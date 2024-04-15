@@ -4,7 +4,7 @@
   "description": "Cryptid web app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Info: we have defined no tests, we need to do this\" && exit 0"
   },
   "repository": {
     "type": "git",
