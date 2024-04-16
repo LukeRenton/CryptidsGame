@@ -1,19 +1,15 @@
 {
   "name": "cryptidsgame",
   "version": "1.0.0",
-  "description": "Cryptid web app",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Info: we have defined no tests, we need to do this\" && exit 0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LukeRenton/CryptidsGame.git"
+    "test": "echo \"Info: please create tests\" && exit 0",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LukeRenton/CryptidsGame/issues"
-  },
-  "homepage": "https://github.com/LukeRenton/CryptidsGame#readme"
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
