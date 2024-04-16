@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Info: please create tests\" && exit 0",
-    "start": "node index.js"
+    "test": "echo \"Info: please create tests\" && exit 0"
   },
   "author": "",
   "license": "ISC",
