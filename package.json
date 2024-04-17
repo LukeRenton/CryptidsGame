@@ -4,12 +4,19 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Info: please create tests\" && exit 0",
+    "test": "jest",
     "start": "node server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
   }
 }
