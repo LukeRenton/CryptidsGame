@@ -1,13 +1,19 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+const boardRoutes = require('./routes/boardRoutes');
+
 
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.json());
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Define any additional API routes or middleware
+
+app.use("/map", boardRoutes);
 
 // Handle requests to root URL - send the React app
 app.get('/', (req, res) => {
