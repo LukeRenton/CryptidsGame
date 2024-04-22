@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'lady-jane-old_free-versionRg';
+    src: url('./ladyjaneoldfreeversion-9m05-webfont.woff') format('woff2'),
+         url('./ladyjaneoldfreeversion-9m05-webfont.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
