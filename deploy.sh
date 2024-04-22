@@ -25,9 +25,11 @@ fi
 git add .
 git commit -m "$commit_message"
 
-if if [ -z "$upstream_branch" ]; then
+if [ -z "$upstream_branch" ]; then
   echo "No upstream branch set for $current_branch. Setting it to origin/$current_branch"
   git push --set-upstream origin "$current_branch"
 else
   git push
 fi
+
+echo -e "\n>>>>>>>>> Deployment complete! <<<<<<<<<\n"
