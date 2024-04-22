@@ -1,0 +1,116 @@
+/* App.css */
+
+/* General styles */
+.tutorial-root  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+  
+  /* Headings */
+  .tutorial-root h1, h2, h3 {
+    color: #333;
+    margin-top: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .tutorial-root  h1 {
+    font-size: 36px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+  
+  .tutorial-root  h2 {
+    font-size: 24px;
+    color: #4CAF50;
+  }
+  
+  .tutorial-root  h3 {
+    font-size: 20px;
+    color: #007bff;
+  }
+  
+  /* Paragraphs */
+  .tutorial-root  p {
+    line-height: 1.6;
+  }
+  
+  /* Lists */
+  .tutorial-root  ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+  
+  /* Links */
+  .tutorial-root  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .tutorial-root  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Components */
+  .tutorial-root  {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* Map section */
+  .map-section {
+    margin-top: 40px;
+  }
+  
+  /* Gameplay section */
+  .gameplay-section {
+    margin-top: 40px;
+  }
+  
+  /* End of Game section */
+  .endgame-section {
+    margin-top: 40px;
+  }
+  /* App.css */
+  
+  /* Image container */
+  .tutorial-image-container {
+      background-color: #000;
+      padding: 10px 0; /* Adjust padding as needed */
+      margin-bottom: 20px;
+      width: 100%;
+  }
+  
+  /* Cryptid image */
+  .tutorial-cryptid-image {
+      max-width: 200px; /* Adjust the maximum width of the image */
+      height: 1cm;
+      display: block;
+      margin: 0 auto;
+  }
+  
+  /* Navbar strip */
+  .tutorial-navbar-strip {
+      background-color: #000;
+      padding: 10px 0; /* Adjust padding as needed */
+  }
+  .tutorial-transition {
+      width: auto; /* This sets the width of the image to 100% of its container */
+      filter: grayscale(1) contrast(0.75); /* This applies grayscale filter and adjusts contrast */
+      transition: 0.75s; /* This sets a transition effect with a duration of 0.75 seconds */
+  }
+  
+  .tutorial-transition:hover {
+      filter: grayscale(0) contrast(1); /* This removes grayscale filter and restores full contrast on hover */
+  }
+  
+  figcaption {
+      font-size: 0.75rem; /* This sets the font size of the caption to 0.75rem */
+  }
+  
+  
