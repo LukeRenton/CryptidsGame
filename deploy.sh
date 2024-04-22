@@ -11,14 +11,6 @@ current_branch=$(git branch --show-current)
 # Check if the current branch has an upstream branch
 upstream_branch=$(git rev-parse --abbrev-ref --symbolic-full-name "${current_branch}@{upstream}" 2>/dev/null)
 
-if [ -z "$upstream_branch" ]; then
-  echo "No upstream branch set for $current_branch. Setting it to origin/$current_branch"
-  git branch --set-upstream-to="origin/$current_branch" "$current_branch"
-else
-  echo "Upstream branch for $current_branch is already set to $upstream_branch"
-fi
-
-
 echo -e "\nEnter your commit message:"
 read commit_message
 
@@ -32,4 +24,10 @@ fi
 
 git add .
 git commit -m "$commit_message"
-git push 
+
+if if [ -z "$upstream_branch" ]; then
+  echo "No upstream branch set for $current_branch. Setting it to origin/$current_branch"
+  git push --set-upstream origin "$current_branch"
+else
+  git push
+fi
