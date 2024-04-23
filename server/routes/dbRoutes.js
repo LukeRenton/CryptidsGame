@@ -29,6 +29,8 @@ client.connect((err) => {
 router.post('/register', async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
+    console.log(req);
+    console.log(username + ' ' + password);
     try {
         const newUser = await addUser(client, username, password);
         res.status(201).json(newUser); // Return the newly created user
