@@ -2,6 +2,7 @@ async function addUser(client, username, password) {
     const query = 'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;';
     const values = [username, password];
     const result = await client.query(query, values);
+    console.log("in addUser")
     return result.rows[0]; // Return the newly added user
 }
 

@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
+app.use(express.json({ type: '*/*' })); 
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use("/map", boardRoutes);
 app.use("/db", dbRoutes);
+
 
 // Handle requests to main react page
 // NOTE: THIS CODE HAS TO BE AT THE END OF THE FILE
