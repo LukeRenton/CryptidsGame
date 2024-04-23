@@ -15,8 +15,9 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.use("/map", boardRoutes);
 
-// Handle requests to root URL - send the React app
-app.get('/', (req, res) => {
+// Handle requests to main react page
+// NOTE: THIS CODE HAS TO BE AT THE END OF THE FILE
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
