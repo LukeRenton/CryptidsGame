@@ -1,11 +1,19 @@
 .container {
-    display: flex;
-    flex-direction: column; /* Arrange items vertically */
-    align-items: center;    /* Center items horizontally */
-    width: 100vw;
-    height: 100vh;
-    background : url('../Images/LobbyBack-transformed-resized.jpeg');
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  width: 100vw;
+  height: 100vh;
+  background: url('../Images/LobbyBack-transformed-resized.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-position: center;
+
+  /* Important Addition */
+  overflow: hidden; 
 }
+
 
 .header {
     display: flex;          /* Make header a flexbox  */
@@ -55,10 +63,20 @@
 }
 
 .public-private {
-    display: flex;          
-    justify-content: space-between; /* Space elements evenly across the row */
-    width: 100%; 
-    margin-top: 20px;
+  display: flex;          
+  justify-content: space-around; 
+  width: 100%; 
+  margin-top: 20px;
+}
+.card {
+  width: 250px; /* Adjust as needed */
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: black;
+  opacity: 0.5;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
 }
 
 .section { 

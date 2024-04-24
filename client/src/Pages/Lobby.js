@@ -7,7 +7,7 @@ export default function Lobby() {
     const navigate = useNavigate();
 
     const handleBack = () => {
-      navigate('/tutorial');
+      navigate('/');
     };
   
 return (
@@ -17,8 +17,11 @@ return (
         <div className="version">v2024.3.50 (build num: 1st Africa)</div>
     </div>
     <div className="body">
-        <div className="public-private">
-            <div className="section"> <h1 className="public">Host a Game</h1>
+    <div className="public-private">
+
+        <div className="card">
+            <div className="section"> 
+                <h1 className="public">Host a Game</h1>
                 <a className="fancy" href="#">
                     <span className="top-key"></span>
                     <span className="text">Create Game</span>
@@ -26,7 +29,11 @@ return (
                     <span className="bottom-key-2"></span>
                 </a>
             </div>
-            <div className="section"> <h1 className="public">Find a Game</h1>
+        </div>
+
+        <div className="card"> 
+            <div className="section"> 
+                <h1 className="public">Find a Game</h1>
                 <a className="fancy" href="#">
                     <span className="top-key"></span>
                     <span className="text">Join Game</span>
@@ -34,7 +41,11 @@ return (
                     <span className="bottom-key-2"></span>
                 </a>
             </div>
-            <div className="section"> <h1 className="private">Start private Game</h1>
+        </div>
+
+        <div className="card"> 
+            <div className="section"> 
+                <h1 className="private">Start private Game</h1>
                 <a className="fancy" href="#">
                     <span className="top-key"></span>
                     <span className="text">Enter Code</span>
@@ -45,6 +56,8 @@ return (
         </div>
 
     </div>
+</div>
+
 
     <div className="back">
         <button className="Btn" onClick={handleBack}>

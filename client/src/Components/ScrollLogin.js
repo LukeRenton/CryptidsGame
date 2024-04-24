@@ -41,7 +41,7 @@ export default function ScrollLogin( props ) {
     console.log(res);
     setTmp(res);
     if (res.status == 200) {
-      navigate('/tutorial');
+      navigate('/lobby');
     }
   }
 
