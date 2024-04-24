@@ -5,6 +5,7 @@ import ScrollCenter from '../Images/scroll-center.png'
 import ScrollBot from '../Images/scroll-bottom.png'
 import PlantButton from './PlantButton'
 import { useNavigate } from 'react-router-dom'
+import ErrorMessage from './ErrorMessage'
 
 
 export default function ScrollLogin( props ) {
@@ -14,7 +15,8 @@ export default function ScrollLogin( props ) {
   const [formInfo, setFormInfo] = useState('login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [tmp, setTmp] = useState('');
+  const [showLoginMessage, setShowLoginMessage] = useState(false);
+  const [showSignupMessage, setShowSignupMessage] = useState(false);
 
   const handleUsernameChange = (event) => {
     if (event.target.value !== '') {
@@ -37,11 +39,14 @@ export default function ScrollLogin( props ) {
 
   const submitLoginForm = async (e) => {
     e.preventDefault();
-    const res = await props.handleLogin(username,password);
-    console.log(res);
-    setTmp(res);
+    const res = await props.handleLogin(username,password); 
     if (res.status == 200) {
       navigate('/lobby');
+    } else {
+      setShowLoginMessage(true);
+      setTimeout(() => {
+        setShowLoginMessage(false);
+      },10000);
     }
   }
 
@@ -50,6 +55,11 @@ export default function ScrollLogin( props ) {
     const res = await props.handleSignup(username,password);
     if (res.status == 201) {
       navigate('/tutorial');
+    } else {
+      setShowSignupMessage(true);
+      setTimeout(() => {
+        setShowSignupMessage(false);
+      },10000);
     }
   }
 
@@ -64,7 +74,7 @@ export default function ScrollLogin( props ) {
       </div>
       <div className={(page === 'signup' ? ' scroll-login-signup' : (page === 'login' ? 'scroll-login-login' : 'scroll-login-center'))} style={style}>
         <div className='scroll-login-form-container'>
-          <div className='scroll-cryptid-header'>CRYPTID {tmp}</div>
+          <div className='scroll-cryptid-header'>CRYPTID</div>
           {formInfo==='login' ? <>
             <div className='scroll-login-header'>Log In</div>
             <form className='scroll-login-form' onSubmit={submitLoginForm}>
@@ -72,6 +82,7 @@ export default function ScrollLogin( props ) {
             <input className='scroll-input' value={username} onChange={handleUsernameChange}/>
             <label className='scroll-label password'>Password</label>
             <input className='scroll-input password'value={password} onChange={(e) => setPassword(e.target.value)}/>
+            {showLoginMessage ? <ErrorMessage>Incorrect username or password</ErrorMessage> : <></>}
             <PlantButton type='submit'>Log in</PlantButton>
             <div className='scroll-login-register'>
               Need an account?<a className='scroll-login-register-link' onClick={handleToggleSignupClick}>Sign Up</a>
@@ -84,6 +95,7 @@ export default function ScrollLogin( props ) {
             <input className='scroll-input' value={username} onChange={handleUsernameChange}/>
             <label className='scroll-label password'>Password</label>
             <input className='scroll-input password'value={password} onChange={(e) => setPassword(e.target.value)}/>
+            {showSignupMessage ? <ErrorMessage>Invalid credentials</ErrorMessage> : <></>}
             <PlantButton type='submit'>Sign Up</PlantButton>
             <div className='scroll-login-register'>
               Already have an account?<a className='scroll-login-register-link' onClick={handleToggleSignupClick}>Log In</a>
