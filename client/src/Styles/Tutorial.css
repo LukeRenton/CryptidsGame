@@ -1,11 +1,14 @@
 /* App.css */
-
+body{
+  overflow-y:auto ;
+}
 /* General styles */
-.tutorial-root  body {
+.tutorial-root{
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    height: 300px;
 }
   
   /* Headings */
@@ -15,6 +18,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     text-transform: uppercase;
+
   }
   
   .tutorial-root  h1 {
