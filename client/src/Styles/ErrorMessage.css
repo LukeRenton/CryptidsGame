@@ -1,0 +1,9 @@
+.error-message-root {
+    background: red;
+    border: 2px solid rgb(177, 0, 0);
+    box-shadow: 5spx 5px 5px;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
