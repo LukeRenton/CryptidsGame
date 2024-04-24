@@ -11,8 +11,11 @@ import five from '../Images/Tutorial/five.png';
 import six from '../Images/Tutorial/six.png';
 import structures from '../Images/Tutorial/structures.png';
 import '../Styles/Tutorial.css'
+import PlantButton from '../Components/PlantButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Tutorial() {
+    const navigate = useNavigate();
   return (
     <div className='tutorial-root'>
         <div className="tutorial-image-container">
@@ -132,6 +135,7 @@ export default function Tutorial() {
 
         <h1>End of Game</h1>
         <p>The game comes to an end when a player correctly identifies the location of the Cryptid.</p>
+        <PlantButton onClick={() => {navigate('/lobby')}}>Go to lobby</PlantButton>
     </div>
   )
 }
