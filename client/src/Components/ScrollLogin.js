@@ -41,7 +41,7 @@ export default function ScrollLogin( props ) {
     e.preventDefault();
     const res = await props.handleLogin(username,password); 
     if (res.status == 200) {
-      navigate('/tutorial');
+      navigate('/lobby');
     } else {
       setShowLoginMessage(true);
       setTimeout(() => {
