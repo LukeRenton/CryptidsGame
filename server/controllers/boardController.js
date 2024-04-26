@@ -1,6 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 
+const deciferMapCode = (mapCode) => {
+  const tiles = {};
+  for (let i = 0; i < mapCode.length; i++) {
+    if (i<6){
+      tiles[i+1] = mapCode[i];
+    }
+  }
+  return tiles;
+
+}
+console.log(deciferMapCode('1A2B3670694207638A'));
+
+
 const getRandomBoard = (mode, player_count) => {
   const directory_path = path.join(__dirname, '../maps', mode);
   const files = fs.readdirSync(directory_path);
