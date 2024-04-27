@@ -1,0 +1,14 @@
+{
+    "hint_not_1": "There are no within 1 clues",
+    "hint_not_on_on": "There are no clues which mention on a terrain of any tpe",
+    "hint_water": "There are no clues which mention water",
+    "hint_terrain": "There are no clues which mention terrain of any type",
+    "hint_fissure": "There are no clues which mention animals",
+    "hint_mountain": "There are no clues which mention mountain",
+    "hint_forest": "There are no clues which mention forest",
+    "hint_desert": "There are no clues which mention desert",
+    "hint_bone": "There are no clues which mention swamp",
+    "hint_not_2": "There are no within 2 clues",
+    "hint_not_3": "There are no within 3 clues"
+  }
+  
