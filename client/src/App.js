@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Routes, Route, useNavigate} from "react-router-
 import Tutorial from './Pages/Tutorial.js';
 import Login from './Pages/Login.js';
 import Lobby from './Pages/Lobby.js';
+import Game from './Pages/Game.js';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/' element={<Login/>}/>
           <Route path='/tutorial' element={<Tutorial/>}/>
           <Route path='/lobby' element={<Lobby/>}/>
+          <Route path='/game' element={<Game />}/>
         </Routes>
       </Router>
     </div>

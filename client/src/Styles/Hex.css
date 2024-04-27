@@ -1,0 +1,151 @@
+.hex {
+    perspective: 10000px;
+    float: left;
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.hex .hex-face {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(
+        to top,
+        #6c4734,
+        #472b24 
+    );
+}
+
+.hex .sideA {
+    transform: rotateX(90deg) translateY(30px) translateX(30px) translateZ(30px);
+}
+
+.hex .sideB {
+    transform: rotateX(90deg) translateY(30px) translateX(30px) translateZ(-74px);
+}
+
+.hex .sideC {
+    transform: rotateX(90deg) rotateY(120deg) translateY(30px) translateX(4px) translateZ(-15px);
+}
+
+.hex .sideD {
+    transform: rotateX(90deg) rotateY(120deg) translateY(30px) translateX(4px) translateZ(89px);
+}
+
+.hex .sideE {
+    transform: rotateX(90deg) rotateY(-120deg) translateY(30px) translateX(-34px) translateZ(-67px);
+}
+
+.hex .sideF {
+    transform: rotateX(90deg) rotateY(-120deg) translateY(30px) translateX(-34px) translateZ(37px);
+}
+
+.hex .top-face {
+    position: absolute;
+    transform: rotateX(0deg) translateZ(60px);
+}
+
+.hex .top-face img {
+    position: absolute;
+    left: -29px;
+    top: -37px;
+    width: 180px;
+    height: 180px;
+}
+
+.hex .bottom-face {
+    transform: rotateX(0deg) translateZ(0px);
+}
+
+
+.hex-top-bottom .top {
+    float: left;
+    border-right: 30px solid #472b24;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+}
+.hex-top-bottom .middle {
+    float: left;
+    width: 60px;
+    height: 104px;
+    background-color: #472b24;
+}
+.hex-top-bottom .bottom {
+    float: left;
+    border-left: 30px solid #472b24;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+}
+
+.piece-0 {
+    left:0;
+    top: 0;
+}
+.piece-1 {
+    left:95px;
+    top: 55px;
+}
+.piece-2 {
+    left: 190px;
+    top: 0;
+}
+.piece-3 {
+    left: 285px;
+    top: 55px;
+}
+.piece-4 {
+    left: 380px;
+    top: 0px;
+}
+.piece-5 {
+    left: 475px;
+    top: 55px;
+}
+.piece-6 {
+    left:0;
+    top: 110px;
+}
+.piece-7 {
+    left:95px;
+    top: 165px;
+}
+.piece-8 {
+    left: 190px;
+    top: 110px;
+}
+.piece-9 {
+    left: 285px;
+    top: 165px;
+}
+.piece-10 {
+    left: 380px;
+    top: 110px;
+}
+.piece-11 {
+    left: 475px;
+    top: 165px;
+}
+.piece-12 {
+    left:0;
+    top: 220px;
+}
+.piece-13 {
+    left:95px;
+    top: 275px;
+}
+.piece-14 {
+    left: 190px;
+    top: 220px;
+}
+.piece-15 {
+    left: 285px;
+    top: 275px;
+}
+.piece-16 {
+    left: 380px;
+    top: 220px;
+}
+.piece-17 {
+    left: 475px;
+    top: 275px;
+}

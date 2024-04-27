@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d5691e20.css",
-    "main.js": "/static/js/main.1310dd98.js",
+    "main.css": "/static/css/main.5c9c40c9.css",
+    "main.js": "/static/js/main.c2a31831.js",
     "static/media/cryptid-background.mp4": "/static/media/cryptid-background.af864c7aa5878e2d51e9.mp4",
     "static/media/LobbyBack-transformed-resized.jpeg": "/static/media/LobbyBack-transformed-resized.7a1d1135358068700242.jpeg",
     "static/media/five.png": "/static/media/five.c1b3ba87d07f39378fe8.png",
@@ -18,11 +18,11 @@
     "static/media/structures.png": "/static/media/structures.1d4574fc8a22e8b15171.png",
     "static/media/animal.png": "/static/media/animal.de309edfdabf8eb53ba6.png",
     "index.html": "/index.html",
-    "main.d5691e20.css.map": "/static/css/main.d5691e20.css.map",
-    "main.1310dd98.js.map": "/static/js/main.1310dd98.js.map"
+    "main.5c9c40c9.css.map": "/static/css/main.5c9c40c9.css.map",
+    "main.c2a31831.js.map": "/static/js/main.c2a31831.js.map"
   },
   "entrypoints": [
-    "static/css/main.d5691e20.css",
-    "static/js/main.1310dd98.js"
+    "static/css/main.5c9c40c9.css",
+    "static/js/main.c2a31831.js"
   ]
 }

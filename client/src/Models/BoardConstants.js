@@ -1,4 +1,4 @@
-import Tile from "./hex_tile.js";
+import Tile from "./Tile.js";
 
 const tile_map = {};
 
@@ -325,4 +325,4 @@ tile_map[7] = [
     new Tile(C, 2, 5, 'd', bear)
  ];
 
-export default tile_map;
+export { tile_map };
