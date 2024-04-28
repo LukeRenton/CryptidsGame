@@ -17,7 +17,7 @@ export default function Game() {
         const allTiles = {};
         for (let i = 1; i <= 6; i++) {
             // const tile = tile_map[newMap.board.tiles[i].tile_num]
-            const tile = tile_map[1]
+            const tile = tile_map[4]
             allTiles[i] = tile;
         }
         setTiles(allTiles);
