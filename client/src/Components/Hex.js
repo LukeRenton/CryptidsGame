@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react'
 import '../Styles/Hex.css'
 
 export default function Hex( props ) {
+  const renderPieces = () => {
+    console.log(props.hexNum + ' --> ' + props.pieces);
+    return props.pieces.map((piece) => {
+      return <img className={'hex-piece hex-'+piece.type} src={piece.image}></img>
+    })
+  }
   return (
-    <div className={'hex piece-'+props.pieceNum} >
+    <div className={'hex hex-'+props.hexNum} >
         <div className='hex-top-bottom bottom-face'>
             <div className='top'></div>
             <div className='middle'></div>
@@ -20,6 +26,9 @@ export default function Hex( props ) {
             <div className='middle'></div>
             <div className='bottom'></div>
             <img src={props.picture}></img>
+            <div className='hex-all-pieces'>
+              {renderPieces()}
+            </div>
         </div>
 
     </div>

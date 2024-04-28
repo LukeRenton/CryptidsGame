@@ -45,8 +45,9 @@
     transform: rotateX(0deg) translateZ(60px);
 }
 
-.hex .top-face img {
+.hex .top-face > img {
     position: absolute;
+    z-index: 1;
     left: -29px;
     top: -37px;
     width: 180px;
@@ -77,75 +78,86 @@
     border-bottom: 52px solid transparent;
 }
 
-.piece-0 {
+.hex-0 {
     left:0;
     top: 0;
 }
-.piece-1 {
+.hex-1 {
     left:95px;
     top: 55px;
 }
-.piece-2 {
+.hex-2 {
     left: 190px;
     top: 0;
 }
-.piece-3 {
+.hex-3 {
     left: 285px;
     top: 55px;
 }
-.piece-4 {
+.hex-4 {
     left: 380px;
     top: 0px;
 }
-.piece-5 {
+.hex-5 {
     left: 475px;
     top: 55px;
 }
-.piece-6 {
+.hex-6 {
     left:0;
     top: 110px;
 }
-.piece-7 {
+.hex-7 {
     left:95px;
     top: 165px;
 }
-.piece-8 {
+.hex-8 {
     left: 190px;
     top: 110px;
 }
-.piece-9 {
+.hex-9 {
     left: 285px;
     top: 165px;
 }
-.piece-10 {
+.hex-10 {
     left: 380px;
     top: 110px;
 }
-.piece-11 {
+.hex-11 {
     left: 475px;
     top: 165px;
 }
-.piece-12 {
+.hex-12 {
     left:0;
     top: 220px;
 }
-.piece-13 {
+.hex-13 {
     left:95px;
     top: 275px;
 }
-.piece-14 {
+.hex-14 {
     left: 190px;
     top: 220px;
 }
-.piece-15 {
+.hex-15 {
     left: 285px;
     top: 275px;
 }
-.piece-16 {
+.hex-16 {
     left: 380px;
     top: 220px;
 }
-.piece-17 {
+.hex-17 {
     left: 475px;
     top: 275px;
+}
+
+
+/* HEX PIECES */
+.hex-piece {
+    position: absolute;
+    z-index: 2;
+    left: 24px;
+    top: 12px;
+    width: 70px;
+    height: 70px;
 }

@@ -7,7 +7,8 @@ import Board from '../Components/Board';
 export default function Game() {
   const [loading, setLoading] = useState(true);
   const [map, setMap] = useState(null);
-  const [tiles, setTiles] = useState([]);
+  const [tiles, setTiles] = useState({});
+  const [pieces, setPieces] = useState({});
 
     const getNewMap = async () => {
         const newMap = await getMap('intro',4);
@@ -16,11 +17,14 @@ export default function Game() {
 
         const allTiles = {};
         for (let i = 1; i <= 6; i++) {
-            // const tile = tile_map[newMap.board.tiles[i].tile_num]
-            const tile = tile_map[4]
+            const tile = tile_map[newMap.board.tiles[i].tile_num]
             allTiles[i] = tile;
         }
         setTiles(allTiles);
+        
+        const allPieces = newMap.board.pieces;
+        setPieces(allPieces);
+        
         console.log(newMap)
         return newMap;
     }
@@ -33,7 +37,7 @@ export default function Game() {
     <div>
         {loading ? 'loading' : 
             <div>
-                <Board tiles={tiles}></Board>
+                <Board tiles={tiles} pieces={pieces}></Board>
             </div>
         }
     </div>
