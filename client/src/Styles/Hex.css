@@ -3,6 +3,34 @@
     float: left;
     position: absolute;
     transform-style: preserve-3d;
+    transition: 0.2s;
+}
+
+.hex-hitbox {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 80px;
+    height: 80px;
+    transform: translateZ(61px);
+    cursor: pointer;
+}
+
+.hex-tooltip {
+    position: absolute;
+    left: -30px;
+    top: -50px;
+    width: 200px;
+    height: 100px;
+    transform: translateZ(62px);
+    background: black;
+    pointer-events: none;
+}
+
+/* On over effect applied via hitbox */
+.hex:has(.hex-hitbox:hover) {
+    transform: translateZ(30px) scale(1.1);
+    transition: 0.2s;
 }
 
 .hex .hex-face {
@@ -42,7 +70,7 @@
 
 .hex .top-face {
     position: absolute;
-    transform: rotateX(0deg) translateZ(60px);
+    transform: rotateX(0deg) translateZ(60px) translateY(0px);
 }
 
 .hex .top-face > img {
