@@ -45,6 +45,14 @@ jobs:
           name: node-app
           path: release.zip
 
+      - name: Get Short Commit SHA
+        id: commit_sha
+        run: echo ::set-output name=sha::$(git rev-parse --short HEAD)
+  
+      - name: Get Workflow Run ID
+        id: workflow_run_id
+        run: echo ::set-output name=run_id::${{ github.run_id }}
+      
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -61,6 +69,7 @@ jobs:
         with:
           name: node-app
 
+      
       - name: Unzip artifact for deployment
         run: unzip release.zip
       
@@ -78,4 +87,21 @@ jobs:
           app-name: 'CryptidsGame-App'
           slot-name: 'Production'
           package: .
+ 
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v1.0.0-${{ steps.commit_sha.outputs.sha }} # Using the commit SHA for a unique tag
+          release_name: 'Release v1.0.0 (Run ID: ${{ steps.workflow_run_id.outputs.run_id }})' # Using the workflow run ID for a unique release name
+          body: 'Automated release with build and test results.'
+          draft: false
+          prerelease: false
+
+      - name: Upload Artifact to GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./release.zip
+          asset_name: release.zip
+          asset_content_type: application/zip
           

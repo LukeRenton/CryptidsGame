@@ -39,6 +39,10 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.get('/test', async(req, res) => {
+  res.status(200).send("Success");
+})
+
 // Route to validate user login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
