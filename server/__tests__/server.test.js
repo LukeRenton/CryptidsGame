@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const boardRoutes = require('../routes/boardRoutes');
 
+
 // Import the Express app
 const createApp = require('../server');
 
