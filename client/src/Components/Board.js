@@ -31,14 +31,14 @@ export default function Board( props ) {
   return (
     <div className='board-root'>
         <div className='board-column-1'>
-            <Map hexes={props.tiles[1]} pieces={getTilePieces(1)}></Map>
-            <Map hexes={props.tiles[2]} pieces={getTilePieces(2)}></Map>
-            <Map hexes={props.tiles[3]} pieces={getTilePieces(3)}></Map>
+            <Map mapNum={props.tiles[1][0].tile_number} hexes={props.tiles[1]} pieces={getTilePieces(1)} mapSide={'left'}></Map>
+            <Map mapNum={props.tiles[2][0].tile_number} hexes={props.tiles[2]} pieces={getTilePieces(2)} mapSide={'left'}></Map>
+            <Map mapNum={props.tiles[3][0].tile_number} hexes={props.tiles[3]} pieces={getTilePieces(3)} mapSide={'left'}></Map>
         </div>
         <div className='board-column-2'>
-            <Map hexes={props.tiles[4]} pieces={getTilePieces(4)}></Map>
-            <Map hexes={props.tiles[5]} pieces={getTilePieces(5)}></Map>
-            <Map hexes={props.tiles[6]} pieces={getTilePieces(6)}></Map>
+            <Map mapNum={props.tiles[4][0].tile_number} hexes={props.tiles[4]} pieces={getTilePieces(4)} mapSide={'right'}></Map>
+            <Map mapNum={props.tiles[5][0].tile_number} hexes={props.tiles[5]} pieces={getTilePieces(5)} mapSide={'right'}></Map>
+            <Map mapNum={props.tiles[6][0].tile_number} hexes={props.tiles[6]} pieces={getTilePieces(6)} mapSide={'right'}></Map>
         </div>
     </div>
   )

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import '../Styles/Hex.css'
+import scroll_img from '../Images/scroll.png'
 
 export default function Hex( props ) {
 
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [tooltipInfo, setTooltipInfo] = useState('test');
 
   const renderPieces = () => {
     return props.pieces.map((piece) => {
@@ -31,7 +31,20 @@ export default function Hex( props ) {
   return (
     <div className={'hex hex-'+props.hexNum} >
         {showTooltip ?  <div className='hex-tooltip' > {/* style={{left: `${mouseX}px`, top: `${mouseY+200}px`}} */}
-                          {tooltipInfo}
+                          <div className='hex-tooltip-header'>
+                            Type: 
+                            <div className='hex-tooltip-text'>{props.type}</div>
+                          </div>
+                          <div className='hex-tooltip-header'>
+                            Animal territory:
+                            <div className='hex-tooltip-text'>{props.animalTerritory ? props.animalTerritory : 'None'}</div>
+                          </div>
+                          <div className='hex-tooltip-header'>
+                            Pieces:
+                            {props.pieces.length > 0 ? props.pieces.map((piece) => {
+                              return <div className='hex-tooltip-text'>{piece.name}</div>
+                            }) : <div className='hex-tooltip-text'>None</div>}
+                          </div>
                         </div> : <></>}
         <div className='hex-hitbox' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></div> {/* onMouseMove={handleMouseHover} */}
         <div className='hex-top-bottom bottom-face'>

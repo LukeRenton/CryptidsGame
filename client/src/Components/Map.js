@@ -10,6 +10,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'blue-shack',
+          name: 'Blue Shack',
           image: require('../Images/CryptidPieces/blue_shack.png')
         });
       }
@@ -19,6 +20,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'blue-standing-stone',
+          name: 'Blue Standing Stone',
           image: require('../Images/CryptidPieces/blue_standing_stone.png')
         });
       }
@@ -28,6 +30,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'green-shack',
+          name: 'Green Shack',
           image: require('../Images/CryptidPieces/green_shack.png')
         });
       }
@@ -37,6 +40,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'green-standing-stone',
+          name: 'Green Standing Stone',
           image: require('../Images/CryptidPieces/green_standing_stone.png')
         });
       }
@@ -46,6 +50,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'white-shack',
+          name: 'White Shack',
           image: require('../Images/CryptidPieces/white_shack.png')
         });
       }
@@ -55,6 +60,7 @@ export default function Map( props ) {
       if (pieceHexNum === hexNum) {
         allPieces.push({
           type: 'white-standing-stone',
+          name: 'White Standing Stone',
           image: require('../Images/CryptidPieces/white_standing_stone.png')
         });
       }
@@ -62,9 +68,10 @@ export default function Map( props ) {
     return allPieces;
   }
   return (
-    <div className='map-root'>
+    <div className={'map-root '+'map-root-'+props.mapSide}>
+      <div className='map-number'>{props.mapNum}</div>
       { props.hexes.map((hex) => {
-          return <Hex pieces={getAllPieces(hex.row*6 + hex.col)} hexNum={hex.row*6 + hex.col} picture={require(`../Images/CryptidTiles/Board ${hex.tile_number}/${hex.tile_image}`)}></Hex>
+          return <Hex pieces={getAllPieces(hex.row*6 + hex.col)} type={hex.type} animalTerritory={hex.animal_territory} hexNum={hex.row*6 + hex.col} picture={require(`../Images/CryptidTiles/Board ${hex.tile_number}/${hex.tile_image}`)}></Hex>
         })
       }
     </div>

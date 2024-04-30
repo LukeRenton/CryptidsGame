@@ -4,6 +4,8 @@
     position: absolute;
     transform-style: preserve-3d;
     transition: 0.2s;
+    transform: translate(0);
+    -webkit-transform: translate(0);
 }
 
 .hex-hitbox {
@@ -21,10 +23,25 @@
     left: -30px;
     top: -50px;
     width: 200px;
-    height: 100px;
+    height: fit-content;
     transform: translateZ(62px);
-    background: black;
+    background: white;
+    border: 1px solid black;
     pointer-events: none;
+    transform: rotateX(-45deg) translateZ(183px) translateY(-62px);
+}
+
+.hex-tooltip-header {
+    font-weight: 900;
+}
+
+.hex-tooltip-text {
+    font-weight: 400;
+}
+
+.hex-tooltip img {
+    width: 100%;
+    height: 100%;
 }
 
 /* On over effect applied via hitbox */
@@ -104,6 +121,8 @@
     border-left: 30px solid #472b24;
     border-top: 52px solid transparent;
     border-bottom: 52px solid transparent;
+    transform: translate(0);
+    -webkit-transform: translate(0);
 }
 
 .hex-0 {
@@ -188,4 +207,6 @@
     top: 12px;
     width: 70px;
     height: 70px;
+    transform: translate(0);
+    -webkit-transform: translate(0);
 }
