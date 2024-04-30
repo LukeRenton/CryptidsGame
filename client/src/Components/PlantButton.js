@@ -3,7 +3,7 @@ import '../Styles/PlantButton.css'
 
 export default function PlantButton( props ) {
   return (
-    <button type={props.type} className='plantbutton-root'>
+    <button type={props.type} onClick={props.onClick} className='plantbutton-root'>
     {props.children}
     <div className="plantbutton-icon-1">
         <svg
