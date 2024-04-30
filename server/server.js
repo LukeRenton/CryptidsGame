@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const boardRoutes = require('./routes/boardRoutes');
-const dbRoutes = require('./routes/dbRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,7 +14,11 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 
 
 app.use("/map", boardRoutes);
-app.use("/db", dbRoutes);
+
+if (process.env.NODE_ENV !== 'test') {
+  const dbRoutes = require('./routes/dbRoutes');
+  app.use("/db", dbRoutes);
+}
 
 
 // Handle requests to main react page

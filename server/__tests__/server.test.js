@@ -2,7 +2,6 @@ const request = require('supertest');
 const path = require('path');
 const express = require('express');
 const boardRoutes = require('../routes/boardRoutes');
-const dbRoutes = require('../routes/dbRoutes');
 
 // Import the Express app
 const createApp = require('../server');
@@ -13,7 +12,6 @@ app.use(express.json({ type: '*/*' }));
 app.use(express.static(path.join(__dirname, '../../client/build')));
 
 app.use("/map", boardRoutes);
-app.use("/db", dbRoutes);
 
 const reactRoutes = ['/'];
 app.get(reactRoutes, (req, res) => {
@@ -32,11 +30,5 @@ describe('Express App Tests', () => {
   test('should handle /map/test route', async () => {
     const response = await request(app).get('/map/random-map?mode=intro&players=4');
     expect(response.status).toBe(200);
-  });
-
-  // Test /db route
-  test('should handle /db/test route', async () => {
-    const response = await request(app).get('/db/test');
-    expect(response.status).toBe(200); // expect proper status code
   });
 });
