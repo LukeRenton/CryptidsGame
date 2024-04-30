@@ -1,0 +1,22 @@
+
+.cards {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 3cm;
+    border: 2px solid #8A6240;
+    border-radius:5px;
+    background-color: #caba9c;
+    color: #fff;
+    flex: 1 1 200px;
+  }
+ 
+  .cards h2 {
+    background-color:#8A6240;
+    margin: 0;
+    color: black;
+    padding: 10px;
+  }
+  
+  .cards p {
+    padding: 10px;
+  }

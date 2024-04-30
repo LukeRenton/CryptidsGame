@@ -28,7 +28,7 @@
     background: white;
     border: 1px solid black;
     pointer-events: none;
-    transform: rotateX(-45deg) translateZ(183px) translateY(-62px);
+    transform: rotateX(0deg) translateZ(183px) translateY(-62px);
 }
 
 .hex-tooltip-header {

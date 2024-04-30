@@ -3,6 +3,8 @@ import { getMap } from '../Services/MapService'
 import { tile_map } from '../Models/BoardConstants'
 import Tile from '../Models/Tile';
 import Board from '../Components/Board';
+import Clues from '../Components/Clues';
+import '../Styles/Game.css';
 
 export default function Game() {
   const [loading, setLoading] = useState(true);
@@ -37,8 +39,10 @@ export default function Game() {
     <div>
         {loading ? 'loading' : 
             <div>
-                <Board tiles={tiles} pieces={pieces}></Board>
+                <div className='game-board-root'><Board tiles={tiles} pieces={pieces}></Board></div>
+                <div><Clues clues={map.rules} hint={map.hint}/></div>
             </div>
+            
         }
     </div>
   )
