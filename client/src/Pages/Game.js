@@ -5,14 +5,14 @@ import Tile from '../Models/Tile';
 import Board from '../Components/Board';
 import '../Styles/Game.css';
 
-export default function Game() {
+export default function Game( props ) {
   const [loading, setLoading] = useState(true);
   const [map, setMap] = useState(null);
   const [tiles, setTiles] = useState({});
   const [pieces, setPieces] = useState({});
 
     const getNewMap = async () => {
-        const newMap = await getMap('intro',4);
+        const newMap = await getMap(props.localGameInfo.mode,props.localGameInfo.players);
         setMap(newMap);
         setLoading(false);
 

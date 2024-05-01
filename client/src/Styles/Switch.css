@@ -1,0 +1,39 @@
+.switch-root {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch-back {
+    width: 50px;
+    height: 25px;
+    background: white;
+    border-radius: 10px;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.switch-ball {
+    width: 25px;
+    height: 25px;
+    background: black;
+    border-radius: 12px;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.switch-ball-left {
+    margin-left: 0px;
+}
+
+.switch-ball-right {
+    margin-left: calc(50px - 25px);
+}
+
+.switch-text {
+    margin-left: 10px;
+    font-size: 20px;
+}
