@@ -32,10 +32,10 @@ export default function Clues(props) {
         setClueVisible(!clueVisible);
     };
 
-    const toggleSetClue = (new_clue) => {
-        if (new_clue !== clue) {
+    const toggleSetClue = (update_clue) => {
+        if (update_clue !== clue) {
             if (verifyClue) {
-                setClue(new_clue);
+                setClue(update_clue);
                 setVerifyClue(false);
             } else {
                 setClue('Click again to show clue');
