@@ -45,8 +45,8 @@ const deciferMapCode = (mapCode, mapMode) => {
         "tile_num" : tile_num > 6 ? tile_num - 6 : tile_num,
       }
   }
-  const structures = mapMode === "intro" ? structures_order_normal : structures_order_advanced
-  const pieces = {}
+  const structures = mapMode === "intro" ? structures_order_normal : structures_order_advanced;
+  const pieces = {};
   let counter = 0;
   for (let i = 6; i < mapCode.length; i+=2){
 
@@ -56,13 +56,12 @@ const deciferMapCode = (mapCode, mapMode) => {
     
     // Retrieve which tile number we are on
     const tile_row = Math.floor(row/3);
-    const tile_col = Math.floor(row/6);
+    const tile_col = Math.floor(col/6);
     const tile_num = tile_row*2 + tile_col + 1
-    
-    // Retrieve the row and column of the tile we are on
+
     const actual_row = row % 3;
     const actual_col = col % 6;
-    
+  
     pieces[structures[counter]] = {
       "row" : actual_row,
       "col" : actual_col,
@@ -81,6 +80,8 @@ const formatFinalLocation = (location) => {
     "col" : row_col[1] - 1
   }
 }
+
+console.log(deciferMapCode("B46183084B18451521", "intro"));
 
 const verbositiseRules = (rules) => {
   const verbose_rules = [];
@@ -117,7 +118,6 @@ const getRandomBoard = (mode, player_count) => {
   return map;
 };
 
-console.log(getRandomBoard("intro", 3));
 
 const getRandomMapController = (req, res) => {
   try {
