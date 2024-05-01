@@ -30,6 +30,7 @@ const reactRoutes = [
   '/login',
   '/register',
   '/lobby',
+  '/game'
 ]
 app.get(reactRoutes, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));

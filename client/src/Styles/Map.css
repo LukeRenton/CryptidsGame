@@ -1,0 +1,33 @@
+.map-root {
+    width: 600px;
+    height: 385px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: rotation 2s;
+    transform-style: preserve-3d;
+    transform: rotateX(0deg);
+}
+
+.map-root-left {
+    margin-left: 100px;
+}
+.map-root-right {
+    margin-right: 100px;
+}
+
+.map-number {
+    font-size: 40px;
+}
+
+.map-root-left .map-number {
+    position: absolute;
+    top: 150px;
+    left: -50px;
+}
+.map-root-right .map-number {
+    position: absolute;
+    top: 150px;
+    right: -50px;
+}

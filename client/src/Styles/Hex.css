@@ -1,0 +1,212 @@
+.hex {
+    perspective: 10000px;
+    float: left;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: 0.2s;
+    transform: translate(0);
+    -webkit-transform: translate(0);
+}
+
+.hex-hitbox {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 80px;
+    height: 80px;
+    transform: translateZ(61px);
+    cursor: pointer;
+}
+
+.hex-tooltip {
+    position: absolute;
+    left: -30px;
+    top: -50px;
+    width: 200px;
+    height: fit-content;
+    transform: translateZ(62px);
+    background: white;
+    border: 1px solid black;
+    pointer-events: none;
+    transform: rotateX(0deg) translateZ(183px) translateY(-62px);
+}
+
+.hex-tooltip-header {
+    font-weight: 900;
+}
+
+.hex-tooltip-text {
+    font-weight: 400;
+}
+
+.hex-tooltip img {
+    width: 100%;
+    height: 100%;
+}
+
+/* On over effect applied via hitbox */
+.hex:has(.hex-hitbox:hover) {
+    transform: translateZ(30px) scale(1.1);
+    transition: 0.2s;
+}
+
+.hex .hex-face {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    background: linear-gradient(
+        to top,
+        #6c4734,
+        #472b24 
+    );
+}
+
+.hex .sideA {
+    transform: rotateX(90deg) translateY(30px) translateX(30px) translateZ(30px);
+}
+
+.hex .sideB {
+    transform: rotateX(90deg) translateY(30px) translateX(30px) translateZ(-74px);
+}
+
+.hex .sideC {
+    transform: rotateX(90deg) rotateY(120deg) translateY(30px) translateX(4px) translateZ(-15px);
+}
+
+.hex .sideD {
+    transform: rotateX(90deg) rotateY(120deg) translateY(30px) translateX(4px) translateZ(89px);
+}
+
+.hex .sideE {
+    transform: rotateX(90deg) rotateY(-120deg) translateY(30px) translateX(-34px) translateZ(-67px);
+}
+
+.hex .sideF {
+    transform: rotateX(90deg) rotateY(-120deg) translateY(30px) translateX(-34px) translateZ(37px);
+}
+
+.hex .top-face {
+    position: absolute;
+    transform: rotateX(0deg) translateZ(60px) translateY(0px);
+}
+
+.hex .top-face > img {
+    position: absolute;
+    z-index: 1;
+    left: -29px;
+    top: -37px;
+    width: 180px;
+    height: 180px;
+}
+
+.hex .bottom-face {
+    transform: rotateX(0deg) translateZ(0px);
+}
+
+
+.hex-top-bottom .top {
+    float: left;
+    border-right: 30px solid #472b24;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+}
+.hex-top-bottom .middle {
+    float: left;
+    width: 60px;
+    height: 104px;
+    background-color: #472b24;
+}
+.hex-top-bottom .bottom {
+    float: left;
+    border-left: 30px solid #472b24;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
+    transform: translate(0);
+    -webkit-transform: translate(0);
+}
+
+.hex-0 {
+    left:0;
+    top: 0;
+}
+.hex-1 {
+    left:95px;
+    top: 55px;
+}
+.hex-2 {
+    left: 190px;
+    top: 0;
+}
+.hex-3 {
+    left: 285px;
+    top: 55px;
+}
+.hex-4 {
+    left: 380px;
+    top: 0px;
+}
+.hex-5 {
+    left: 475px;
+    top: 55px;
+}
+.hex-6 {
+    left:0;
+    top: 110px;
+}
+.hex-7 {
+    left:95px;
+    top: 165px;
+}
+.hex-8 {
+    left: 190px;
+    top: 110px;
+}
+.hex-9 {
+    left: 285px;
+    top: 165px;
+}
+.hex-10 {
+    left: 380px;
+    top: 110px;
+}
+.hex-11 {
+    left: 475px;
+    top: 165px;
+}
+.hex-12 {
+    left:0;
+    top: 220px;
+}
+.hex-13 {
+    left:95px;
+    top: 275px;
+}
+.hex-14 {
+    left: 190px;
+    top: 220px;
+}
+.hex-15 {
+    left: 285px;
+    top: 275px;
+}
+.hex-16 {
+    left: 380px;
+    top: 220px;
+}
+.hex-17 {
+    left: 475px;
+    top: 275px;
+}
+
+
+/* HEX PIECES */
+.hex-piece {
+    position: absolute;
+    z-index: 2;
+    left: 24px;
+    top: 12px;
+    width: 70px;
+    height: 70px;
+    transform: translate(0);
+    -webkit-transform: translate(0);
+}
