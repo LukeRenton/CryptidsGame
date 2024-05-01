@@ -9,6 +9,7 @@
     color: #fff;
     flex: 1 1 200px;
     scale: calc(1 / 0.7);
+    transform: translateY(150px);
   }
  
   .cards h2 {
@@ -20,4 +21,24 @@
   
   .cards p {
     padding: 10px;
+    transition: 0.2;
+  }
+
+  .clues-clue-visible {
+    opacity: 1;
+    transition: 0.2s;
+  }
+
+  .clues-clue-invisible {
+    opacity: 0;
+    transition: 0.2;
+  }
+
+  .clues-all-clues {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px 0px;
+    padding-bottom: 20px;
   }
