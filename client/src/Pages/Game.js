@@ -37,7 +37,7 @@ export default function Game( props ) {
   return (
     <div>
         {loading ? 'loading' : 
-            <div>
+            <div className='game-board-container'>
                 <div className='game-board-root'><Board clues={map.rules} hint={map.hint} tiles={tiles} pieces={pieces}></Board></div>
             </div>
         }

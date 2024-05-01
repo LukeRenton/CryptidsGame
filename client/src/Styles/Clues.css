@@ -8,6 +8,7 @@
     background-color: #caba9c;
     color: #fff;
     flex: 1 1 200px;
+    scale: calc(1 / 0.7);
   }
  
   .cards h2 {
