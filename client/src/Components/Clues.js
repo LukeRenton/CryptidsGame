@@ -85,6 +85,8 @@ export default function Clues(props) {
                     <h2>Hint</h2>
                     <p>{!verifyShowHint ? (showHint ? props.hint : '') : 'Click again to show hint. Make sure all players are aware of the hint.'}</p>
                     <PlantButton onClick={handleShowHint}>{!showHint ? 'Show Hint' : 'Hide Hint'}</PlantButton>
+                    <h2>Cryptid Location</h2>
+                        <p>The location of the cryptid is at Row: {props.row} Column: {props.col}</p>
                 </div>
             </div>
             }

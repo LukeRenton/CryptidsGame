@@ -44,7 +44,7 @@ export default function Board( props ) {
           </div>
         </div>
         <div className='board-clues'>
-          <Clues clues={props.clues} hint={props.hint}></Clues>
+          <Clues clues={props.clues} hint={props.hint} row={props.row} col={props.col}></Clues>
         </div>
     </div>
   )
