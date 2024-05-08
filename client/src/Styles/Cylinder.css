@@ -1,0 +1,78 @@
+.cylinder {
+  /* whatever values/units you want */
+  pointer-events: none;
+  /* background: radial-gradient(50% 20px at 50% 10px, #0003 99.99%, #0000 0), radial-gradient(50% 10px at 50% calc(100% - 10px), #fff3 99.99%, #0000 0), red; */
+  border-radius: 100% / 20px;
+  height: 40px;
+  width: 50px;
+  /* transform: translateZ(80px) translateY(30px) translateX(50px); */
+  position: absolute;
+}
+
+/* html, 
+body {
+  height: 100%;
+  background: #1F2227;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#container {
+	width: 100px;
+  height: 100px;
+}
+
+#frame {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 23px;
+	transform-style: preserve-3d;
+	transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  cursor: pointer;
+}
+
+.strips {
+	transform-style: preserve-3d;
+  transition: all 420ms;
+}
+
+.strips > div {
+	position: absolute;
+  top: -60px;
+  left: -12px;
+  margin-top: -10px;
+	background: limegreen;
+	border: solid darkgreen;
+	border-width: 5px 0;
+	height: 120px;
+	width: 24px;
+	opacity: 1;
+  transition: all 420ms;
+}
+
+.strip-1 { transform: rotateY(0deg) translateZ(85px); }
+.strip-2 { transform: rotateY(15deg) translateZ(85px); }
+.strip-3 { transform: rotateY(30deg) translateZ(85px); }
+.strip-4 { transform: rotateY(45deg) translateZ(85px); }
+.strip-5 { transform: rotateY(60deg) translateZ(85px); }
+.strip-6 { transform: rotateY(75deg) translateZ(85px); }
+.strip-7 { transform: rotateY(90deg) translateZ(85px); }
+.strip-8 { transform: rotateY(105deg) translateZ(85px); }
+.strip-9 { transform: rotateY(120deg) translateZ(85px); }
+.strip-10 { transform: rotateY(135deg) translateZ(85px); }
+.strip-11 { transform: rotateY(150deg) translateZ(85px); }
+.strip-12 { transform: rotateY(165deg) translateZ(85px); }
+.strip-13 { transform: rotateY(180deg) translateZ(85px); }
+.strip-14 { transform: rotateY(195deg) translateZ(85px); }
+.strip-15 { transform: rotateY(210deg) translateZ(85px); }
+.strip-16 { transform: rotateY(225deg) translateZ(85px); }
+.strip-17 { transform: rotateY(240deg) translateZ(85px); }
+.strip-18 { transform: rotateY(255deg) translateZ(85px); }
+.strip-19 { transform: rotateY(270deg) translateZ(85px); }
+.strip-20 { transform: rotateY(285deg) translateZ(85px); }
+.strip-21 { transform: rotateY(300deg) translateZ(85px); }
+.strip-22 { transform: rotateY(315deg) translateZ(85px); }
+.strip-23 { transform: rotateY(330deg) translateZ(85px); }
+.strip-24 { transform: rotateY(345deg) translateZ(85px); } */

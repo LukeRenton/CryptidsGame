@@ -65,7 +65,7 @@ export default function ScrollLogin( props ) {
 
   const style = {
     backgroundImage: "url("+ScrollCenter+")",
-    backgroundRepeat: "no-repeat",
+    backgroundRepeat: "no-repeat"
   };
   return (
     <div className='scroll-login-root'>

@@ -148,3 +148,8 @@
 .username {
   margin-top: 20px;
 }
+
+.board-info-end-turn-button {
+  width: 100%;
+  height: 100%;
+}

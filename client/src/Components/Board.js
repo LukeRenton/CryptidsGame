@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../Styles/Board.css'
 import Map from './Map'
 import Clues from './Clues'
 
 
-export default function Board( props ) {
+export default function Board( props ) {  
   
   const getTilePieces = (tile_num) => {
     const tilePieces = {};
@@ -33,14 +33,14 @@ export default function Board( props ) {
     <div className='board-root'>
         <div className='board-columns'>
           <div className='board-column-1'>
-              <Map mapNum={props.tiles[1][0].tile_number} hexes={props.tiles[1]} pieces={getTilePieces(1)} mapSide={'left'}></Map>
-              <Map mapNum={props.tiles[2][0].tile_number} hexes={props.tiles[2]} pieces={getTilePieces(2)} mapSide={'left'}></Map>
-              <Map mapNum={props.tiles[3][0].tile_number} hexes={props.tiles[3]} pieces={getTilePieces(3)} mapSide={'left'}></Map>
+              <Map tileNumByPosition={1} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[1][0].tile_number} hexes={props.tiles[1]} pieces={getTilePieces(1)} mapSide={'left'}></Map>
+              <Map tileNumByPosition={3} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[2][0].tile_number} hexes={props.tiles[2]} pieces={getTilePieces(2)} mapSide={'left'}></Map>
+              <Map tileNumByPosition={5} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[3][0].tile_number} hexes={props.tiles[3]} pieces={getTilePieces(3)} mapSide={'left'}></Map>
           </div>
           <div className='board-column-2'>
-              <Map mapNum={props.tiles[4][0].tile_number} hexes={props.tiles[4]} pieces={getTilePieces(4)} mapSide={'right'}></Map>
-              <Map mapNum={props.tiles[5][0].tile_number} hexes={props.tiles[5]} pieces={getTilePieces(5)} mapSide={'right'}></Map>
-              <Map mapNum={props.tiles[6][0].tile_number} hexes={props.tiles[6]} pieces={getTilePieces(6)} mapSide={'right'}></Map>
+              <Map tileNumByPosition={2} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[4][0].tile_number} hexes={props.tiles[4]} pieces={getTilePieces(4)} mapSide={'right'}></Map>
+              <Map tileNumByPosition={4} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[5][0].tile_number} hexes={props.tiles[5]} pieces={getTilePieces(5)} mapSide={'right'}></Map>
+              <Map tileNumByPosition={6} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[6][0].tile_number} hexes={props.tiles[6]} pieces={getTilePieces(6)} mapSide={'right'}></Map>
           </div>
         </div>
         <div className='board-clues'>
