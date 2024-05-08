@@ -11,11 +11,11 @@ export default function Switch( props ) {
 
   return (
     <div className='switch-root'>
-        <div className='switch-back' onClick={toggleSwitch}>
-            <div className={'switch-ball '+(switchLeft ? 'switch-ball-left' : 'switch-ball-right')} onClick={toggleSwitch}></div>
-        </div>
         <div className='switch-text'>
             {props.text}
+        </div>
+        <div className='switch-back' onClick={toggleSwitch}>
+            <div className={'switch-ball '+(switchLeft ? 'switch-ball-left' : 'switch-ball-right')} onClick={toggleSwitch}></div>
         </div>
     </div>
   )

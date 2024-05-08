@@ -1,28 +1,58 @@
-import React, { useEffect, useRef, useState } from "react";
-import "../Styles/Lobby.css";
-import { useNavigate } from "react-router-dom";
-import scroll_paper_img from '../Images/scroll-paper.png'
-import PlantButton from "../Components/PlantButton";
-import Switch from "../Components/Switch";
+import React, { useState } from 'react'
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+
+
+import '../Styles/Lobby.css'
+import forest_animation from '../Videos/forest_animation.mp4'
+import beach_animation from '../Videos/beach_animation.mp4'
+import mountain_animation from '../Videos/mountain_animation.mp4'
+import host_online from '../Images/LobbyHeaders/host_online.png'
+import join_online from '../Images/LobbyHeaders/join_online.png'
+import local from '../Images/LobbyHeaders/local.png'
+import background from '../Videos/wall-background.mp4'
+import lobbyback from '../Images/LobbyBack-transformed-resized.jpeg'
+import Switch from '../Components/Switch'
+import PlantButton from '../Components/PlantButton'
+import { useNavigate } from 'react-router-dom'
 
 export default function Lobby( props ) {
-
-    const [showPrivateOptions, setShowPrivateOptions] = useState(false);
-    const [showTimedOptions, setShowTimedOptions] = useState(false);
-    const [sliderChecked, setSliderChecked] = useState(false);
-    const [numPlayers, setNumPlayers] = useState(0);
-    
     const navigate = useNavigate();
+    const [playHostOnline, setPlayHostOnline] = useState(false);
+    const [playJoinOnline, setPlayJoinOnline] = useState(false);
+    const [playLocal, setPlayLocal] = useState(false);
+    const [showSettings, setShowSettings] = useState('');
+    const [sliderChecked, setSliderChecked] = useState(false);
+    const [numPlayers, setNumPlayers] = useState(2);
 
-    const handleBack = () => {
-      navigate('/');
-    };
+    const handleHoverHostOnline = (event) => {
+        event.target.play();
+        setPlayHostOnline(true);
+    }
 
-    const handleShowPrivateOptions = () => {
-        setShowPrivateOptions(true);
-        setTimeout(() => {
-            setShowTimedOptions(true);
-        },200)
+    const handleLeaveHostOnline = (event) => {
+        event.target.pause();
+        setPlayHostOnline(false);
+    }
+
+    const handleHoverJoinOnline = (event) => {
+        event.target.play();
+        setPlayJoinOnline(true);
+    }
+
+    const handleLeaveJoinOnline = (event) => {
+        event.target.pause();
+        setPlayJoinOnline(false);
+    }
+
+    const handleHoverLocal = (event) => {
+        event.target.play();
+        setPlayLocal(true);
+    }
+
+    const handleLeaveLocal = (event) => {
+        event.target.pause();
+        setPlayLocal(false);
     }
 
     const toggleSlider = () => {
@@ -34,95 +64,74 @@ export default function Lobby( props ) {
         props.setLocalGameInfo({mode: sliderChecked ? 'normal' : 'intro', players: numPlayers});
         navigate('/game');
     }
-  
-return (
-<div className="lobby-container">
-    <div className="lobby-header">
-        <div className="lobby-title">Play</div>
-        <div className="lobby-version">v2024.3.50 (build num: 1st Africa)</div>
+
+    const renderSettings = () => {
+        if (showSettings === 'local') {
+            return  <div className='lobby-settings-local'>
+                        <h1 className="lobby-settings-header">Local Game</h1>
+                        <h2 className="lobby-settings-subheader">Options</h2>
+                        <form className="lobby-settings-form">
+                            <Switch text={'Advanced mode'} onClick={toggleSlider}/>
+                            <div className='lobby-settings-num-players'>
+                                <div className='lobby-settings-num-players-text'>Number of players: </div>
+                                <ul className='lobby-settings-num-players-selector'>
+                                    <li className={numPlayers === 2 ? 'selected' : ''} onClick={() => {setNumPlayers(2)}}>2</li>
+                                    <li className={numPlayers === 3 ? 'selected' : ''} onClick={() => {setNumPlayers(3)}}>3</li>
+                                    <li className={numPlayers === 4 ? 'selected' : ''} onClick={() => {setNumPlayers(4)}}>4</li>
+                                    <li className={numPlayers === 5 ? 'selected' : ''} onClick={() => {setNumPlayers(5)}}>5</li>
+                                </ul>
+                            </div>
+                            {/* <PlantButton type={'submit'} onClick={handleStartPrivateGame}>Start private game</PlantButton> */}
+                            <button className='lobby-settings-button' type='submit' onClick={handleStartPrivateGame}>Start local game</button>
+                        </form>
+                    </div>
+        }
+    }
+
+
+  return (
+    <div className='lobby-root'>
+        {/* <video autoPlay muted loop className='lobby-background'>
+            <source src={background} type="video/mp4" />
+        </video> */}
+        {showSettings !== '' ? <div className='back-blur' onClick={() => {setShowSettings('')}}></div> : <></>}
+        {renderSettings()}
+        <div className='lobby-go-tutorial'>
+            <button className='lobby-go-tutorial-button' onClick={() => navigate('/tutorial')}>
+                Go to tutorial
+            </button>
+        </div>
+        <img className='lobby-background' src={lobbyback}></img>
+        <div className='lobby-items'>
+            <div className='top-row'>
+                <div className='lobby-item lobby-join-online'>
+                    <div className='lobby-join-online-back'>
+                        <video muted loop className={'lobby-video '+(!playJoinOnline ? 'grayed-out' : '')} onMouseEnter={handleHoverJoinOnline} onMouseLeave={handleLeaveJoinOnline}>
+                            <source src={beach_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-join-online-text '+(!playJoinOnline ? '' : 'zoomed-in')} src={join_online} />
+                    </div>
+                </div>
+                <div className='lobby-item lobby-local' onClick={() => setShowSettings('local')}>
+                    <div className='lobby-local-back'>
+                        <video muted loop className={'lobby-video '+(!playLocal ? 'grayed-out' : '')} onMouseEnter={handleHoverLocal} onMouseLeave={handleLeaveLocal}>
+                            <source src={mountain_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-local-text '+(!playLocal ? '' : 'zoomed-in')} src={local} />
+                    </div>
+                </div>
+            </div>
+            <div className='bottom-row'>
+                <div className='lobby-item lobby-host-online '>
+                    <div className='lobby-host-online-back'>
+                        <video muted loop className={'lobby-video '+(!playHostOnline ? 'grayed-out' : '')} onMouseEnter={handleHoverHostOnline} onMouseLeave={handleLeaveHostOnline}>
+                            <source src={forest_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-host-online-text '+(!playHostOnline ? '' : 'zoomed-in')} src={host_online} />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div className="lobby-body">
-    <div className="lobby-public-private">
-
-        <div className="lobby-card" style={{backgroundImage: `url(${scroll_paper_img})`}}>
-            <div className="lobby-section"> 
-                <h1 className="lobby-public">Host a Game</h1>
-                <PlantButton>HOST</PlantButton>
-            </div>
-        </div>
-
-        <div className="lobby-card" style={{backgroundImage: `url(${scroll_paper_img})`}}>
-            <div className="lobby-section"> 
-                <h1 className="lobby-public">Find a Game</h1>
-                <PlantButton>FIND</PlantButton>
-            </div>
-        </div>
-
-        <div className={"lobby-card "+(showPrivateOptions ? 'lobby-card-flipped' : '')} style={{backgroundImage: `url(${scroll_paper_img})`}}>
-            { !showTimedOptions ? <div className="lobby-section"> 
-                <h1 className="lobby-public">Start a private Game</h1>
-                <PlantButton onClick={handleShowPrivateOptions}>START</PlantButton>
-            </div>
-            :
-            <div className="lobby-section"> 
-                <h1 className="lobby-public">Private Game</h1>
-                <h2 className="lobby-public">Options</h2>
-                <form className="lobby-private-form">
-                    <Switch text={'Advanced mode'} onClick={toggleSlider}/>
-                    <input className="lobby-input" placeholder="Number of players..." value={numPlayers} onChange={(e) => setNumPlayers(e.target.value)}></input>
-                    <PlantButton type={'submit'} onClick={handleStartPrivateGame}>Start private game</PlantButton>
-                </form>
-            </div>
-            }
-        </div>
-
-        {/* <div className="lobby-card">
-            <img className="lobby-card-background" src={scroll_paper_img}></img>
-            <div className="lobby-section"> 
-                <h1 className="lobby-public">Host a Game</h1>
-                <a className="lobby-fancy" href="#">
-                    <span className="lobby-top-key"></span>
-                    <span className="lobby-text">Create Game</span>
-                    <span className="lobby-bottom-key-1"></span>
-                    <span className="lobby-bottom-key-2"></span>
-                </a>
-            </div>
-        </div>
-
-        <div className="lobby-card"> 
-            <div className="lobby-section"> 
-                <h1 className="lobby-public">Find a Game</h1>
-                <a className="lobby-fancy" href="#">
-                    <span className="lobby-top-key"></span>
-                    <span className="lobby-text">Join Game</span>
-                    <span className="lobby-bottom-key-1"></span>
-                    <span className="lobby-bottom-key-2"></span>
-                </a>
-            </div>
-        </div>
-
-        <div className="lobby-card"> 
-            <div className="lobby-section"> 
-                <h1 className="lobby-private">Start private Game</h1>
-                <a className="lobby-fancy" href="#">
-                    <span className="lobby-top-key"></span>
-                    <span className="lobby-text">Enter Code</span>
-                    <span className="lobby-bottom-key-1"></span>
-                    <span className="lobby-bottom-key-2"></span>
-                </a>
-            </div>
-        </div> */}
-
-    </div>
-</div>
-
-
-    <div className="lobby-back">
-        <button className="lobby-Btn" onClick={handleBack}>
-            <div className="lobby-sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
-            <div className="lobby-text-btn">Back</div>
-        </button>
-    </div>
-</div>
-  );
+  )
 }

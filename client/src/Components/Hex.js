@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import '../Styles/Hex.css'
 import scroll_img from '../Images/scroll.png'
+import PlayerCube from './PlayerCube';
+import Cylinder from './Cylinder';
+import { colours } from '../Models/PlayerColours';
+import search from '../Icons/search.svg'
 
 export default function Hex( props ) {
 
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const [positivePieces, setPositivePieces] = useState([]);
+  const [negativePieces, setNegativePieces] = useState([]);
+  // const [] = useState();
 
   const renderPieces = () => {
     return props.pieces.map((piece) => {
@@ -15,10 +23,12 @@ export default function Hex( props ) {
   }
 
   const handleMouseEnter = () => {
+    props.setHexHover({type: props.type, animalTerritory: props.animalTerritory, pieces: props.pieces});
     setShowTooltip(true);
   }
 
   const handleMouseLeave = () => {
+    props.setHexHover(null);
     setShowTooltip(false);
   }
 
@@ -28,25 +38,84 @@ export default function Hex( props ) {
   //   console.log('x: '+mouseX);
   // }
 
+  const handleClick = () => {
+    console.log('clicked');
+    if (props.placeNegative) {
+      const state = props.gameState;
+      const negativePieces = state.negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
+      if (negativePieces.length === 0) {
+        state.negativePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
+        props.setGameState(state);
+        setNegativePieces(state.negativePieces);
+      }
+    } else if (props.placePositive) {
+      const state = props.gameState;
+      const positivePieces = state.positivePieces.filter(piece => {return (piece.player === props.gameState.playerTurn && piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
+      if (positivePieces.length === 0) {
+        state.positivePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
+        setPositivePieces(state.positivePieces);
+        props.setGameState(state);
+      }
+    } else if (props.placeSearch) {
+      console.log('making a search');
+      const state = props.gameState;
+      state.searchPiece = {row: props.hexRow, col: props.hexCol, tileNum: props.tileNum}
+      console.log(state);
+      props.setGameState(state);
+    }
+  }
+
+  const renderNegativePieces = () => {
+    // const negativePieces = [{row: 0, col: 0, player: 1}];
+    // const negativePieces = props.gameState.negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
+    return negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)}).map(piece => {
+      return <PlayerCube color={colours[piece.player]}></PlayerCube>
+    });
+  }
+
+  const renderPositivePieces = () => {
+    // const negativePieces = [{row: 0, col: 0, player: 1}];
+    // const positivePieces = props.gameState.positivePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
+    return positivePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)}).map((piece, index) => {
+      return <Cylinder color={colours[piece.player]} index={index}></Cylinder>
+    });
+  }
+  
+  const renderSearchPiece = () => {
+    if (props.gameState.searchPiece) {
+      if (props.gameState.searchPiece.row === props.hexRow && props.gameState.searchPiece.col === props.hexCol && props.gameState.searchPiece.tileNum === props.tileNum) {
+        return <img className='hex-search-piece' src={search}></img>
+      }
+    } 
+  }
+
+  const revealCryptidStyle = () => {
+    const destRow = props.destination.row;
+    const destCol = props.destination.col;
+
+    if (destRow === 'A') destRow = 10; if (destRow === 'B') destRow = 11;
+    if (destCol === 'A') destCol = 10; if (destCol === 'B') destCol = 11;
+
+    const tile_row = Math.floor(destRow/3);
+    const tile_col = Math.floor(destCol/6);
+    const tile_num = tile_row*2 + tile_col + 1;
+
+    const actual_row = destRow % 3;
+    const actual_col = destCol % 6;
+
+    // console.log({row: actual_row, col: actual_col, tile: tile_num});
+    console.log(props.tileNumByPosition);
+
+    if (tile_num === props.tileNumByPosition && actual_row === props.hexRow && actual_col === props.hexCol) {
+      return ' show-cryptid'
+    } else {
+      return ' gray-out'
+    }
+  }
+
   return (
-    <div className={'hex hex-'+props.hexNum} >
-        {showTooltip ?  <div className='hex-tooltip' > {/* style={{left: `${mouseX}px`, top: `${mouseY+200}px`}} */}
-                          <div className='hex-tooltip-header'>
-                            Type: 
-                            <div className='hex-tooltip-text'>{props.type}</div>
-                          </div>
-                          <div className='hex-tooltip-header'>
-                            Animal territory:
-                            <div className='hex-tooltip-text'>{props.animalTerritory ? props.animalTerritory : 'None'}</div>
-                          </div>
-                          <div className='hex-tooltip-header'>
-                            Pieces:
-                            {props.pieces.length > 0 ? props.pieces.map((piece) => {
-                              return <div className='hex-tooltip-text'>{piece.name}</div>
-                            }) : <div className='hex-tooltip-text'>None</div>}
-                          </div>
-                        </div> : <></>}
-        <div className='hex-hitbox' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></div> {/* onMouseMove={handleMouseHover} */}
+    <div className={'hex hex-'+props.hexNum+' '+(props.revealCryptid ? revealCryptidStyle() : '')} >
+        <div className='hex-hitbox' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></div>
         <div className='hex-top-bottom bottom-face'>
             <div className='top'></div>
             <div className='middle'></div>
@@ -67,7 +136,9 @@ export default function Hex( props ) {
               {renderPieces()}
             </div>
         </div>
-
+        {renderNegativePieces()}
+        {renderPositivePieces()}
+        {renderSearchPiece()}
     </div>
   )
 }
