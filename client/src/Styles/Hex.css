@@ -1,5 +1,5 @@
 .hex {
-    perspective: 10000px;
+    perspective: 100000px;
     float: left;
     position: absolute;
     transform-style: preserve-3d;
@@ -209,4 +209,23 @@
     height: 70px;
     transform: translate(0);
     -webkit-transform: translate(0);
+}
+
+.hex-search-piece {
+    position: absolute;
+    width: 100px;
+    height: 70px;
+    pointer-events: none;
+    transform: translateZ(80px) translateX(-130px) translateY(25px) rotateX(0deg) rotateY(0deg);
+}
+
+.show-cryptid {
+    pointer-events: none;
+}
+
+.gray-out * {
+    pointer-events: none;
+    filter: grayscale();
+    opacity: 0.5;
+    transition: 3s;
 }

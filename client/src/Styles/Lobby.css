@@ -5,14 +5,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: black;
 }
 
 .lobby-background {
     /* width: 1920px; */
     /* height: 1080px; */
+    width: 100%;
+    /* height: 100%; */
     position: fixed;
     left: 0;
-    top: 0;
+    top: -200px;
+    filter:  brightness(1.1);
+    pointer-events: none;
 }
 
 .lobby-items {
@@ -25,6 +30,7 @@
     display: flex;
     flex-direction: row;
     gap: 0px 250px;
+    animation: load 1s ease;
 }
 
 .lobby-items .bottom-row {
@@ -34,6 +40,7 @@
     margin-top: -300px;
     margin-left: 387px;
     width: fit-content;
+    animation: load 1.2s ease;
 }
 
 
@@ -73,18 +80,134 @@
 .lobby-host-online-text, .lobby-join-online-text, .lobby-local-text {
     position: absolute;
     pointer-events: none;
-    top: 150px;
+    top: 250px;
     width: 450px;
     transition: 0.5s;
     filter: grayscale(0.1);
 }
 
 .lobby-host-online-text {
-    top: 370px;
+    top: 470px;
 }
 
 .zoomed-in {
     transform: scale(1.05);
     filter: grayscale(0);
     transition: 0.5s;
+}
+
+.flip-card {
+    transform: rotateY(180deg);
+    transition: 0.5s;
+}
+
+
+@keyframes load {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.lobby-settings-local {
+    position: absolute;
+    background: gray;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: float-in 0.7s ease;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.lobby-settings-local h1 {
+    margin: 0;
+}
+
+.lobby-settings-local h2 {
+    margin-top: 5px;
+}
+
+.lobby-settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px 0px;
+    font-size: 20px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.lobby-settings-num-players {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.lobby-settings-num-players-selector {
+    display: flex;
+    flex-direction: row;
+    gap: 0px 5px;
+    list-style: none;
+    padding: 0;
+    padding-left: 12px;
+    margin: 0;
+}
+
+.lobby-settings-num-players-selector li {
+    padding: 2px;
+    border: 1px black solid;
+    border-radius: 3px;
+    cursor: pointer;
+    background: transparent;
+    color: black;
+}
+
+.lobby-settings-num-players-selector .selected {
+    background: black;
+    color: white;
+}
+
+.back-blur {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.8;
+    z-index: 1;
+    animation: gray-out 0.5s ease;
+}
+
+@keyframes gray-out {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes float-in {
+    0% {
+        transform: translateY(-500px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.lobby-settings-button {
+    width: 100%;
+}
+
+.lobby-go-tutorial {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    z-index: 1;
 }
