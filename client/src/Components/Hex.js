@@ -46,6 +46,11 @@ export default function Hex( props ) {
       if (negativePieces.length === 0) {
         state.negativePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
         props.setGameState(state);
+
+        const movesList = props.movesList;
+        movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed negative on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+        props.setMovesList(movesList);
+
         setNegativePieces(state.negativePieces);
       }
     } else if (props.placePositive) {
@@ -55,6 +60,11 @@ export default function Hex( props ) {
         state.positivePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
         setPositivePieces(state.positivePieces);
         props.setGameState(state);
+
+        const movesList = props.movesList;
+        movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed positive on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+        props.setMovesList(movesList);
+
       }
     } else if (props.placeSearch) {
       console.log('making a search');
@@ -62,6 +72,10 @@ export default function Hex( props ) {
       state.searchPiece = {row: props.hexRow, col: props.hexCol, tileNum: props.tileNum}
       console.log(state);
       props.setGameState(state);
+      
+      const movesList = props.movesList;
+      movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed search on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+      props.setMovesList(movesList);
     }
   }
 

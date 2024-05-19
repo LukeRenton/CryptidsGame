@@ -8,6 +8,8 @@ import { useState } from 'react';
 
 function App() {
   const [localGameInfo, setLocalGameInfo] = useState({});
+  const [playerNames, setPlayerNames] = useState(["","","","",""]);
+  const [movesList, setMovesList] = useState([[],[],[],[],[]]);
 
   return (
     <div className="App">
@@ -15,8 +17,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Login/>}/>
           <Route path='/tutorial' element={<Tutorial/>}/>
-          <Route path='/lobby' element={<Lobby setLocalGameInfo={setLocalGameInfo}/>}/>
-          <Route path='/game' element={<Game localGameInfo={localGameInfo} />}/>
+          <Route path='/lobby' element={<Lobby setMovesList={setMovesList} playerNames={playerNames} setPlayerNames={setPlayerNames} localGameInfo={localGameInfo} setLocalGameInfo={setLocalGameInfo}/>}/>
+          <Route path='/game' element={<Game movesList={movesList} setMovesList={setMovesList} playerNames={playerNames} localGameInfo={localGameInfo} />}/>
         </Routes>
       </Router>
     </div>

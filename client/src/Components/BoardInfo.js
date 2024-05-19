@@ -60,8 +60,9 @@ export default function BoardInfo( props ) {
         props.setPlaceSearch(false);
 
         const state = props.gameState;
-        if (state.playerTurn + 1 == 5) {
+        if (state.playerTurn + 1 == (props.numPlayers+1)) {
             state.playerTurn = 1;
+            props.setTurn(props.turn + 1);
         } else {
             state.playerTurn += 1;
         }
@@ -124,7 +125,8 @@ export default function BoardInfo( props ) {
                         <img className='header-icon' src={avatar}/><h2>TURN</h2>
                     </div>
                     <div className='text'>
-                        Player {playerNum}
+                        {/* Player {playerNum} */}
+                        {props.playerNames[playerNum-1]}
                     </div>
                 </div>
             </li>
