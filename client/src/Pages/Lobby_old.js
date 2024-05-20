@@ -6,18 +6,19 @@ import PlantButton from "../Components/PlantButton";
 import Switch from "../Components/Switch";
 
 export default function Lobby( props ) {
-
+    // State variables initialization
     const [showPrivateOptions, setShowPrivateOptions] = useState(false);
     const [showTimedOptions, setShowTimedOptions] = useState(false);
     const [sliderChecked, setSliderChecked] = useState(false);
     const [numPlayers, setNumPlayers] = useState(0);
     
     const navigate = useNavigate();
-
+    // Handle back button click
     const handleBack = () => {
       navigate('/');
     };
 
+    // Show private game options
     const handleShowPrivateOptions = () => {
         setShowPrivateOptions(true);
         setTimeout(() => {
@@ -25,10 +26,12 @@ export default function Lobby( props ) {
         },200)
     }
 
+    // Toggle slider
     const toggleSlider = () => {
         setSliderChecked(!sliderChecked);
     }
 
+    // Start a private game
     const handleStartPrivateGame = (e) => {
         e.preventDefault();
         props.setLocalGameInfo({mode: sliderChecked ? 'normal' : 'intro', players: numPlayers});

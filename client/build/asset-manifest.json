@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.de38feeb.css",
-    "main.js": "/static/js/main.a056b68b.js",
+    "main.js": "/static/js/main.ec3648a8.js",
     "static/media/forest_animation.mp4": "/static/media/forest_animation.239347dfe9755133bd14.mp4",
     "static/media/wall-background.mp4": "/static/media/wall-background.9691b868f5274a0471f2.mp4",
     "static/media/cryptid-background.mp4": "/static/media/cryptid-background.af864c7aa5878e2d51e9.mp4",
@@ -28,17 +28,17 @@
     "static/media/structures.png": "/static/media/structures.1d4574fc8a22e8b15171.png",
     "static/media/animal.png": "/static/media/animal.de309edfdabf8eb53ba6.png",
     "static/media/search.svg": "/static/media/search.fbeb080e691daadc7e1a2765c5adbf02.svg",
-    "static/media/block.svg": "/static/media/block.799554af0f304d7e04b971e2d5700134.svg",
-    "static/media/avatar.svg": "/static/media/avatar.3a46b17ae79dacc469da4d36ffdb3be5.svg",
+    "static/media/block.svg": "/static/media/block.18ab2345c603acca02aa2462644a0a77.svg",
+    "static/media/avatar.svg": "/static/media/avatar.57b2a8eabac5062f5c5d9041ebbd693e.svg",
     "static/media/hex.svg": "/static/media/hex.25a0838035c9ae824478d196b7ed9512.svg",
-    "static/media/question.svg": "/static/media/question.d7dd2c99fbcd281ede054bd70207345c.svg",
-    "static/media/info.svg": "/static/media/info.86375dfea0b36eba22b87e3829720254.svg",
+    "static/media/question.svg": "/static/media/question.8a1e4449611c350bd8cc32af580d9502.svg",
+    "static/media/info.svg": "/static/media/info.42fe141ea30ab771f04377afeda54e90.svg",
     "index.html": "/index.html",
     "main.de38feeb.css.map": "/static/css/main.de38feeb.css.map",
-    "main.a056b68b.js.map": "/static/js/main.a056b68b.js.map"
+    "main.ec3648a8.js.map": "/static/js/main.ec3648a8.js.map"
   },
   "entrypoints": [
     "static/css/main.de38feeb.css",
-    "static/js/main.a056b68b.js"
+    "static/js/main.ec3648a8.js"
   ]
 }

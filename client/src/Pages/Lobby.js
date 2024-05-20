@@ -17,6 +17,7 @@ import PlantButton from '../Components/PlantButton'
 import { useNavigate } from 'react-router-dom'
 
 export default function Lobby( props ) {
+    // State variables initialization
     const navigate = useNavigate();
     const [playHostOnline, setPlayHostOnline] = useState(false);
     const [playJoinOnline, setPlayJoinOnline] = useState(false);
@@ -25,6 +26,7 @@ export default function Lobby( props ) {
     const [sliderChecked, setSliderChecked] = useState(false);
     const [numPlayers, setNumPlayers] = useState(2);
 
+     // Handlers for video hover events
     const handleHoverHostOnline = (event) => {
         event.target.play();
         setPlayHostOnline(true);
@@ -55,16 +57,19 @@ export default function Lobby( props ) {
         setPlayLocal(false);
     }
 
+    // Toggle slider
     const toggleSlider = () => {
         setSliderChecked(!sliderChecked);
     }
 
+    // Start a private game
     const handleStartPrivateGame = (e) => {
         e.preventDefault();
         props.setLocalGameInfo({mode: sliderChecked ? 'normal' : 'intro', players: numPlayers});
         navigate('/game');
     }
 
+    // Render settings based on state
     const renderSettings = () => {
         if (showSettings === 'local') {
             return  <div className='lobby-settings-local'>

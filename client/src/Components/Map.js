@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 import '../Styles/Map.css'
 import Hex from './Hex';
 
+//This component renders the game map with hexagonal tiles and associated pieces.
 export default function Map( props ) {
+  // Function to get all pieces located on a specific hexagon
   const getAllPieces = (hexNum) => {
     const allPieces = [];
+    // Check if blue shack piece exists and add it to allPieces if present
     if (props.pieces.blue_shack) {
       const pieceHexNum = props.pieces.blue_shack.row*6 + props.pieces.blue_shack.col;
       if (pieceHexNum === hexNum) {
@@ -15,6 +18,13 @@ export default function Map( props ) {
         });
       }
     }
+
+    // Check if blue standing stone piece exists and add it to allPieces if present
+    // Similar checks are performed for other piece types (green shack, green standing stone, etc.)
+    // Replace 'blue_shack', 'blue_standing_stone', etc. with appropriate piece types
+    // Replace '../Images/CryptidPieces/blue_shack.png', '../Images/CryptidPieces/blue_standing_stone.png', etc. with appropriate image paths
+    // Similar comments apply to other pieces as well
+    // You may consider refactoring this code to avoid repetition, perhaps by storing piece types in an array and iterating over it
     if (props.pieces.blue_standing_stone) {
       const pieceHexNum = props.pieces.blue_standing_stone.row*6 + props.pieces.blue_standing_stone.col;
       if (pieceHexNum === hexNum) {
@@ -65,6 +75,8 @@ export default function Map( props ) {
         });
       }
     } 
+
+    // We repeat similar checks for all the other piece types
     return allPieces;
   }
   return (

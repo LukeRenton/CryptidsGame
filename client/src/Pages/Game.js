@@ -7,7 +7,10 @@ import '../Styles/Game.css';
 import BoardInfo from '../Components/BoardInfo';
 import Cylinder from '../Components/Cylinder';
 
+
+// Define and export the Game functional component
 export default function Game( props ) {
+  // State variables initialization
   const [gameState, setGameState] = useState( {
                                                 playerTurn: 1,
                                                 positivePieces: [],
@@ -27,7 +30,7 @@ export default function Game( props ) {
   const [placeSearch, setPlaceSearch] = useState(false);
 
   const [revealCryptid, setRevealCryptid] = useState(false);
-
+  // Handlers for toggling placement modes
   const handlePlaceNegative = (value) => {
     setPlacePositive(false);
     setPlaceSearch(false);
@@ -45,12 +48,13 @@ export default function Game( props ) {
     setPlacePositive(false);
     setPlaceSearch(value);
   }
-
+  // Function to fetch a new map
   const getNewMap = async () => {
       const newMap = await getMap(props.localGameInfo.mode,props.localGameInfo.players);
       setMap(newMap);
       setLoading(false);
 
+      // Extract tiles from the new map
       const allTiles = {};
       for (let i = 1; i <= 6; i++) {
           const tile = tile_map[newMap.board.tiles[i].tile_num]
@@ -58,6 +62,7 @@ export default function Game( props ) {
       }
       setTiles(allTiles);
       
+      // Set pieces from the new map
       const allPieces = newMap.board.pieces;
       setPieces(allPieces);
       

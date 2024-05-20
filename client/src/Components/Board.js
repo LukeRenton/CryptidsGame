@@ -3,11 +3,12 @@ import '../Styles/Board.css'
 import Map from './Map'
 import Clues from './Clues'
 
-
+// Board component for the Cryptid game, responsible for rendering the game board and managing game pieces.
 export default function Board( props ) {  
-  
+  // Function to get the pieces located on a specific tile.
   const getTilePieces = (tile_num) => {
     const tilePieces = {};
+    // Check and assign each piece to the corresponding tile if it matches the tile number.
     if (props.pieces.blue_shack.tile_num == tile_num) {
       tilePieces.blue_shack = props.pieces.blue_shack;
     } else {tilePieces.blue_shack = null}

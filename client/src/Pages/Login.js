@@ -4,6 +4,7 @@ import ScrollLogin from '../Components/ScrollLogin'
 import BackgroundVideo from '../Videos/cryptid-background.mp4'
 import { handleLogin, handleSignup } from '../Services/LoginService'
 
+// This component represents the login page.
 export default function Login() {
   return (
     <div className='login-root'>
