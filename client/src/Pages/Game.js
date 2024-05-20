@@ -88,7 +88,7 @@ export default function Game( props ) {
             const globalCol = ((tile+1) % 2 )*6 + col;
             const globalRow = (Math.floor((tile-1) / 2))*3 + row;
             
-            grid[globalRow][globalCol] = {row: globalRow, col: globalCol, pieces: [], animalTerritory: hex.animal_territory};
+            grid[globalRow][globalCol] = {row: globalRow, col: globalCol, type : hex.type, pieces: [], animalTerritory: hex.animal_territory};
 
             if (allPieces.white_standing_stone.globalRow === globalRow && allPieces.white_standing_stone.globalCol === globalCol) {
                 grid[globalRow][globalCol].pieces.push('white_standing_stone');
@@ -129,11 +129,209 @@ export default function Game( props ) {
       const allPieces = newMap.board.pieces;
       setPieces(allPieces);
       
-      console.log(allTiles);
 
-      const grid = parseInfo(newMap, allTiles, allPieces);
-      
+      const grid = await parseInfo(newMap, allTiles, allPieces);
+      console.log(grid);
+      const availableGuesses = getAvailableGuesses(grid);
       return newMap;
+  }
+
+  const getAvailableGuesses = (boardState) => {  
+    const { grid, clues, hint } = boardState;
+    const availableGuesses = {};
+    console.log(grid);
+    for (let i = 0; i < clues.length; i++) {
+        // Need to remove "The habitat is" from the clue to get the actual clue
+        let clue = (clues[i]).substring(15);
+        const player = i+1;
+        const allowedTiles = processClue(clue, grid);
+        availableGuesses[player] = allowedTiles;
+    }
+    console.log(availableGuesses)
+    return availableGuesses;
+  }
+
+
+  const processClue = (clue, grid) => {
+    if (clue.startsWith("on")) {
+      console.log("Processing on: ", clue)
+      return onTypeClue(clue, grid);
+    } else if (clue.startsWith("not on")) {
+      return notOnTypeClue(clue, grid);
+    } else if (clue.startsWith("within one space")) {
+      console.log("Processing within one space: ", clue)
+      return withinOneSpaceClue(clue, grid);
+    } else if (clue.startsWith("within two spaces")) {
+      console.log("Processing within two spaces: ", clue)
+      return withinTwoSpaceClue(clue, grid);
+    } else if (clue.startsWith("within three spaces")) {
+      console.log("Processing within three spaces: ", clue)
+      return withinThreeSpaceClue(clue, grid);
+    // } else if (clue.startsWith("not within one space")) {
+    //   return notWithinOneSpaceClue(clue, grid);
+    // } else if (clue.startsWith("not within two spaces")) {
+    //   return notWithinTwoSpaceClue(clue, grid);
+    // } else if (clue.startsWith("not within three spaces")) {
+    //   return notWithinThreeSpaceClue(clue, grid);
+    } else {
+      console.log("Unknown clue type:", clue);
+    }
+  };
+
+ const onTypeClue = (clue, grid) => {
+    const allowedTiles = [];
+    const splitClue = clue.split(' ');
+    const type1 = splitClue[1];
+    const type2 = splitClue[3];
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[row].length; col++) {
+            const hex = grid[row][col];
+            if (hex.type === type1 || hex.type === type2) {
+                allowedTiles.push(hex);
+            }
+        }
+    }
+    return allowedTiles;
+  }
+
+  const notOnTypeClue = (clue, grid) => {
+    const allowedTiles = [];
+    const splitClue = clue.split(' ');
+    const type1 = splitClue[2];
+    const type2 = splitClue[4];
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[row].length; col++) {
+            const hex = grid[row][col];
+            if (hex.type !== type1 && hex.type !== type2) {
+                allowedTiles.push(hex);
+            }
+        }
+    }
+    return allowedTiles;
+  }
+
+  const withinOneSpaceClue = (clue, grid) => {
+    let allowedTiles = [];
+    const splitClue = clue.split(' ');
+    const type = splitClue[splitClue.length - 1];
+    const depth = 1;
+    const territory = type === "territory";
+    //We only want unique tiles
+    const allowedTilesSet = new Set();
+
+    for (let row = 0; row < grid.length; row++) {
+        for (let col = 0; col < grid[row].length; col++) {
+            const hex = grid[row][col];
+            if ((territory && hex.animalTerritory !== null) || (!territory && hex.type === type)) {
+                allowedTilesSet.add(hex);
+                const neighbours = generateNeighbours(row, col, depth, grid);
+                neighbours.forEach(neighbour => allowedTilesSet.add(neighbour));
+            }
+        }
+    }
+
+    // Convert the Set back to an array
+    allowedTiles = Array.from(allowedTilesSet);
+    return allowedTiles;
+  };
+
+  const withinTwoSpaceClue = (clue, grid) => {
+    let allowedTiles = [];
+    const splitClue = clue.split(' ');
+    const lengthOfClue = splitClue.length;
+    let type = splitClue[lengthOfClue - 2];
+    const depth = 2;
+    const territory = (type === "cougar" || type === "bear");
+    if (!territory) {
+      // The "a" means the clue is: "is within two spaces of a shack" else the clue is "is within two spaces of a standing stone"
+      if (type === "a") {
+        type = "shack";
+      } 
+      else {
+        type = "standing stone"
+      }
+        
+    }
+    console.log("Type: ", type)
+    //We only want unique tiles
+    const allowedTilesSet = new Set();
+
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[row].length; col++) {
+          const hex = grid[row][col];
+          if ((territory && hex.animalTerritory === type) || (!territory && hex.pieces.length > 0 && standardiseName(hex.pieces[0]) === type)) {
+              allowedTilesSet.add(hex);
+              const neighbours = generateNeighbours(row, col, depth, grid);
+              neighbours.forEach(neighbour => allowedTilesSet.add(neighbour));
+          }
+      }
+    }
+
+    // Convert the Set back to an array
+    allowedTiles = Array.from(allowedTilesSet);
+    console.log("Allowed Tiles: ", allowedTiles)
+    return allowedTiles;
+  }
+
+  const withinThreeSpaceClue = (clue, grid) => {
+    let allowedTiles = [];
+    const splitClue = clue.split(' ');
+    const color = splitClue[splitClue.length - 2];
+    const depth = 3;
+
+    //We only want unique tiles
+    const allowedTilesSet = new Set();
+    for (let row = 0; row < grid.length; row++) {
+      for (let col = 0; col < grid[row].length; col++) {
+          const hex = grid[row][col];
+          if (hex.pieces.length > 0 && getPieceColor(hex.pieces[0]) === color){
+              allowedTilesSet.add(hex);
+              const neighbours = generateNeighbours(row, col, depth, grid);
+              neighbours.forEach(neighbour => allowedTilesSet.add(neighbour));
+          }
+      }
+    }
+
+    // Convert the Set back to an array
+    allowedTiles = Array.from(allowedTilesSet);
+    console.log("Allowed Tiles: ", allowedTiles)
+    return allowedTiles;
+  }
+
+
+  const generateNeighbours = (row, col, depth, grid) => {
+    const neighbours = [];
+    for (let i = -depth; i <= depth; i++) {
+        for (let j = -depth; j <= depth; j++) {
+            if (i === 0 && j === 0) {
+                continue;
+            }
+
+            const newRow = row + i;
+            const newCol = col + j;
+            if (newRow >= 0 && newRow < grid.length && newCol >= 0 && newCol < grid[newRow].length) {
+                neighbours.push(grid[newRow][newCol]);
+            }
+        }
+    }
+    return neighbours;
+  }
+
+
+  //Since the code uses underscore convention, to check the type of tile I standardise it here
+  const standardiseName = (name) => {
+    const splitName = name.split('_');
+    if (splitName.length === 2){
+      return "shack";
+    }
+    else{
+      return "standing stone";
+    }
+  }
+
+  const getPieceColor = (name) => {
+    const splitName = name.split('_');
+    return splitName[0];
   }
 
   useEffect(async () => {
