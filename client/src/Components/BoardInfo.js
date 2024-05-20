@@ -82,6 +82,7 @@ export default function BoardInfo( props ) {
             props.setTurn(props.turn + 1);
         } else {
             state.playerTurn += 1;
+            props.setTurn(props.turn + 1);
         }
         props.setGameState(state);
         setPlayerNum(props.gameState.playerTurn);
@@ -118,7 +119,7 @@ export default function BoardInfo( props ) {
         return <div className='player-dropdown'>
                 {players.filter(num => num !== playerNum).map((num) => (
                     <div key={num} className='player-dropdown-item' style={{background: `${colours[num]}`}} onClick={() => handlePlayerChange(num)}>
-                        {props.playerNames[num-1]}
+                        {props.playerNames[num-1] ? props.playerNames[num-1] : `Player ${num}`}
                     </div>
                 ))}
             </div>
@@ -162,7 +163,7 @@ export default function BoardInfo( props ) {
                         <img className='header-icon' src={avatar} /><h2>TURN</h2>
                     </div>
                     <div className='text'>
-                        {props.playerNames[playerNum-1]}
+                        {props.playerNames[playerNum-1] ? props.playerNames[playerNum-1] : `Player ${playerNum}`}
                         
                         {showPlayerDropdown ? handleShowPlayerDropdown()
                         :

@@ -34,7 +34,9 @@ export default function Game( props ) {
 
   const [playerNames, setPlayerNames] = useState(["","","","",""]);
 
-  const [turn, setTurn] = useState(1);                                              
+  const [turn, setTurn] = useState(1);       
+  
+  const [allAvailableGuesses, setAllAvailableGuesses] = useState({});
 
   const handlePlaceNegative = (value) => {
     setPlacePositive(false);
@@ -138,7 +140,33 @@ export default function Game( props ) {
       const grid = await parseInfo(newMap, allTiles, allPieces);
       console.log(grid);
       const availableGuesses = getAvailableGuesses(grid);
+      setAllAvailableGuesses(availableGuesses);
       return newMap;
+  }
+
+  const processHexNumbers = (availableGuesses) => {
+    for (let player = 1; player <= props.localGameInfo.players; player++) {
+      const newAvailableGuesses = availableGuesses[player];
+      for (let i = 0; i < newAvailableGuesses.length; i++) {
+        const tile = newAvailableGuesses[i];
+        const row = tile.row;
+        const col = tile.col;
+        
+        // Retrieve which tile number we are on
+        const tile_row = Math.floor(row/3);
+        const tile_col = Math.floor(col/6);
+        const tile_num = tile_row*2 + tile_col + 1
+        
+        const actual_row = row % 3;
+        const actual_col = col % 6;
+        
+        newAvailableGuesses[i].row = actual_row;
+        newAvailableGuesses[i].col = actual_col;
+        newAvailableGuesses[i].tileNumByPosition = tile_num;
+      }
+      availableGuesses[player] = newAvailableGuesses;
+    }
+    return availableGuesses;
   }
 
   const getAvailableGuesses = (boardState) => {  
@@ -152,8 +180,7 @@ export default function Game( props ) {
         const allowedTiles = processClue(clue, grid);
         availableGuesses[player] = allowedTiles;
     }
-    console.log(availableGuesses)
-    return availableGuesses;
+    return processHexNumbers(availableGuesses);
   }
 
 
@@ -383,6 +410,7 @@ export default function Game( props ) {
               <div className='game-board-container'>
                   <div className='game-board-root'>
                     <Board  
+                            allAvailableGuesses={allAvailableGuesses}
                             turn={turn}
                             setTurn={setTurn}
                             movesList={props.movesList}
