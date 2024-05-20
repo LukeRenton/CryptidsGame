@@ -8,7 +8,10 @@ import BoardInfo from '../Components/BoardInfo';
 import Cylinder from '../Components/Cylinder';
 import Moves from '../Components/Moves';
 
+
+// Define and export the Game functional component
 export default function Game( props ) {
+  // State variables initialization
   const [gameState, setGameState] = useState( {
                                                 playerTurn: 1,
                                                 positivePieces: [],
@@ -119,6 +122,7 @@ export default function Game( props ) {
       setMap(newMap);
       setLoading(false);
 
+      // Extract tiles from the new map
       const allTiles = {};
       for (let i = 1; i <= 6; i++) {
           const tile = tile_map[newMap.board.tiles[i].tile_num]
@@ -126,6 +130,7 @@ export default function Game( props ) {
       }
       setTiles(allTiles);
       
+      // Set pieces from the new map
       const allPieces = newMap.board.pieces;
       setPieces(allPieces);
       

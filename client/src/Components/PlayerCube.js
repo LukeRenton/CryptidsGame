@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Styles/PlayerCube.css';
-
+// Define and export the PlayerCube functional component
 export default function PlayerCube({ color = 'skyblue' }) {
   return (
       <div className="cube">

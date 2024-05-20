@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import '../Styles/Clues.css'
 import PlantButton from "./PlantButton";
 
-
+// Clues component for managing and displaying clues, hints, and the cryptid location in the game.
 export default function Clues(props) {
-    
+    // State variables for managing the component's behavior and visibility of clues and hints.
     const [clueVisible, setClueVisible] = useState(false);
     const [currentClueIndex, setCurrentClueIndex] = useState(0);
     const [showAllClues, setShowAllClues] = useState(false);
@@ -13,18 +13,20 @@ export default function Clues(props) {
 
     const [showHint, setShowHint] = useState(false);
     const [verifyShowHint, setVerifyShowHint] = useState(false);
+    // Function to update the clue visibility and index.
 
     const handleUpdateClues = () => {
         console.log('clue is '+clueVisible);
         if (clueVisible) {
             setCurrentClueIndex(currentClueIndex+1)
-
+            // Show all clues if all individual clues have been revealed.    
             if (currentClueIndex == 3) {
                 setShowAllClues(true);
             }
         }
     }
 
+    // Function to toggle the visibility of the current clue.
     const toggleClueVisibility = () => {
         // Toggle the visibility of the clue
         // Automatically show the next clue after hiding the current one
@@ -32,6 +34,7 @@ export default function Clues(props) {
         setClueVisible(!clueVisible);
     };
 
+    // Function to toggle and set a specific clue.
     const toggleSetClue = (update_clue) => {
         if (update_clue !== clue) {
             if (verifyClue) {
@@ -47,6 +50,7 @@ export default function Clues(props) {
         }
     }
 
+    // Function to handle the visibility of the hint.
     const handleShowHint = () => {
         if (!showHint) {
             if (verifyShowHint) {

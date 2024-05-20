@@ -7,6 +7,7 @@ import Game from './Pages/Game.js';
 import { useState } from 'react';
 
 function App() {
+  // State variable to manage local game information
   const [localGameInfo, setLocalGameInfo] = useState({});
   const [playerNames, setPlayerNames] = useState(["","","","",""]);
   const [movesList, setMovesList] = useState([[],[],[],[],[]]);

@@ -9,13 +9,17 @@ import question from '../Icons/question.svg'
 import arrow from '../Icons/arrow.gif'
 import { colours } from '../Models/PlayerColours'
 
+// BoardInfo component displays various game information such as player turns, clues, hints, and hex data.
 export default function BoardInfo( props ) {
     
+    // State variables for managing the visibility and confirmation dialogs
     const [viewClue, setViewClue] = useState(false);
     const [viewHint, setViewHint] = useState(false);
     const [confirmViewHint, setConfirmViewHint] = useState(false);
     const [confirmViewCryptid, setConfirmViewCryptid] = useState(false);
     const [blurBack, setBlurBack] = useState(false);
+    const [showPlayerDropdown, setShowPlayerDropdown] = useState(false);
+
 
     const [hideAccordion, setHideAccordion] = useState(false);
 
@@ -24,6 +28,7 @@ export default function BoardInfo( props ) {
     const [playerNum, setPlayerNum] = useState(1);
     // const playerNum = 2;
 
+    // Function to handle the viewing of clues with animation for accordion effect
     const handleViewClue = () => {
         if (viewClue) {
             setHideAccordion(true);
@@ -36,6 +41,15 @@ export default function BoardInfo( props ) {
         }
     }
 
+    const handlePlayerChange = (newPlayerNum) => {
+        const state = { ...props.gameState, playerTurn: newPlayerNum };
+        props.setGameState(state);
+        setPlayerNum(newPlayerNum);
+        setShowPlayerDropdown(false);
+    }
+    
+
+    // Function to initiate the process of viewing the hint, requiring confirmation
     const handleViewHint = () => {
         if (!confirmViewHint) {
             setBlurBack(true);
@@ -43,17 +57,20 @@ export default function BoardInfo( props ) {
         }
     }
 
+    // Function to cancel the hint confirmation process
     const handleCancelConfirmHint = () => {
         setBlurBack(false);
         setConfirmViewHint(false);
     }
 
+    // Function to confirm and display the hint
     const handleConfirmHint = () => {
         setViewHint(true);
         setBlurBack(false);
         setConfirmViewHint(false);
     }
 
+    // Function to handle the end of the current player's turn and advance to the next player
     const handleEndTurn = () => {
         props.setPlacePositive(false);
         props.setPlaceNegative(false);
@@ -70,6 +87,7 @@ export default function BoardInfo( props ) {
         setPlayerNum(props.gameState.playerTurn);
     }
 
+    // Function to initiate the process to reveal the Cryptid, requiring confirmation
     const handleViewCryptid = () => {
         if (!confirmViewCryptid) {
             setBlurBack(true);
@@ -77,17 +95,20 @@ export default function BoardInfo( props ) {
         }
     }
 
+    // Function to confirm and reveal the Cryptid's location
     const handleConfirmCryptid = () => {
         props.setRevealCryptid(true);
         setBlurBack(false);
         setConfirmViewCryptid(false);
     }
 
+    // Function to cancel the Cryptid reveal confirmation process
     const handleCancelCryptid = () => {
         setBlurBack(false);
         setConfirmViewCryptid(false);
     }
 
+  // Render the main structure of the BoardInfo component  
   return (
     <div className='board-info-root'>
         {blurBack ? <div className='board-info-blur-back'></div> : <></>}
@@ -120,15 +141,25 @@ export default function BoardInfo( props ) {
         <div className='board-header'><h1>Cryptid</h1></div>
         <ul className='board-info-items'>
             <li className='board-info-item' style={{background: `${colours[props.gameState.playerTurn]}`}}>
-                <div className='board-info-turn'>
+            <div className='board-info-turn'>
                     <div className='header'>
-                        <img className='header-icon' src={avatar}/><h2>TURN</h2>
+                        <img className='header-icon' src={avatar} /><h2>TURN</h2>
                     </div>
                     <div className='text'>
-                        {/* Player {playerNum} */}
-                        {props.playerNames[playerNum-1]}
+                        Player {playerNum}
+                        
+                        {showPlayerDropdown && (
+                            <div className='player-dropdown'>
+                                {[1, 2, 3, 4].filter(num => num !== playerNum).map(num => (
+                                    <div key={num} className='player-dropdown-item' onClick={() => handlePlayerChange(num)}>
+                                        Player {num}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
+
             </li>
 
             <li className='board-info-item'>
@@ -243,12 +274,25 @@ export default function BoardInfo( props ) {
                     }
                 </div>
             </li>
+            
+
+            
 
             <li className='board-info-item'>
                 <div className='board-info-end-turn'>
+                    
+                <button className='board-info-end-turn-button' onClick={() => setShowPlayerDropdown(!showPlayerDropdown)}>Change Player</button>
+                </div>
+                
+            </li>
+            <li className='board-info-item'>
+                <div className='board-info-end-turn'>
+                    
                     <button className='board-info-end-turn-button' onClick={handleEndTurn}>End Turn</button>
                 </div>
+                
             </li>
+            
             
         </ul>
     </div>
