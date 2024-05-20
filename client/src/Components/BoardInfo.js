@@ -124,6 +124,11 @@ export default function BoardInfo( props ) {
                 ))}
             </div>
     }
+    
+    const handleToggleShowAvailableGuesses = () => {
+        console.log(props.showAvailableGueses);
+        props.setShowAvailableGuesses(!props.showAvailableGueses);
+    }
 
   // Render the main structure of the BoardInfo component  
   return (
@@ -232,6 +237,12 @@ export default function BoardInfo( props ) {
                             <div className={'board-info-information-item-accordion '+(hideAccordion ? ' hide-accordion' : '')} onClick={handleViewClue}> 
                                 {props.clues[props.gameState.playerTurn-1]}
                             </div> : <></>}
+                        </li>
+
+                        <li className='board-info-information-item'>
+                            <div className='board-info-information-item-text' onClick={handleToggleShowAvailableGuesses}>
+                                Toggle: Show only valid hexes based on clue ({props.showAvailableGueses ? `Currently On` : `Currently Off`})
+                            </div>
                         </li>
 
                         {!viewHint

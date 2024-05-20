@@ -37,6 +37,7 @@ export default function Game( props ) {
   const [turn, setTurn] = useState(1);       
   
   const [allAvailableGuesses, setAllAvailableGuesses] = useState({});
+  const [showAvailableGueses, setShowAvailableGuesses] = useState(false);
 
   const handlePlaceNegative = (value) => {
     setPlacePositive(false);
@@ -381,6 +382,8 @@ export default function Game( props ) {
               <div className='game-board-info'>
                 {!revealCryptid ?
                 <BoardInfo  
+                    showAvailableGueses={showAvailableGueses}
+                    setShowAvailableGuesses={setShowAvailableGuesses}
                     turn={turn}
                     setTurn={setTurn}
                     numPlayers={props.localGameInfo.players}
@@ -410,6 +413,7 @@ export default function Game( props ) {
               <div className='game-board-container'>
                   <div className='game-board-root'>
                     <Board  
+                            showAvailableGueses={showAvailableGueses}
                             allAvailableGuesses={allAvailableGuesses}
                             turn={turn}
                             setTurn={setTurn}

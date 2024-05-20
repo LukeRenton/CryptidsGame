@@ -142,7 +142,7 @@ export default function Hex( props ) {
   }
 
   return (
-    <div className={'hex hex-'+props.hexNum+' '+(props.revealCryptid ? revealCryptidStyle() : '')+' '+(props.validGuess ? 'hex-valid-guess' : 'hex-invalid-guess')} >
+    <div className={'hex hex-'+props.hexNum+' '+(props.revealCryptid ? revealCryptidStyle() : '')+(props.showAvailableGueses ? ' '+(props.validGuess ? 'hex-valid-guess' : 'hex-invalid-guess') : '')} >
         <div className='hex-hitbox' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></div>
         <div className='hex-top-bottom bottom-face'>
             <div className='top'></div>
