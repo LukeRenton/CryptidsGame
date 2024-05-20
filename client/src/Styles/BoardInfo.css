@@ -162,3 +162,11 @@
 .selected-item {
     
 }
+
+.player-dropdown-item {
+    cursor: pointer;
+}
+
+.player-dropdown-item:hover {
+    filter: brightness(0.9);
+}

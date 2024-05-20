@@ -65,6 +65,8 @@ const deciferMapCode = (mapCode, mapMode) => {
     pieces[structures[counter]] = {
       "row" : actual_row,
       "col" : actual_col,
+      "globalRow" : row,
+      "globalCol" : col,
       "tile_num" : tile_num
     }
 

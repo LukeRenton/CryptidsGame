@@ -14,8 +14,11 @@ import '../Styles/Tutorial.css'
 import { useNavigate } from 'react-router-dom';
 import PlantButton from '../Components/PlantButton';
 
+// Functional component for the Tutorial page
 export default function Tutorial() {
     const navigate = useNavigate();
+    
+  // Return the JSX elements for the Tutorial component  
   return (
     <div className='tutorial-root'>
         <div className="tutorial-image-container">

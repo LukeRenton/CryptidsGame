@@ -1,6 +1,6 @@
 import React from 'react'
 import '../Styles/PlantButton.css'
-
+// Code for a custom button
 export default function PlantButton( props ) {
   return (
     <button type={props.type} onClick={props.onClick} className='plantbutton-root'>

@@ -211,3 +211,9 @@
     top: 5px;
     z-index: 1;
 }
+
+.lobby-settings-player-names-item {
+    display: flex;
+    flex-direction: row;
+    gap: 0px 20px;
+}

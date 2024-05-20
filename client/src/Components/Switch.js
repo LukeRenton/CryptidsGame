@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import '../Styles/Switch.css'
 
+// Define and export the Switch functional component
 export default function Switch( props ) {
+    // Define a state variable 'switchLeft' to manage the position of the switch
     const [switchLeft, setSwitchLeft] = useState(true);
 
+    // Function to toggle the switch position and call the onClick handler from props    
     const toggleSwitch = () => {
         setSwitchLeft(!switchLeft);
         props.onClick();

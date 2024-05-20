@@ -17,6 +17,7 @@ import PlantButton from '../Components/PlantButton'
 import { useNavigate } from 'react-router-dom'
 
 export default function Lobby( props ) {
+    // State variables initialization
     const navigate = useNavigate();
     const [playHostOnline, setPlayHostOnline] = useState(false);
     const [playJoinOnline, setPlayJoinOnline] = useState(false);
@@ -24,7 +25,9 @@ export default function Lobby( props ) {
     const [showSettings, setShowSettings] = useState('');
     const [sliderChecked, setSliderChecked] = useState(false);
     const [numPlayers, setNumPlayers] = useState(2);
+    const [playerNames, setPlayerNames] = useState(["","","","",""]);
 
+     // Handlers for video hover events
     const handleHoverHostOnline = (event) => {
         event.target.play();
         setPlayHostOnline(true);
@@ -55,16 +58,51 @@ export default function Lobby( props ) {
         setPlayLocal(false);
     }
 
+    // Toggle slider
     const toggleSlider = () => {
         setSliderChecked(!sliderChecked);
     }
 
+    // Start a private game
     const handleStartPrivateGame = (e) => {
         e.preventDefault();
         props.setLocalGameInfo({mode: sliderChecked ? 'normal' : 'intro', players: numPlayers});
+        const newMovesList = [];
+        for (let i = 0; i < numPlayers; i++) {
+            newMovesList.push([]);
+        }
+        props.setMovesList(newMovesList);
         navigate('/game');
     }
 
+    const updateNumPlayers = (newNumPlayers) => {
+        setNumPlayers(newNumPlayers);
+
+    }
+
+    const updatePlayerName = (playerNum, playerName) => {
+        const newPlayerNames = props.playerNames;
+        newPlayerNames[playerNum-1] = playerName;
+        props.setPlayerNames(newPlayerNames);
+    }
+
+    const renderPlayerNames = () => {
+        const newPlayerData = [];
+        for (let i = 0; i < numPlayers; i++) {
+            newPlayerData.push({playerNum: i+1});
+        }
+
+        return newPlayerData.map((player) => {
+            return  <div className='lobby-settings-player-names-item'>
+                        <div className='lobby-settings-player-names-item-name'>
+                            Player {player.playerNum} name:
+                        </div>
+                        <input className='lobby-settings-player-names-item-input'  onChange={(e) => updatePlayerName(player.playerNum, e.target.value)}/>
+                    </div>
+        })
+    }
+
+    // Render settings based on state
     const renderSettings = () => {
         if (showSettings === 'local') {
             return  <div className='lobby-settings-local'>
@@ -75,11 +113,14 @@ export default function Lobby( props ) {
                             <div className='lobby-settings-num-players'>
                                 <div className='lobby-settings-num-players-text'>Number of players: </div>
                                 <ul className='lobby-settings-num-players-selector'>
-                                    <li className={numPlayers === 2 ? 'selected' : ''} onClick={() => {setNumPlayers(2)}}>2</li>
-                                    <li className={numPlayers === 3 ? 'selected' : ''} onClick={() => {setNumPlayers(3)}}>3</li>
-                                    <li className={numPlayers === 4 ? 'selected' : ''} onClick={() => {setNumPlayers(4)}}>4</li>
-                                    <li className={numPlayers === 5 ? 'selected' : ''} onClick={() => {setNumPlayers(5)}}>5</li>
+                                    <li className={numPlayers === 2 ? 'selected' : ''} onClick={() => {updateNumPlayers(2)}}>2</li>
+                                    <li className={numPlayers === 3 ? 'selected' : ''} onClick={() => {updateNumPlayers(3)}}>3</li>
+                                    <li className={numPlayers === 4 ? 'selected' : ''} onClick={() => {updateNumPlayers(4)}}>4</li>
+                                    <li className={numPlayers === 5 ? 'selected' : ''} onClick={() => {updateNumPlayers(5)}}>5</li>
                                 </ul>
+                            </div>
+                            <div className='lobby-settings-player-names'>
+                                {renderPlayerNames()}
                             </div>
                             {/* <PlantButton type={'submit'} onClick={handleStartPrivateGame}>Start private game</PlantButton> */}
                             <button className='lobby-settings-button' type='submit' onClick={handleStartPrivateGame}>Start local game</button>

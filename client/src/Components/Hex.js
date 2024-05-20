@@ -8,25 +8,30 @@ import search from '../Icons/search.svg'
 
 export default function Hex( props ) {
 
+  // State variables for mouse coordinates and tooltip visibility
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
   const [showTooltip, setShowTooltip] = useState(false);
 
+  // State variables for positive and negative pieces
   const [positivePieces, setPositivePieces] = useState([]);
   const [negativePieces, setNegativePieces] = useState([]);
-  // const [] = useState();
 
+  // const [] = useState();
+  // Function to render pieces on the hex
   const renderPieces = () => {
     return props.pieces.map((piece) => {
       return <img className={'hex-piece hex-'+piece.type} src={piece.image}></img>
     })
   }
 
+  // Function to handle mouse enter event
   const handleMouseEnter = () => {
     props.setHexHover({type: props.type, animalTerritory: props.animalTerritory, pieces: props.pieces});
     setShowTooltip(true);
   }
 
+  // Function to handle mouse leave event
   const handleMouseLeave = () => {
     props.setHexHover(null);
     setShowTooltip(false);
@@ -38,7 +43,10 @@ export default function Hex( props ) {
   //   console.log('x: '+mouseX);
   // }
 
+  // Function to handle click event  
   const handleClick = () => {
+    // Logic for placing positive, negative pieces or making a search
+    // Modify game state accordingly
     console.log('clicked');
     if (props.placeNegative) {
       const state = props.gameState;
@@ -46,6 +54,11 @@ export default function Hex( props ) {
       if (negativePieces.length === 0) {
         state.negativePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
         props.setGameState(state);
+
+        const movesList = props.movesList;
+        movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed negative on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+        props.setMovesList(movesList);
+
         setNegativePieces(state.negativePieces);
       }
     } else if (props.placePositive) {
@@ -55,6 +68,11 @@ export default function Hex( props ) {
         state.positivePieces.push({tileNum: props.tileNum, row: props.hexRow, col: props.hexCol, player: props.gameState.playerTurn});
         setPositivePieces(state.positivePieces);
         props.setGameState(state);
+
+        const movesList = props.movesList;
+        movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed positive on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+        props.setMovesList(movesList);
+
       }
     } else if (props.placeSearch) {
       console.log('making a search');
@@ -62,9 +80,14 @@ export default function Hex( props ) {
       state.searchPiece = {row: props.hexRow, col: props.hexCol, tileNum: props.tileNum}
       console.log(state);
       props.setGameState(state);
+      
+      const movesList = props.movesList;
+      movesList[props.gameState.playerTurn-1].push(`On turn ${props.turn}, placed search on tile ${props.tileNum}, row ${props.hexRow}, col ${props.hexCol}`);
+      props.setMovesList(movesList);
     }
   }
 
+  // Function to render negative pieces
   const renderNegativePieces = () => {
     // const negativePieces = [{row: 0, col: 0, player: 1}];
     // const negativePieces = props.gameState.negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
@@ -73,6 +96,7 @@ export default function Hex( props ) {
     });
   }
 
+  // Function to render positive pieces
   const renderPositivePieces = () => {
     // const negativePieces = [{row: 0, col: 0, player: 1}];
     // const positivePieces = props.gameState.positivePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
@@ -80,7 +104,8 @@ export default function Hex( props ) {
       return <Cylinder color={colours[piece.player]} index={index}></Cylinder>
     });
   }
-  
+ 
+  // Function to render the search piece icon
   const renderSearchPiece = () => {
     if (props.gameState.searchPiece) {
       if (props.gameState.searchPiece.row === props.hexRow && props.gameState.searchPiece.col === props.hexCol && props.gameState.searchPiece.tileNum === props.tileNum) {
@@ -88,8 +113,9 @@ export default function Hex( props ) {
       }
     } 
   }
-
+  // Function to determine style for revealing cryptid
   const revealCryptidStyle = () => {
+    // Logic for determining reveal cryptid style
     const destRow = props.destination.row;
     const destCol = props.destination.col;
 

@@ -7,10 +7,10 @@ import PlantButton from './PlantButton'
 import { useNavigate } from 'react-router-dom'
 import ErrorMessage from './ErrorMessage'
 
-
+// Define and export the ScrollLogin functional component
 export default function ScrollLogin( props ) {
   const navigate = useNavigate();
-
+  // Define state variables using useState hook
   const [page, setPage] = useState('loadin-login');
   const [formInfo, setFormInfo] = useState('login');
   const [username, setUsername] = useState('');
@@ -18,6 +18,7 @@ export default function ScrollLogin( props ) {
   const [showLoginMessage, setShowLoginMessage] = useState(false);
   const [showSignupMessage, setShowSignupMessage] = useState(false);
 
+  // Handle change in username input
   const handleUsernameChange = (event) => {
     if (event.target.value !== '') {
       setUsername(event.target.value);
@@ -26,6 +27,7 @@ export default function ScrollLogin( props ) {
     }
   }
 
+  // Handle toggle between login and signup forms
   const handleToggleSignupClick = () => {
     setTimeout(() => {
       setFormInfo(page == 'signup' ? 'login' : 'signup');
@@ -37,6 +39,7 @@ export default function ScrollLogin( props ) {
     }
   }
 
+  // Handle form submission for login
   const submitLoginForm = async (e) => {
     e.preventDefault();
     const res = await props.handleLogin(username,password); 
@@ -50,6 +53,7 @@ export default function ScrollLogin( props ) {
     }
   }
 
+  // Handle form submission for signup
   const submitSignupForm = async (e) => {
     e.preventDefault();
     const res = await props.handleSignup(username,password);
@@ -63,6 +67,7 @@ export default function ScrollLogin( props ) {
     }
   }
 
+  // Style for the scroll center
   const style = {
     backgroundImage: "url("+ScrollCenter+")",
     backgroundRepeat: "no-repeat"
