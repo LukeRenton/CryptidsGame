@@ -41,6 +41,7 @@ export default function BoardInfo( props ) {
         }
     }
 
+    // Function to handle the logic of changing a player 
     const handlePlayerChange = (newPlayerNum) => {
         const state = { ...props.gameState, playerTurn: newPlayerNum };
         props.setGameState(state);

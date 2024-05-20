@@ -4,9 +4,10 @@ import dropdown from '../Icons/dropdown.png'
 import { colours } from '../Models/PlayerColours'
 
 export default function Moves( props ) {
-
+    // useState hook to manage the state of which player's moves to show
     const [showPlayerMoves, setShowPlayerMoves] = useState(-1);
-
+    
+    // Function to handle clicks on player headers, setting the state to show/hide the moves list
     const handleClick = (playerNum) => {
         setShowPlayerMoves(playerNum-1);
     }
