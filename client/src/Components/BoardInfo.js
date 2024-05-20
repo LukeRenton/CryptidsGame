@@ -108,6 +108,22 @@ export default function BoardInfo( props ) {
         setConfirmViewCryptid(false);
     }
 
+    const handleShowPlayerDropdown = () => {
+
+        const players = [];
+        for (let i = 1; i <= props.numPlayers; i++) {
+            players.push(i);
+        }
+
+        return <div className='player-dropdown'>
+                {players.filter(num => num !== playerNum).map((num) => (
+                    <div key={num} className='player-dropdown-item' style={{background: `${colours[num]}`}} onClick={() => handlePlayerChange(num)}>
+                        {props.playerNames[num-1]}
+                    </div>
+                ))}
+            </div>
+    }
+
   // Render the main structure of the BoardInfo component  
   return (
     <div className='board-info-root'>
@@ -146,17 +162,12 @@ export default function BoardInfo( props ) {
                         <img className='header-icon' src={avatar} /><h2>TURN</h2>
                     </div>
                     <div className='text'>
-                        Player {playerNum}
+                        {props.playerNames[playerNum-1]}
                         
-                        {showPlayerDropdown && (
-                            <div className='player-dropdown'>
-                                {[1, 2, 3, 4].filter(num => num !== playerNum).map(num => (
-                                    <div key={num} className='player-dropdown-item' onClick={() => handlePlayerChange(num)}>
-                                        Player {num}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                        {showPlayerDropdown ? handleShowPlayerDropdown()
+                        :
+                        <></>   
+                        }  
                     </div>
                 </div>
 
