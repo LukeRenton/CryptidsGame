@@ -79,11 +79,24 @@ export default function Map( props ) {
     // We repeat similar checks for all the other piece types
     return allPieces;
   }
+
+  const validatePieceGuess = (row, col, tileNumByPosition) => {
+    for (let i = 0; i < props.allAvailableGuesses.length; i++) {
+      const hex = props.allAvailableGuesses[i];
+
+      if (hex.row === row && hex.col === col && hex.tileNumByPosition === tileNumByPosition) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   return (
     <div className={'map-root '+'map-root-'+props.mapSide}>
       <div className='map-number'>{props.mapNum}</div>
       { props.hexes.map((hex) => {
-          return <Hex turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} tileNum={props.mapNum} tileNumByPosition={props.tileNumByPosition} pieces={getAllPieces(hex.row*6 + hex.col)} type={hex.type} animalTerritory={hex.animal_territory} hexNum={hex.row*6 + hex.col} hexRow={hex.row} hexCol={hex.col} picture={require(`../Images/CryptidTiles/Board ${hex.tile_number}/${hex.tile_image}`)}></Hex>
+          return <Hex showAvailableGueses={props.showAvailableGueses} validGuess={validatePieceGuess(hex.row, hex.col, props.tileNumByPosition)} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} tileNum={props.mapNum} tileNumByPosition={props.tileNumByPosition} pieces={getAllPieces(hex.row*6 + hex.col)} type={hex.type} animalTerritory={hex.animal_territory} hexNum={hex.row*6 + hex.col} hexRow={hex.row} hexCol={hex.col} picture={require(`../Images/CryptidTiles/Board ${hex.tile_number}/${hex.tile_image}`)}></Hex>
         })
       }
     </div>

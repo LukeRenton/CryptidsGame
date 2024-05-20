@@ -8,6 +8,8 @@ import search from '../Icons/search.svg'
 
 export default function Hex( props ) {
 
+  console.log(props.validGuess)
+
   // State variables for mouse coordinates and tooltip visibility
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
@@ -140,7 +142,7 @@ export default function Hex( props ) {
   }
 
   return (
-    <div className={'hex hex-'+props.hexNum+' '+(props.revealCryptid ? revealCryptidStyle() : '')} >
+    <div className={'hex hex-'+props.hexNum+' '+(props.revealCryptid ? revealCryptidStyle() : '')+(props.showAvailableGueses ? ' '+(props.validGuess ? 'hex-valid-guess' : 'hex-invalid-guess') : '')} >
         <div className='hex-hitbox' onClick={handleClick} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}></div>
         <div className='hex-top-bottom bottom-face'>
             <div className='top'></div>

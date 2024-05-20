@@ -229,3 +229,9 @@
     opacity: 0.5;
     transition: 3s;
 }
+
+.hex-invalid-guess > * {
+    filter: grayscale(0.5);
+    opacity: 0.1;
+    pointer-events: none;
+}
