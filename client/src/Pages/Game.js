@@ -70,7 +70,7 @@ export default function Game( props ) {
             hint: hint
         }    
     */
-  const parseInfo = async (map, allTiles, allPieces) => {
+  const parseInfo = (map, allTiles, allPieces) => {
     const clues = map.rules;
     const hint = map.hint;
     const numTiles = 6;
@@ -87,9 +87,9 @@ export default function Game( props ) {
     for (let tile = 1; tile <= numTiles; tile++) {
         const map = allTiles[tile];
         for (let j = 0; j < totalHexesPerMap; j++) {
-            const hex = await map[j];
-            const row = await hex.row;
-            const col = await hex.col;
+            const hex = map[j];
+            const row = hex.row;
+            const col = hex.col;
 
             const globalCol = ((tile+1) % 2 )*6 + col;
             const globalRow = (Math.floor((tile-1) / 2))*3 + row;
@@ -138,7 +138,7 @@ export default function Game( props ) {
       setPieces(allPieces);
       
 
-      const grid = await parseInfo(newMap, allTiles, allPieces);
+      const grid = parseInfo(newMap, allTiles, allPieces);
       console.log(grid);
       const availableGuesses = getAvailableGuesses(grid);
       setAllAvailableGuesses(availableGuesses);
@@ -146,34 +146,38 @@ export default function Game( props ) {
   }
 
   const processHexNumbers = (availableGuesses) => {
+    // console.log(availableGuesses);
+    // const newAvailableGuesses = availableGuesses.map((x) => x);
+    const newAvailableGuesses = JSON.parse(JSON.stringify(availableGuesses));
+    console.log(newAvailableGuesses);
     for (let player = 1; player <= props.localGameInfo.players; player++) {
-      const newAvailableGuesses = availableGuesses[player];
-      for (let i = 0; i < newAvailableGuesses.length; i++) {
-        const tile = newAvailableGuesses[i];
+      const newPlayerGuesses = newAvailableGuesses[player];
+      for (let i = 0; i < newPlayerGuesses.length; i++) {
+        const tile = newPlayerGuesses[i];
         const row = tile.row;
         const col = tile.col;
         
         // Retrieve which tile number we are on
         const tile_row = Math.floor(row/3);
         const tile_col = Math.floor(col/6);
-        const tile_num = tile_row*2 + tile_col + 1
+        const tile_num = tile_row*2 + tile_col + 1;
         
         const actual_row = row % 3;
         const actual_col = col % 6;
         
-        newAvailableGuesses[i].row = actual_row;
-        newAvailableGuesses[i].col = actual_col;
-        newAvailableGuesses[i].tileNumByPosition = tile_num;
+        newPlayerGuesses[i].row = actual_row;
+        newPlayerGuesses[i].col = actual_col;
+        newPlayerGuesses[i].tileNumByPosition = tile_num;
       }
-      availableGuesses[player] = newAvailableGuesses;
+      newAvailableGuesses[player] = newPlayerGuesses;
     }
-    return availableGuesses;
+    return newAvailableGuesses;
   }
 
   const getAvailableGuesses = (boardState) => {  
     const { grid, clues, hint } = boardState;
     const availableGuesses = {};
-    console.log(grid);
+    console.log("Here #1");
     for (let i = 0; i < clues.length; i++) {
         // Need to remove "The habitat is" from the clue to get the actual clue
         let clue = (clues[i]).substring(15);
@@ -181,7 +185,11 @@ export default function Game( props ) {
         const allowedTiles = processClue(clue, grid);
         availableGuesses[player] = allowedTiles;
     }
-    return processHexNumbers(availableGuesses);
+    console.log("Here #2")
+    const processedGuesses = processHexNumbers(availableGuesses);
+    console.log(processedGuesses);
+    // console.log("NEW GUESSES:",processHexNumbers(availableGuesses));
+    return processedGuesses;
   }
 
 

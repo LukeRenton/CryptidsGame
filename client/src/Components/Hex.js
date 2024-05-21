@@ -8,8 +8,6 @@ import search from '../Icons/search.svg'
 
 export default function Hex( props ) {
 
-  console.log(props.validGuess)
-
   // State variables for mouse coordinates and tooltip visibility
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
