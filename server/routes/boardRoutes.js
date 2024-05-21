@@ -6,8 +6,10 @@ const { getRandomMapController } = require('../controllers/boardController'); //
 
 //base url will be /map
 
+//passes this to the controller to get the map
 router.get('/random-map', getRandomMapController);
 
+//test for board routes
 router.get('/test', async(req, res) => {
     res.status(200).send("Success");
   })

@@ -34,7 +34,12 @@ const processChar = (char) => {
     return 11;
   }
 }
-
+/**
+ * 
+ * @param {string} mapCode 
+ * @param {string} mapMode 
+ * @returns grid of tiles and pieces
+ */
 const deciferMapCode = (mapCode, mapMode) => {
   const tiles = {};
   for (let i = 0; i < 6; i++) {
@@ -85,6 +90,7 @@ const formatFinalLocation = (location) => {
 
 console.log(deciferMapCode("B46183084B18451521", "intro"));
 
+// Verbositise the rules and hints
 const verbositiseRules = (rules) => {
   const verbose_rules = [];
   rules.forEach(rule => {
@@ -97,7 +103,9 @@ const verbositiseHint = (hint) => {
   return hints_json[hint];
 }
 
+// Get a random board based on the mode and number of players
 const getRandomBoard = (mode, player_count) => {
+  //Get all the stored files
   const directory_path = path.join(__dirname, '../maps', mode);
   const files = fs.readdirSync(directory_path);
   const random_file = files[Math.floor(Math.random() * files.length)];
@@ -121,6 +129,7 @@ const getRandomBoard = (mode, player_count) => {
 };
 
 
+// Controller entry point to get a random map based on the mode and number of players
 const getRandomMapController = (req, res) => {
   try {
     const mode = req.query.mode;

@@ -86,6 +86,7 @@ export default function Game( props ) {
 
     for (let tile = 1; tile <= numTiles; tile++) {
         const map = allTiles[tile];
+        console.log(map);
         for (let j = 0; j < totalHexesPerMap; j++) {
             const hex = await map[j];
             const row = await hex.row;
