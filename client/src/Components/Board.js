@@ -44,9 +44,6 @@ export default function Board( props ) {
               <Map showAvailableGueses={props.showAvailableGueses} allAvailableGuesses={props.allAvailableGuesses[props.gameState.playerTurn]} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} tileNumByPosition={6} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[6][0].tile_number} hexes={props.tiles[6]} pieces={getTilePieces(6)} mapSide={'right'}></Map>
           </div>
         </div>
-        {/* <div className='board-clues'>
-          <Clues clues={props.clues} hint={props.hint} row={props.row} col={props.col}></Clues>
-        </div> */}
     </div>
   )
 }

@@ -17,7 +17,6 @@ export default function Hex( props ) {
   const [positivePieces, setPositivePieces] = useState([]);
   const [negativePieces, setNegativePieces] = useState([]);
 
-  // const [] = useState();
   // Function to render pieces on the hex
   const renderPieces = () => {
     return props.pieces.map((piece) => {
@@ -36,12 +35,6 @@ export default function Hex( props ) {
     props.setHexHover(null);
     setShowTooltip(false);
   }
-
-  // const handleMouseHover = (event) => {
-  //   setMouseX(event.clientX);
-  //   setMouseY(event.clientY);
-  //   console.log('x: '+mouseX);
-  // }
 
   // Function to handle click event  
   const handleClick = () => {
@@ -89,8 +82,6 @@ export default function Hex( props ) {
 
   // Function to render negative pieces
   const renderNegativePieces = () => {
-    // const negativePieces = [{row: 0, col: 0, player: 1}];
-    // const negativePieces = props.gameState.negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
     return negativePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)}).map(piece => {
       return <PlayerCube color={colours[piece.player]}></PlayerCube>
     });
@@ -98,8 +89,6 @@ export default function Hex( props ) {
 
   // Function to render positive pieces
   const renderPositivePieces = () => {
-    // const negativePieces = [{row: 0, col: 0, player: 1}];
-    // const positivePieces = props.gameState.positivePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)});
     return positivePieces.filter(piece => {return (piece.row === props.hexRow && piece.col === props.hexCol && piece.tileNum === props.tileNum)}).map((piece, index) => {
       return <Cylinder color={colours[piece.player]} index={index}></Cylinder>
     });
@@ -129,7 +118,6 @@ export default function Hex( props ) {
     const actual_row = destRow % 3;
     const actual_col = destCol % 6;
 
-    // console.log({row: actual_row, col: actual_col, tile: tile_num});
     console.log(props.tileNumByPosition);
 
     if (tile_num === props.tileNumByPosition && actual_row === props.hexRow && actual_col === props.hexCol) {
