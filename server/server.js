@@ -12,10 +12,11 @@ app.use(express.json({ type: '*/*' }));
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-
+// give map to boardRoutes
 app.use("/map", boardRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
+  // give db to dbRoutes
   const dbRoutes = require('./routes/dbRoutes');
   app.use("/db", dbRoutes);
 }

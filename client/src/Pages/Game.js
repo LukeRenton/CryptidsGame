@@ -39,18 +39,21 @@ export default function Game( props ) {
   const [allAvailableGuesses, setAllAvailableGuesses] = useState({});
   const [showAvailableGueses, setShowAvailableGuesses] = useState(false);
 
+  // Handle if a user wants to place a negative piece
   const handlePlaceNegative = (value) => {
     setPlacePositive(false);
     setPlaceSearch(false);
     setPlaceNegative(value);
   }
 
+  // Handle if a user wants to place a positive piece
   const handlePlacePositive = (value) => {
     setPlaceNegative(false);
     setPlaceSearch(false);
     setPlacePositive(value);
   }
 
+  // Handle if a user wants to place a search piece
   const handlePlaceSearch = (value) => {
     setPlaceNegative(false);
     setPlacePositive(false);
@@ -86,6 +89,7 @@ export default function Game( props ) {
 
     for (let tile = 1; tile <= numTiles; tile++) {
         const map = allTiles[tile];
+        console.log(map);
         for (let j = 0; j < totalHexesPerMap; j++) {
             const hex = map[j];
             const row = hex.row;
@@ -119,6 +123,7 @@ export default function Game( props ) {
     return {grid: grid, clues: clues, hint: hint};
   }
 
+  // Function to run on-component-load to get the map and information for the game
   const getNewMap = async () => {
       const newMap = await getMap(props.localGameInfo.mode,props.localGameInfo.players);
     
@@ -145,6 +150,7 @@ export default function Game( props ) {
       return newMap;
   }
 
+  // Process the hex numbers to be used for the frontend/css
   const processHexNumbers = (availableGuesses) => {
     // console.log(availableGuesses);
     // const newAvailableGuesses = availableGuesses.map((x) => x);
@@ -174,6 +180,7 @@ export default function Game( props ) {
     return newAvailableGuesses;
   }
 
+  // Get all available guesses possible for each player
   const getAvailableGuesses = (boardState) => {  
     const { grid, clues, hint } = boardState;
     const availableGuesses = {};
@@ -193,6 +200,7 @@ export default function Game( props ) {
   }
 
 
+  // Parse string and process each clue
   const processClue = (clue, grid) => {
     if (clue.startsWith("on")) {
       console.log("Processing on: ", clue)
@@ -219,7 +227,8 @@ export default function Game( props ) {
     }
   };
 
- const onTypeClue = (clue, grid) => {
+  // Handle a clue for "on type"
+  const onTypeClue = (clue, grid) => {
     const allowedTiles = [];
     const splitClue = clue.split(' ');
     const type1 = splitClue[1];
@@ -235,6 +244,7 @@ export default function Game( props ) {
     return allowedTiles;
   }
 
+  // Handle a clue for "not on type"
   const notOnTypeClue = (clue, grid) => {
     const allowedTiles = [];
     const splitClue = clue.split(' ');
@@ -251,6 +261,7 @@ export default function Game( props ) {
     return allowedTiles;
   }
 
+  // Handle a clue for "within one space of"
   const withinOneSpaceClue = (clue, grid) => {
     let allowedTiles = [];
     const splitClue = clue.split(' ');
@@ -276,6 +287,7 @@ export default function Game( props ) {
     return allowedTiles;
   };
 
+  // Handle a clue for "within two spaces of"
   const withinTwoSpaceClue = (clue, grid) => {
     let allowedTiles = [];
     const splitClue = clue.split(' ');
@@ -314,6 +326,7 @@ export default function Game( props ) {
     return allowedTiles;
   }
 
+  // Handle a clue for "within three spaces of"
   const withinThreeSpaceClue = (clue, grid) => {
     let allowedTiles = [];
     const splitClue = clue.split(' ');
@@ -339,7 +352,7 @@ export default function Game( props ) {
     return allowedTiles;
   }
 
-
+  // Generate the neighbours based on the clues and the depth of the clue (how far away from a hex)
   const generateNeighbours = (row, col, depth, grid) => {
     const neighbours = [];
     for (let i = -depth; i <= depth; i++) {
@@ -370,17 +383,16 @@ export default function Game( props ) {
     }
   }
 
+  // Get the colour of a piece
   const getPieceColor = (name) => {
     const splitName = name.split('_');
     return splitName[0];
   }
 
+  // Use effect hook on-component-load to get map information
   useEffect(async () => {
     const newMap = await getNewMap();
   },[])
-//   useEffect(() => {
-    // const newMap = getNewMap();  
-//   },[])
 
 
   return (

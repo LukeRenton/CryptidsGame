@@ -33,26 +33,31 @@ export default function Lobby( props ) {
         setPlayHostOnline(true);
     }
 
+    // Handle when mouse leaves the host online window
     const handleLeaveHostOnline = (event) => {
         event.target.pause();
         setPlayHostOnline(false);
     }
 
+    // Handle when mouse enters the host online window
     const handleHoverJoinOnline = (event) => {
         event.target.play();
         setPlayJoinOnline(true);
     }
 
+    // Handle when mouse leaves the join online window
     const handleLeaveJoinOnline = (event) => {
         event.target.pause();
         setPlayJoinOnline(false);
     }
 
+    // Handle when mouse enters the local window
     const handleHoverLocal = (event) => {
         event.target.play();
         setPlayLocal(true);
     }
 
+    // Handle when mouse leaves the local window
     const handleLeaveLocal = (event) => {
         event.target.pause();
         setPlayLocal(false);
@@ -75,17 +80,19 @@ export default function Lobby( props ) {
         navigate('/game');
     }
 
+    // Update the number of players as required
     const updateNumPlayers = (newNumPlayers) => {
         setNumPlayers(newNumPlayers);
-
     }
 
+    // Update the players name
     const updatePlayerName = (playerNum, playerName) => {
         const newPlayerNames = props.playerNames;
         newPlayerNames[playerNum-1] = playerName;
         props.setPlayerNames(newPlayerNames);
     }
 
+    // Render the player name inputs
     const renderPlayerNames = () => {
         const newPlayerData = [];
         for (let i = 0; i < numPlayers; i++) {
@@ -122,7 +129,6 @@ export default function Lobby( props ) {
                             <div className='lobby-settings-player-names'>
                                 {renderPlayerNames()}
                             </div>
-                            {/* <PlantButton type={'submit'} onClick={handleStartPrivateGame}>Start private game</PlantButton> */}
                             <button className='lobby-settings-button' type='submit' onClick={handleStartPrivateGame}>Start local game</button>
                         </form>
                     </div>
@@ -132,9 +138,6 @@ export default function Lobby( props ) {
 
   return (
     <div className='lobby-root'>
-        {/* <video autoPlay muted loop className='lobby-background'>
-            <source src={background} type="video/mp4" />
-        </video> */}
         {showSettings !== '' ? <div className='back-blur' onClick={() => {setShowSettings('')}}></div> : <></>}
         {renderSettings()}
         <div className='lobby-go-tutorial'>
