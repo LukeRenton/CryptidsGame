@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -10,13 +10,11 @@ import mountain_animation from '../Videos/mountain_animation.mp4'
 import host_online from '../Images/LobbyHeaders/host_online.png'
 import join_online from '../Images/LobbyHeaders/join_online.png'
 import local from '../Images/LobbyHeaders/local.png'
-import background from '../Videos/wall-background.mp4'
-import lobbyback from '../Images/LobbyBack-transformed-resized.jpeg'
 import Switch from '../Components/Switch'
-import PlantButton from '../Components/PlantButton'
 import { useNavigate } from 'react-router-dom'
 
 export default function Lobby( props ) {
+    
     // State variables initialization
     const navigate = useNavigate();
     const [playHostOnline, setPlayHostOnline] = useState(false);
@@ -25,7 +23,6 @@ export default function Lobby( props ) {
     const [showSettings, setShowSettings] = useState('');
     const [sliderChecked, setSliderChecked] = useState(false);
     const [numPlayers, setNumPlayers] = useState(2);
-    const [playerNames, setPlayerNames] = useState(["","","","",""]);
 
      // Handlers for video hover events
     const handleHoverHostOnline = (event) => {
@@ -135,47 +132,65 @@ export default function Lobby( props ) {
         }
     }
 
+    // Handle escape key to close "game settings" window
+    useEffect(() => {
+        const handleEsc = (event) => {
+           if (event.key === 'Escape') {
+            setShowSettings('');
+          }
+        };
+        window.addEventListener('keydown', handleEsc);
+    
+        return () => {
+          window.removeEventListener('keydown', handleEsc);
+        };
+      }, []);
+
 
   return (
-    <div className='lobby-root'>
-        {showSettings !== '' ? <div className='back-blur' onClick={() => {setShowSettings('')}}></div> : <></>}
-        {renderSettings()}
-        <div className='lobby-go-tutorial'>
+    <section className='lobby-root'>
+        <div className='lobby-background'></div>
+        {/* <img className='lobby-background' src={lobbyback}></img> */}
+        {/* <video muted autoPlay loop className='lobby-background'> */}
+            {/* <source src={beach_animation} type="video/mp4" /> */}
+        {/* </video> */}
+        <section className='lobby-items'>
+            <section className='top-row'>
+                <a className='lobby-item lobby-join-online'>
+                    <div className='lobby-join-online-back'>
+                        <video muted loop className={'lobby-video '+(!playJoinOnline ? 'grayed-out' : 'not-grayed-out')} onMouseEnter={handleHoverJoinOnline} onMouseLeave={handleLeaveJoinOnline}>
+                            <source src={beach_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-join-online-text '+(!playJoinOnline ? '' : 'zoomed-in')} alt="Header for join online option" src={join_online} />
+                    </div>
+                </a>
+                <a className='lobby-item lobby-local' onClick={() => setShowSettings('local')}>
+                    <div className='lobby-local-back'>
+                        <video muted loop className={'lobby-video '+(!playLocal ? 'grayed-out' : 'not-grayed-out')} onMouseEnter={handleHoverLocal} onMouseLeave={handleLeaveLocal}>
+                            <source src={mountain_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-local-text '+(!playLocal ? '' : 'zoomed-in')} alt="Header for join local option" src={local} />
+                    </div>
+                </a>
+            </section>
+            <section className='bottom-row'>
+                <a className='lobby-item lobby-host-online '>
+                    <div className='lobby-host-online-back'>
+                        <video muted loop className={'lobby-video '+(!playHostOnline ? 'grayed-out' : 'not-grayed-out')} onMouseEnter={handleHoverHostOnline} onMouseLeave={handleLeaveHostOnline}>
+                            <source src={forest_animation} type="video/mp4" />
+                        </video>
+                        <img className={'lobby-host-online-text '+(!playHostOnline ? '' : 'zoomed-in')} alt="Header for host online option" src={host_online} />
+                    </div>
+                </a>
+            </section>
+        </section>
+        <section className='lobby-go-tutorial'>
             <button className='lobby-go-tutorial-button' onClick={() => navigate('/tutorial')}>
                 Go to tutorial
             </button>
-        </div>
-        <img className='lobby-background' src={lobbyback}></img>
-        <div className='lobby-items'>
-            <div className='top-row'>
-                <div className='lobby-item lobby-join-online'>
-                    <div className='lobby-join-online-back'>
-                        <video muted loop className={'lobby-video '+(!playJoinOnline ? 'grayed-out' : '')} onMouseEnter={handleHoverJoinOnline} onMouseLeave={handleLeaveJoinOnline}>
-                            <source src={beach_animation} type="video/mp4" />
-                        </video>
-                        <img className={'lobby-join-online-text '+(!playJoinOnline ? '' : 'zoomed-in')} src={join_online} />
-                    </div>
-                </div>
-                <div className='lobby-item lobby-local' onClick={() => setShowSettings('local')}>
-                    <div className='lobby-local-back'>
-                        <video muted loop className={'lobby-video '+(!playLocal ? 'grayed-out' : '')} onMouseEnter={handleHoverLocal} onMouseLeave={handleLeaveLocal}>
-                            <source src={mountain_animation} type="video/mp4" />
-                        </video>
-                        <img className={'lobby-local-text '+(!playLocal ? '' : 'zoomed-in')} src={local} />
-                    </div>
-                </div>
-            </div>
-            <div className='bottom-row'>
-                <div className='lobby-item lobby-host-online '>
-                    <div className='lobby-host-online-back'>
-                        <video muted loop className={'lobby-video '+(!playHostOnline ? 'grayed-out' : '')} onMouseEnter={handleHoverHostOnline} onMouseLeave={handleLeaveHostOnline}>
-                            <source src={forest_animation} type="video/mp4" />
-                        </video>
-                        <img className={'lobby-host-online-text '+(!playHostOnline ? '' : 'zoomed-in')} src={host_online} />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        </section>
+        {showSettings !== '' ? <div className='back-blur' onClick={() => {setShowSettings('')}}></div> : <></>}
+        {renderSettings()}
+    </section>
   )
 }

@@ -13,7 +13,7 @@ function App() {
   const [movesList, setMovesList] = useState([[],[],[],[],[]]);
 
   return (
-    <div className="App">
+    <main className="App">
       <Router>
         <Routes>
           <Route path='/' element={<Login/>}/>
@@ -22,7 +22,7 @@ function App() {
           <Route path='/game' element={<Game movesList={movesList} setMovesList={setMovesList} playerNames={playerNames} localGameInfo={localGameInfo} />}/>
         </Routes>
       </Router>
-    </div>
+    </main>
   );
 }
 

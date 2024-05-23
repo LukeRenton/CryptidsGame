@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap');
+
 .lobby-root {
     width: 100%;
     height: 100%;
@@ -5,20 +7,32 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: black;
+    background: white;
 }
 
 .lobby-background {
     /* width: 1920px; */
     /* height: 1080px; */
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     position: fixed;
     left: 0;
-    top: -200px;
+    top: 0px;
     filter:  brightness(1.1);
     pointer-events: none;
+
+    /* background: radial-gradient(black, black, black , white); */
+    
+    /* background: url(https://i.pinimg.com/736x/af/61/99/af61998107bbbca399099f247f4dccac.jpg); */
+    /* background-size: cover; */
+    /* background-repeat: no-repeat; */
+    /* filter: invert(); */
+    /* background: radial-gradient( #135D66,#135D66, #003C43, black); */
+    background: linear-gradient( to bottom, white, #135D66, #002e33);
+
+    opacity: 1;
 }
+
 
 .lobby-items {
     display: flex;
@@ -61,7 +75,7 @@
 }
 
 .lobby-host-online-back, .lobby-join-online-back, .lobby-local-back {
-    background: black;
+    background: #003C43;
     width: 510px;
     height: 510px;
     clip-path: polygon(25% 0%, 75% 0%, 100% 40%, 75% 80%, 25% 80%, 0% 40%);
@@ -74,6 +88,11 @@
 
 .grayed-out {
     filter: grayscale(0.5) blur(2px);
+    transition: 0.2s;
+}
+
+.not-grayed-out {
+    filter: grayscale(0) blur(0px);
     transition: 0.2s;
 }
 
@@ -99,16 +118,6 @@
 .flip-card {
     transform: rotateY(180deg);
     transition: 0.5s;
-}
-
-
-@keyframes load {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }
 
 .lobby-settings-local {
@@ -206,9 +215,9 @@
 }
 
 .lobby-go-tutorial {
-    position: absolute;
-    left: 5px;
-    top: 5px;
+    position: relative;
+    left: 0px;
+    top: 0px;
     z-index: 1;
 }
 
@@ -216,4 +225,66 @@
     display: flex;
     flex-direction: row;
     gap: 0px 20px;
+}
+
+@media (min-width: 0px) and (max-width: 1300px) {
+    .lobby-items {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lobby-host-online-back, .lobby-join-online-back, .lobby-local-back {
+        clip-path: none;
+        background: black;
+        width: 650px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid black;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+
+    .lobby-video {
+        width: 650px;
+        height: 700px;
+        clip-path: none;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    .lobby-item {
+        height: fit-content;
+        width: 650px;
+    }
+
+    .lobby-items .top-row {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .lobby-items .bottom-row {
+        display: flex;
+        flex-direction: row;
+        gap: 0px 250px;
+        margin-top: 0px;
+        margin-left: 0px;
+        width: -moz-fit-content;
+        width: fit-content;
+        animation: load 1.2s ease;
+    }
+
+    .lobby-host-online-text, .lobby-join-online-text, .lobby-local-text {
+        position: relative;
+        pointer-events: none;
+        top: 0px;
+        left: -170px;
+        margin-left: -300px;
+        width: 300px;
+        transition: 0.5s;
+        filter: grayscale(0.1);
+    }
+    
 }

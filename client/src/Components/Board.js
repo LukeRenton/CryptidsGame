@@ -31,8 +31,8 @@ export default function Board( props ) {
   }
 
   return (
-    <div className='board-root'>
-        <div className='board-columns'>
+    <section className='board-root'>
+        <section className='board-columns'>
           <div className='board-column-1'>
               <Map showAvailableGueses={props.showAvailableGueses} allAvailableGuesses={props.allAvailableGuesses[props.gameState.playerTurn]} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} tileNumByPosition={1} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[1][0].tile_number} hexes={props.tiles[1]} pieces={getTilePieces(1)} mapSide={'left'}></Map>
               <Map showAvailableGueses={props.showAvailableGueses} allAvailableGuesses={props.allAvailableGuesses[props.gameState.playerTurn]} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} tileNumByPosition={3} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[3][0].tile_number} hexes={props.tiles[3]} pieces={getTilePieces(3)} mapSide={'left'}></Map>
@@ -43,7 +43,7 @@ export default function Board( props ) {
               <Map showAvailableGueses={props.showAvailableGueses} allAvailableGuesses={props.allAvailableGuesses[props.gameState.playerTurn]} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} tileNumByPosition={4} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[4][0].tile_number} hexes={props.tiles[4]} pieces={getTilePieces(4)} mapSide={'right'}></Map>
               <Map showAvailableGueses={props.showAvailableGueses} allAvailableGuesses={props.allAvailableGuesses[props.gameState.playerTurn]} turn={props.turn} movesList={props.movesList} setMovesList={props.setMovesList} tileNumByPosition={6} destination={props.destination} revealCryptid={props.revealCryptid} placeSearch={props.placeSearch} setPlaceSearch={props.setPlaceSearch} placePositive={props.placePositive} setPlacePositive={props.setPlacePositive} placeNegative={props.placeNegative} setPlaceNegative={props.setPlaceNegative} gameState={props.gameState} setGameState={props.setGameState} setHexHover={props.setHexHover} mapNum={props.tiles[6][0].tile_number} hexes={props.tiles[6]} pieces={getTilePieces(6)} mapSide={'right'}></Map>
           </div>
-        </div>
-    </div>
+        </section>
+    </section>
   )
 }

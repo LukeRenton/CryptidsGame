@@ -7,13 +7,13 @@ import { handleLogin, handleSignup } from '../Services/LoginService'
 // This component represents the login page.
 export default function Login() {
   return (
-    <div className='login-root'>
+    <section className='login-root'>
       <video autoPlay muted loop className='login-background-video'>
         <source src={BackgroundVideo} type="video/mp4" />
       </video>
-      <div className='login-scroll-login'>
+      <section className='login-scroll-login'>
         <ScrollLogin handleLogin={handleLogin} handleSignup={handleSignup}></ScrollLogin>        
-      </div>
-    </div>
+      </section>
+    </section>
   )
 }

@@ -133,63 +133,63 @@ export default function BoardInfo( props ) {
 
   // Render the main structure of the BoardInfo component  
   return (
-    <div className='board-info-root'>
+    <section className='board-info-root'>
         {blurBack ? <div className='board-info-blur-back'></div> : <></>}
         {confirmViewHint ?
-        <div className='board-info-confirm'>
-            <div className='header'>
+        <section className='board-info-confirm'>
+            <section className='header'>
                 <h2>View Hint</h2>
-            </div>
-            <div className='subheader'>
+            </section>
+            <section className='subheader'>
                 Please ensure that all players have confirmed to show the hint!
-            </div>
-            <div className='board-info-confirm-buttons'>
+            </section>
+            <form className='board-info-confirm-buttons'>
                 <button className='board-info-confirm-button accept' onClick={handleConfirmHint}>Show hint</button>
                 <button className='board-info-confirm-button cancel' onClick={handleCancelConfirmHint}>Cancel</button>
-            </div>
-        </div> : <></>}
+            </form>
+        </section> : <></>}
         {confirmViewCryptid ?
-        <div className='board-info-confirm'>
-            <div className='header'>
+        <section className='board-info-confirm'>
+            <section className='header'>
                 <h2>View Cryptid</h2>
-            </div>
-            <div className='subheader'>
+            </section>
+            <section className='subheader'>
                 Please ensure that all players have confirmed to reveal the Cryptid's true location!
-            </div>
-            <div className='board-info-confirm-buttons'>
+            </section>
+            <form className='board-info-confirm-buttons'>
                 <button className='board-info-confirm-button accept' onClick={handleConfirmCryptid}>Reveal Cryptid</button>
                 <button className='board-info-confirm-button cancel' onClick={handleCancelCryptid}>Cancel</button>
-            </div>
-        </div> : <></>}
-        <div className='board-header'><h1>Cryptid</h1></div>
+            </form>
+        </section> : <></>}
+        <section className='board-header'><h1>Cryptid</h1></section>
         <ul className='board-info-items'>
             <li className='board-info-item' style={{background: `${colours[props.gameState.playerTurn]}`}}>
-            <div className='board-info-turn'>
-                    <div className='header'>
+            <section className='board-info-turn'>
+                    <section className='header'>
                         <img className='header-icon' src={avatar} /><h2>TURN</h2>
-                    </div>
-                    <div className='text'>
+                    </section>
+                    <section className='text'>
                         {props.playerNames[playerNum-1] ? props.playerNames[playerNum-1] : `Player ${playerNum}`}
                         
                         {showPlayerDropdown ? handleShowPlayerDropdown()
                         :
                         <></>   
                         }  
-                    </div>
-                </div>
+                    </section>
+            </section>
 
             </li>
 
             <li className='board-info-item'>
-                <div className='board-info-decisions'>
-                    <div className='header'>
+                <section className='board-info-decisions'>
+                    <section className='header'>
                         <img className='header-icon' src={block}/><h2>DECISIONS</h2>
-                    </div>
+                    </section>
                     <ul className='board-info-decisions-list'>
                         <li className='board-info-decisions-item' onClick={() => props.setPlacePositive(!props.placePositive)}>
-                            <div className='item-text' style={{color: `${props.placePositive ? colours[props.gameState.playerTurn] : ''}`}}>
+                            <a className='item-text' style={{color: `${props.placePositive ? colours[props.gameState.playerTurn] : ''}`}}>
                                 Place a positive
-                            </div>
+                            </a>
                             {props.placePositive
                             ?
                             <img className='selected-icon' src={arrow}></img>    
@@ -198,9 +198,9 @@ export default function BoardInfo( props ) {
                             }
                         </li>
                         <li className='board-info-decisions-item' onClick={() => props.setPlaceNegative(!props.placeNegative)}>
-                            <div className='item-text' style={{color: `${props.placeNegative ? colours[props.gameState.playerTurn] : ''}`}}>
+                            <a className='item-text' style={{color: `${props.placeNegative ? colours[props.gameState.playerTurn] : ''}`}}>
                                 Place a negative
-                            </div>
+                            </a>
                             {props.placeNegative
                             ?
                             <img className='selected-icon' src={arrow}></img>    
@@ -209,9 +209,9 @@ export default function BoardInfo( props ) {
                             }
                         </li>
                         <li className='board-info-decisions-item' onClick={() => props.setPlaceSearch(!props.placeSearch)}>
-                            <div className='item-text' style={{color: `${props.placeSearch ? colours[props.gameState.playerTurn] : ''}`}}>
+                            <a className='item-text' style={{color: `${props.placeSearch ? colours[props.gameState.playerTurn] : ''}`}}>
                                 Make a search
-                            </div>
+                            </a>
                             {props.placeSearch
                             ?
                             <img className='selected-icon' src={arrow}></img>    
@@ -220,30 +220,30 @@ export default function BoardInfo( props ) {
                             }
                         </li>
                     </ul>
-                </div>
+                </section>
             </li>
 
             <li className='board-info-item'>
-                <div className='board-info-information'>
-                    <div className='header'>
+                <section className='board-info-information'>
+                    <section className='header'>
                         <img className='header-icon' src={info}/><h2>INFORMATION</h2>
-                    </div>
+                    </section>
                     <ul className='board-info-information-list'>
-                        <li className='board-info-information-item'>
-                            <div className='board-info-information-item-text' onClick={handleViewClue}>
+                        <li className='board-info-information-item' onClick={handleViewClue}>
+                            <a className='board-info-information-item-text'>
                                 {!viewClue ? 'View my clue' : 'Hide my clue'}
-                            </div>
+                            </a>
                             {viewClue
                             ?
-                            <div className={'board-info-information-item-accordion '+(hideAccordion ? ' hide-accordion' : '')} onClick={handleViewClue}> 
+                            <div className={'board-info-information-item-accordion '+(hideAccordion ? ' hide-accordion' : '')} > 
                                 {props.clues[props.gameState.playerTurn-1]}
                             </div> : <></>}
                         </li>
 
-                        <li className='board-info-information-item'>
-                            <div className='board-info-information-item-text' onClick={handleToggleShowAvailableGuesses}>
-                                Toggle: Show only valid hexes based on clue ({props.showAvailableGueses ? `Currently On` : `Currently Off`})
-                            </div>
+                        <li className='board-info-information-item' onClick={handleToggleShowAvailableGuesses}>
+                            <a className='board-info-information-item-text' >
+                                Toggle: Show only valid hexes based on clue {props.showAvailableGueses ? <div className='board-info-valid-status'>(Currently:  <div style={{color: `green`}}>on</div> )</div> : <div className='board-info-valid-status'>(Currently:  <div style={{color: `red`}}>off</div> )</div>}
+                            </a>
                         </li>
 
                         {!viewHint
@@ -253,72 +253,67 @@ export default function BoardInfo( props ) {
                             </li> : <></>
                         }
                         <li className='board-info-information-item' onClick={handleViewCryptid}>
-                            Reveal the Cryptid
+                            Reveal the Cryptid (end the game)
                         </li>
                     </ul>
-                </div>
+                </section>
             </li>
 
             {viewHint ? 
             <li className='board-info-item'>
-                <div className='header'>
+                <section className='header'>
                     <img className='header-icon' src={question}/><h2>HINT</h2>
-                </div>
-                <div className='board-info-hint'>
+                </section>
+                <p className='board-info-hint'>
                     {props.hint}
-                </div>
+                </p>
             </li> : <></>}
 
             <li className='board-info-item'>
-                <div className='header'>
+                <section className='header'>
                     <img className='header-icon' src={hex}/><h2>HEX DATA</h2>
-                </div>
-                <div className='board-info-hex-info'>
+                </section>
+                <section className='board-info-hex-info'>
                     {
                         props.hexHover === null 
                         ? 
                         'Hover over a hex to see information about that hex' 
                         : 
-                        <div>
-                            <div className='board-info-hex-info-header'>
+                        <section>
+                            <section className='board-info-hex-info-header'>
                                 Type: 
                                 <div className='board-info-hex-info-text'>{props.hexHover.type}</div>
-                            </div>
-                            <div className='board-info-hex-info-header'>
+                            </section>
+                            <section className='board-info-hex-info-header'>
                                 Animal territory:
                                 <div className='board-info-hex-info-text'>{props.hexHover.animalTerritory ? props.hexHover.animalTerritory : 'None'}</div>
-                            </div>
-                            <div className='board-info-hex-info-header'>
+                            </section>
+                            <section className='board-info-hex-info-header'>
                                 Pieces:
                                 {props.hexHover.pieces.length > 0 ? props.hexHover.pieces.map((piece) => {
                                     return <div className='board-info-hex-info-text'>{piece.name}</div>
                                 }) : <div className='board-info-hex-info-text'>None</div>}
-                            </div>
-                        </div> 
+                            </section>
+                        </section> 
                     }
-                </div>
+                </section>
             </li>
             
 
             
 
             <li className='board-info-item'>
-                <div className='board-info-end-turn'>
-                    
-                <button className='board-info-end-turn-button' onClick={() => setShowPlayerDropdown(!showPlayerDropdown)}>Change Player</button>
-                </div>
-                
+                <section className='board-info-end-turn'>
+                    <button className='board-info-end-turn-button' onClick={() => setShowPlayerDropdown(!showPlayerDropdown)}>Change Player</button>
+                </section>
             </li>
+
             <li className='board-info-item'>
-                <div className='board-info-end-turn'>
-                    
+                <section className='board-info-end-turn'>        
                     <button className='board-info-end-turn-button' onClick={handleEndTurn}>End Turn</button>
-                </div>
-                
-            </li>
-            
-            
+                </section>
+            </li>            
         </ul>
-    </div>
+    </section>
   )
 }

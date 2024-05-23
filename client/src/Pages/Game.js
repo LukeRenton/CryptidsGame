@@ -1,16 +1,105 @@
 import React, { useEffect, useState } from 'react'
 import { getMap } from '../Services/MapService'
 import { tile_map } from '../Models/BoardConstants'
-import Tile from '../Models/Tile';
 import Board from '../Components/Board';
 import '../Styles/Game.css';
 import BoardInfo from '../Components/BoardInfo';
-import Cylinder from '../Components/Cylinder';
 import Moves from '../Components/Moves';
 
 
 // Define and export the Game functional component
 export default function Game( props ) {
+
+
+  const testMap = {
+    "mapCode": "2B79A676314A1A1630",
+    "mode": "intro",
+    "players": 2,
+    "board": {
+        "tiles": {
+            "1": {
+                "png_num": "2",
+                "tile_num": 2
+            },
+            "2": {
+                "png_num": "B",
+                "tile_num": 5
+            },
+            "3": {
+                "png_num": "7",
+                "tile_num": 1
+            },
+            "4": {
+                "png_num": "9",
+                "tile_num": 3
+            },
+            "5": {
+                "png_num": "A",
+                "tile_num": 4
+            },
+            "6": {
+                "png_num": "6",
+                "tile_num": 6
+            }
+        },
+        "pieces": {
+            "white_standing_stone": {
+                "row": 1,
+                "col": 0,
+                "globalRow": 7,
+                "globalCol": 6,
+                "tile_num": 6
+            },
+            "green_standing_stone": {
+                "row": 0,
+                "col": 1,
+                "globalRow": 3,
+                "globalCol": 1,
+                "tile_num": 3
+            },
+            "blue_standing_stone": {
+                "row": 1,
+                "col": 4,
+                "globalRow": 4,
+                "globalCol": 10,
+                "tile_num": 4
+            },
+            "white_shack": {
+                "row": 1,
+                "col": 4,
+                "globalRow": 1,
+                "globalCol": 10,
+                "tile_num": 2
+            },
+            "green_shack": {
+                "row": 1,
+                "col": 0,
+                "globalRow": 1,
+                "globalCol": 6,
+                "tile_num": 2
+            },
+            "blue_shack": {
+                "row": 0,
+                "col": 0,
+                "globalRow": 3,
+                "globalCol": 0,
+                "tile_num": 3
+            }
+        }
+    },
+    "destination": {
+        "row": 4,
+        "col": 7
+    },
+    "rules": [
+        "The habitat is within one space of water",
+        "The habitat is within three spaces of a blue structure",
+        "The habitat is on water or swamp",
+        "The habitat is within three spaces of a white structure"
+    ],
+    "hint": "There are no within 2 clues"
+  }
+
   // State variables initialization
   const [gameState, setGameState] = useState( {
                                                 playerTurn: 1,
@@ -126,7 +215,8 @@ export default function Game( props ) {
   // Function to run on-component-load to get the map and information for the game
   const getNewMap = async () => {
       const newMap = await getMap(props.localGameInfo.mode,props.localGameInfo.players);
-    
+      // const newMap = testMap;
+
       setMap(newMap);
       setLoading(false);
 
@@ -147,6 +237,7 @@ export default function Game( props ) {
       console.log(grid);
       const availableGuesses = getAvailableGuesses(grid);
       setAllAvailableGuesses(availableGuesses);
+      console.log("MAP:",newMap);
       return newMap;
   }
 
@@ -394,12 +485,28 @@ export default function Game( props ) {
     const newMap = await getNewMap();
   },[])
 
+  // useEffect(() => {
+  //   const newMap = getNewMap();
+  // },[])
+
+  // Function to evaluate the window width and set the board size accordingly
+  const evaluateBoardWidth = () => {
+    if (window.innerWidth > 1300) {
+      return 0.7;
+    } else if (window.innerWidth > 1200) {
+      return 0.63;
+    } else if (window.innerWidth > 1000) {
+      return 0.5;
+    }
+    return window.innerWidth/2200;
+  }
+
 
   return (
-    <div className='game-root'>
-       {loading ? 'loading' : 
+    <section className='game-root'>
+      {loading ? 'loading' : 
            <>
-              <div className='game-board-info'>
+              <aside className='game-board-info'>
                 {!revealCryptid ?
                 <BoardInfo  
                     showAvailableGueses={showAvailableGueses}
@@ -429,9 +536,9 @@ export default function Game( props ) {
                     playerNames={playerNames}
                 </Moves>
                 }
-              </div>
-              <div className='game-board-container'>
-                  <div className='game-board-root'>
+              </aside>
+              <section className='game-board-container'>
+                  <section className='game-board-root' style={{scale: `${evaluateBoardWidth()}`}}>
                     <Board  
                             showAvailableGueses={showAvailableGueses}
                             allAvailableGuesses={allAvailableGuesses}
@@ -456,12 +563,12 @@ export default function Game( props ) {
                             destination={map.destination}
                             >
                     </Board>
-                  </div>
-              </div>
+                  </section>
+              </section>
 
             </>
-        }
+      }
       
-      </div>
+    </section>
   )
 }
