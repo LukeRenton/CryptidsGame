@@ -1,3 +1,8 @@
+/*
+DECIFERMAPCODE.TEST.JS
+Type: jest test file
+Description: Testing the map code deciphering and handling TDD of server
+*/
 // deciferMapCode.test.js
 const controller = require('../../../controllers/boardController');
 

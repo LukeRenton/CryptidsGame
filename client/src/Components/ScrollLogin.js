@@ -1,3 +1,9 @@
+/*
+SCROLLLOGIN.JS
+Type: component
+Description: Renders the form for login/signup and all animations 
+*/
+
 import React, { useState } from 'react'
 import '../Styles/ScrollLogin.css'
 import ScrollTop from '../Images/scroll_top.png'
@@ -44,6 +50,7 @@ export default function ScrollLogin( props ) {
     e.preventDefault();
     const res = await props.handleLogin(username,password); 
     if (res.status == 200) {
+      props.updateUser(username);
       navigate('/lobby');
     } else {
       setShowLoginMessage(true);
@@ -58,6 +65,7 @@ export default function ScrollLogin( props ) {
     e.preventDefault();
     const res = await props.handleSignup(username,password);
     if (res.status == 201) {
+      props.updateUser(username);
       navigate('/tutorial');
     } else {
       setShowSignupMessage(true);

@@ -1,3 +1,9 @@
+/*
+BOARD.JS
+Type: component
+Description: Renders each of the 6 maps/tiles of the board. Also parses pieces for each of the respective tiles.
+*/
+
 import React, { useState } from 'react'
 import '../Styles/Board.css'
 import Map from './Map'

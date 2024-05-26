@@ -1,3 +1,8 @@
+/*
+DBCONTROLLER.TEST.JS
+Type: jest test file
+Description: Testing the login/signup and handling TDD of server
+*/
 const dbController = require('../../../controllers/dbController');
 
 test("addUser function", async () => {

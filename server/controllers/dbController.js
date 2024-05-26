@@ -1,3 +1,9 @@
+/*
+DBCONTROLLER.JS
+Type: controller
+Description: Provides controller for the database for login/signup
+*/
+
 async function addUser(client, username, password) {
     const query = 'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;';
     const values = [username, password];

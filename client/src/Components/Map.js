@@ -1,3 +1,9 @@
+/*
+MAP.JS
+Type: component
+Description: Renders all hexes for this map/tile
+*/
+
 import React, { useState } from 'react'
 import '../Styles/Map.css'
 import Hex from './Hex';

@@ -1,3 +1,8 @@
+/*
+GETRANDOMMAPCONTROLLER.TEST.JS
+Type: jest test file
+Description: Testing the random map controller and handling TDD of server
+*/
 const request = require('supertest'); // for HTTP requests in tests
 const express = require('express');
 const controller = require('../../../controllers/boardController'); // adjust path accordingly

@@ -1,3 +1,10 @@
+/*
+CLUES.JS
+Type: component
+Description: Old file to render the clue information for the players
+!! NOT CURRENTLY IN USE !!
+*/
+
 import React, { useState } from "react";
 import '../Styles/Clues.css'
 import PlantButton from "./PlantButton";

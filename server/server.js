@@ -1,3 +1,9 @@
+/*
+SERVER.JS
+Type: server js file
+Description: Overall backend handling
+*/
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');

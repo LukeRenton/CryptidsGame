@@ -88,3 +88,18 @@
     /* justify-content: flex-start; */
     text-align: start;
 }
+
+.moves-back-to-lobby {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moves-back-to-lobby-button {
+    display: flex;
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+}

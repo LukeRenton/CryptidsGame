@@ -1,3 +1,9 @@
+/*
+BOARDCONSTANTS.JS
+Type: model
+Description: Provides model constants of the board tiles
+*/
+
 import Tile from "./Tile.js";
 
 const tile_map = {};

@@ -1,3 +1,9 @@
+/*
+BOARDINFO.JS
+Type: component
+Description: Renders the board information section that handles user interaction with the board and the game.
+*/
+
 import React, { useEffect, useState } from 'react'
 import '../Styles/BoardInfo.css'
 import scroll from '../Images/game-script-back.png'
@@ -127,7 +133,6 @@ export default function BoardInfo( props ) {
     }
     
     const handleToggleShowAvailableGuesses = () => {
-        console.log(props.showAvailableGueses);
         props.setShowAvailableGuesses(!props.showAvailableGueses);
     }
 
@@ -143,10 +148,10 @@ export default function BoardInfo( props ) {
             <section className='subheader'>
                 Please ensure that all players have confirmed to show the hint!
             </section>
-            <form className='board-info-confirm-buttons'>
+            <section className='board-info-confirm-buttons'>
                 <button className='board-info-confirm-button accept' onClick={handleConfirmHint}>Show hint</button>
                 <button className='board-info-confirm-button cancel' onClick={handleCancelConfirmHint}>Cancel</button>
-            </form>
+            </section>
         </section> : <></>}
         {confirmViewCryptid ?
         <section className='board-info-confirm'>
@@ -156,10 +161,10 @@ export default function BoardInfo( props ) {
             <section className='subheader'>
                 Please ensure that all players have confirmed to reveal the Cryptid's true location!
             </section>
-            <form className='board-info-confirm-buttons'>
+            <section className='board-info-confirm-buttons'>
                 <button className='board-info-confirm-button accept' onClick={handleConfirmCryptid}>Reveal Cryptid</button>
                 <button className='board-info-confirm-button cancel' onClick={handleCancelCryptid}>Cancel</button>
-            </form>
+            </section>
         </section> : <></>}
         <section className='board-header'><h1>Cryptid</h1></section>
         <ul className='board-info-items'>
@@ -279,29 +284,26 @@ export default function BoardInfo( props ) {
                         ? 
                         'Hover over a hex to see information about that hex' 
                         : 
-                        <section>
-                            <section className='board-info-hex-info-header'>
-                                Type: 
+                        <ul className='board-info-hex-info-items'>
+                            <li className='board-info-hex-info-item'>
+                                <h4>Type:</h4> 
                                 <div className='board-info-hex-info-text'>{props.hexHover.type}</div>
-                            </section>
-                            <section className='board-info-hex-info-header'>
-                                Animal territory:
+                            </li>
+                            <li className='board-info-hex-info-item'>
+                                <h4>Animal territory:</h4>
                                 <div className='board-info-hex-info-text'>{props.hexHover.animalTerritory ? props.hexHover.animalTerritory : 'None'}</div>
-                            </section>
-                            <section className='board-info-hex-info-header'>
-                                Pieces:
+                            </li>
+                            <li className='board-info-hex-info-item'>
+                                <h4>Pieces:</h4>
                                 {props.hexHover.pieces.length > 0 ? props.hexHover.pieces.map((piece) => {
                                     return <div className='board-info-hex-info-text'>{piece.name}</div>
                                 }) : <div className='board-info-hex-info-text'>None</div>}
-                            </section>
-                        </section> 
+                            </li>
+                        </ul> 
                     }
                 </section>
             </li>
             
-
-            
-
             <li className='board-info-item'>
                 <section className='board-info-end-turn'>
                     <button className='board-info-end-turn-button' onClick={() => setShowPlayerDropdown(!showPlayerDropdown)}>Change Player</button>

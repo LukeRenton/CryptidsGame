@@ -1,3 +1,9 @@
+/*
+DBROUTES.JS
+Type: route
+Description: Provides routes for login/signup
+*/
+
 const express = require('express');
 const router = express.Router();
 require('dotenv').config();

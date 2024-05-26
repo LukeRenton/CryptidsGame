@@ -1,3 +1,9 @@
+/*
+TUTORIAL.JS
+Type: page
+Description: Renders the tutorial page
+*/
+
 import React from 'react'
 import logo from '../Images/Tutorial/logo.png';
 import map from '../Images/Tutorial/map.png';

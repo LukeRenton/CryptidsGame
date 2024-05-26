@@ -1,11 +1,20 @@
+/*
+MOVES.JS
+Type: component
+Description: Renders the final game tab which shows history of player moves.
+*/
+
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../Styles/Moves.css'
 import dropdown from '../Icons/dropdown.png'
 import { colours } from '../Models/PlayerColours'
+import PlantButton from './PlantButton'
 
 export default function Moves( props ) {
     // useState hook to manage the state of which player's moves to show
     const [showPlayerMoves, setShowPlayerMoves] = useState(-1);
+    const navigate = useNavigate();
     
     // Function to handle clicks on player headers, setting the state to show/hide the moves list
     const handleClick = (playerNum) => {
@@ -42,6 +51,9 @@ return (
                 }
                 
             </ul>
+        </div>
+        <div className='moves-back-to-lobby'>
+            <button className='moves-back-to-lobby-button' onClick={() => {navigate('/lobby')}}>Back to lobby</button>
         </div>
     </div>
   )

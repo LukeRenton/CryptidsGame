@@ -215,9 +215,9 @@
 }
 
 .lobby-go-tutorial {
-    position: relative;
+    position: absolute;
     left: 0px;
-    top: 0px;
+    bottom: 0px;
     z-index: 1;
 }
 
@@ -288,3 +288,157 @@
     }
     
 }
+
+@media (min-width: 1300px) {
+    .lobby-items {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lobby-host-online-back, .lobby-join-online-back, .lobby-local-back {
+        clip-path: none;
+        background: black;
+        width: 1000px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .lobby-video {
+        width: 2000px;
+        height: 1200px;
+        clip-path: none;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    .lobby-item {
+        height: fit-content;
+        width: 1000px;
+    }
+
+    .lobby-items .top-row {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .lobby-items .bottom-row {
+        display: flex;
+        flex-direction: row;
+        gap: 0px 250px;
+        margin-top: 0px;
+        margin-left: 0px;
+        width: -moz-fit-content;
+        width: fit-content;
+        animation: load 1.2s ease;
+    }
+
+    .lobby-host-online-text, .lobby-join-online-text, .lobby-local-text {
+        position: relative;
+        pointer-events: none;
+        top: 0px;
+        left: -380px;
+        margin-left: -400px;
+        width: 350px;
+        transition: 0.5s;
+        filter: grayscale(0.1);
+    }
+    
+}
+
+ul {
+    list-style: none;
+  }
+
+  .icon-content {
+    cursor: pointer;
+  }
+  
+  .example-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+  }
+  .example-2 .icon-content {
+    margin: 0 10px;
+    position: relative;
+  }
+  .example-2 .icon-content .tooltip {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(50%);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 15px;
+    opacity: 0;
+    visibility: hidden;
+    font-size: 14px;
+    transition: all 0.3s ease;
+  }
+  .example-2 .icon-content:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: 6px;
+  }
+  .example-2 .icon-content a {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 20%;
+    color: #4d4d4d;
+    background-color: #ffff;
+    transition: all 0.3s ease-in-out;
+  }
+  .example-2 .icon-content a:hover {
+    box-shadow: 3px 2px 45px 0px rgb(0 0 0 / 50%);
+  }
+  .example-2 .icon-content a svg {
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+  }
+  .example-2 .icon-content a:hover {
+    color: white;
+  }
+  .example-2 .icon-content a .filled {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: #000;
+    transition: all 0.3s ease-in-out;
+  }
+  .example-2 .icon-content a:hover .filled {
+    height: 100%;
+  }
+  .example-2 .icon-content a[data-link="spotify"] .filled,
+  .example-2 .icon-content a[data-link="spotify"] ~ .tooltip {
+    background-color: #1db954;
+  }
+  .example-2 .icon-content a[data-link="logout"] .filled,
+  .example-2 .icon-content a[data-link="logout"] ~ .tooltip {
+    background-color: #bd081c;
+  }
+  .example-2 .icon-content a[data-link="tutorial"] .filled,
+  .example-2 .icon-content a[data-link="tutorial"] ~ .tooltip {
+    background-color: #ea4c89;
+  }
+  .example-2 .icon-content a[data-link="telegram"] .filled,
+  .example-2 .icon-content a[data-link="telegram"] ~ .tooltip {
+    background-color: #0088cc;
+  }
+  

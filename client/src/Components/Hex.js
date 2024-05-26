@@ -1,3 +1,9 @@
+/*
+HEX.JS
+Type: component
+Description: Renders a hex piece for the board. Also parses hex information (pieces on the hex, etc.) and handles hover and click effects.
+*/
+
 import React, { useState } from 'react'
 import '../Styles/Hex.css'
 import PlayerCube from './PlayerCube';
@@ -124,8 +130,6 @@ export default function Hex( props ) {
 
     const actual_row = destRow % 3;
     const actual_col = destCol % 6;
-
-    console.log(props.tileNumByPosition);
 
     if (tile_num === props.tileNumByPosition && actual_row === props.hexRow && actual_col === props.hexCol) {
       return ' show-cryptid'

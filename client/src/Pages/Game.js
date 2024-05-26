@@ -1,3 +1,9 @@
+/*
+Game.JS
+Type: page
+Description: Renders the page for the actual game
+*/
+
 import React, { useEffect, useState } from 'react'
 import { getMap } from '../Services/MapService'
 import { tile_map } from '../Models/BoardConstants'
@@ -101,6 +107,8 @@ export default function Game( props ) {
   }
 
   // State variables initialization
+  // storage needed: gameState, playerNames, turn, 
+
   const [gameState, setGameState] = useState( {
                                                 playerTurn: 1,
                                                 positivePieces: [],
@@ -127,6 +135,7 @@ export default function Game( props ) {
   
   const [allAvailableGuesses, setAllAvailableGuesses] = useState({});
   const [showAvailableGueses, setShowAvailableGuesses] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   // Handle if a user wants to place a negative piece
   const handlePlaceNegative = (value) => {
@@ -178,7 +187,6 @@ export default function Game( props ) {
 
     for (let tile = 1; tile <= numTiles; tile++) {
         const map = allTiles[tile];
-        console.log(map);
         for (let j = 0; j < totalHexesPerMap; j++) {
             const hex = map[j];
             const row = hex.row;
@@ -215,9 +223,9 @@ export default function Game( props ) {
   // Function to run on-component-load to get the map and information for the game
   const getNewMap = async () => {
       const newMap = await getMap(props.localGameInfo.mode,props.localGameInfo.players);
-      // const newMap = testMap;
 
       setMap(newMap);
+      console.log(newMap);
       setLoading(false);
 
       // Extract tiles from the new map
@@ -234,10 +242,8 @@ export default function Game( props ) {
       
 
       const grid = parseInfo(newMap, allTiles, allPieces);
-      console.log(grid);
       const availableGuesses = getAvailableGuesses(grid);
       setAllAvailableGuesses(availableGuesses);
-      console.log("MAP:",newMap);
       return newMap;
   }
 
@@ -246,7 +252,6 @@ export default function Game( props ) {
     // console.log(availableGuesses);
     // const newAvailableGuesses = availableGuesses.map((x) => x);
     const newAvailableGuesses = JSON.parse(JSON.stringify(availableGuesses));
-    console.log(newAvailableGuesses);
     for (let player = 1; player <= props.localGameInfo.players; player++) {
       const newPlayerGuesses = newAvailableGuesses[player];
       for (let i = 0; i < newPlayerGuesses.length; i++) {
@@ -275,7 +280,6 @@ export default function Game( props ) {
   const getAvailableGuesses = (boardState) => {  
     const { grid, clues, hint } = boardState;
     const availableGuesses = {};
-    console.log("Here #1");
     for (let i = 0; i < clues.length; i++) {
         // Need to remove "The habitat is" from the clue to get the actual clue
         let clue = (clues[i]).substring(15);
@@ -283,9 +287,7 @@ export default function Game( props ) {
         const allowedTiles = processClue(clue, grid);
         availableGuesses[player] = allowedTiles;
     }
-    console.log("Here #2")
     const processedGuesses = processHexNumbers(availableGuesses);
-    console.log(processedGuesses);
     // console.log("NEW GUESSES:",processHexNumbers(availableGuesses));
     return processedGuesses;
   }
@@ -294,18 +296,14 @@ export default function Game( props ) {
   // Parse string and process each clue
   const processClue = (clue, grid) => {
     if (clue.startsWith("on")) {
-      console.log("Processing on: ", clue)
       return onTypeClue(clue, grid);
     } else if (clue.startsWith("not on")) {
       return notOnTypeClue(clue, grid);
     } else if (clue.startsWith("within one space")) {
-      console.log("Processing within one space: ", clue)
       return withinOneSpaceClue(clue, grid);
     } else if (clue.startsWith("within two spaces")) {
-      console.log("Processing within two spaces: ", clue)
       return withinTwoSpaceClue(clue, grid);
     } else if (clue.startsWith("within three spaces")) {
-      console.log("Processing within three spaces: ", clue)
       return withinThreeSpaceClue(clue, grid);
     // } else if (clue.startsWith("not within one space")) {
     //   return notWithinOneSpaceClue(clue, grid);
@@ -396,7 +394,6 @@ export default function Game( props ) {
       }
         
     }
-    console.log("Type: ", type)
     //We only want unique tiles
     const allowedTilesSet = new Set();
 
@@ -413,7 +410,6 @@ export default function Game( props ) {
 
     // Convert the Set back to an array
     allowedTiles = Array.from(allowedTilesSet);
-    console.log("Allowed Tiles: ", allowedTiles)
     return allowedTiles;
   }
 
@@ -439,7 +435,6 @@ export default function Game( props ) {
 
     // Convert the Set back to an array
     allowedTiles = Array.from(allowedTilesSet);
-    console.log("Allowed Tiles: ", allowedTiles)
     return allowedTiles;
   }
 
@@ -480,14 +475,17 @@ export default function Game( props ) {
     return splitName[0];
   }
 
-  // Use effect hook on-component-load to get map information
-  useEffect(async () => {
-    const newMap = await getNewMap();
-  },[])
+  const resizeWindow = () => {
+    setWindowWidth(window.innerWidth);
+  }
 
-  // useEffect(() => {
-  //   const newMap = getNewMap();
-  // },[])
+  // Use effect hook on-component-load to get map information
+  useEffect(() => {
+    const newMap = getNewMap();
+    resizeWindow();
+    window.addEventListener("resize", resizeWindow);
+    return () => window.removeEventListener("resize", resizeWindow);
+  },[])
 
   // Function to evaluate the window width and set the board size accordingly
   const evaluateBoardWidth = () => {
@@ -505,6 +503,7 @@ export default function Game( props ) {
   return (
     <section className='game-root'>
       {loading ? 'loading' : 
+           window.innerWidth >= 800 ?
            <>
               <aside className='game-board-info'>
                 {!revealCryptid ?
@@ -566,7 +565,10 @@ export default function Game( props ) {
                   </section>
               </section>
 
-            </>
+            </> : 
+            <div className='screen-too-small'>
+              Your screen is too small to display the game. Please adjust your screen size or make use of a device with a large screen size. We apologize for the incovnenience.
+            </div>
       }
       
     </section>

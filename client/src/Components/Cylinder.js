@@ -1,3 +1,9 @@
+/*
+CYLINDER.JS
+Type: component
+Description: Renders the cylinder piece for a hex
+*/
+
 import React from "react";
 import "../Styles/Cylinder.css";
 

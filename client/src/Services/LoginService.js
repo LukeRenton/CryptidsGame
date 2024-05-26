@@ -1,3 +1,9 @@
+/*
+LOGINSERVICE.JS
+Type: service
+Description: Provides access to the backend for login/signup
+*/
+
 // Function to handle user signup
 async function handleSignup(this_username, this_password) {
     // Construct user object with provided username and password

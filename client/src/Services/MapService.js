@@ -1,3 +1,9 @@
+/*
+MAPSERVICE.JS
+Type: service
+Description: Provides access to the backend for retrieving the random map info
+*/
+
 // Function to fetch a random map based on mode and number of players
 async function getMap(mode, players) {
      // Send a GET request to the server to fetch the map
