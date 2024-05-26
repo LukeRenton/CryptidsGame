@@ -19,6 +19,7 @@ https://carnation-surf-f04.notion.site/Submission-Links-b49539a8257741539160af94
 
 For documentation on downloading and running the application locally, please read further below.
 
+
 ## Table of Contents
 1. [For players](#for-players)
     
