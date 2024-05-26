@@ -1,3 +1,9 @@
+/*
+PLAYERCOLOURS.JS
+Type: model
+Description: Provides model constants of the player colours
+*/
+
 // player colours:
 const colours = {
     1: '#fe110b', //red

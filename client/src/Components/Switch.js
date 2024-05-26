@@ -1,3 +1,9 @@
+/*
+BOARD.JS
+Type: component
+Description: Renders a toggle switch
+*/
+
 import React, { useState } from 'react'
 import '../Styles/Switch.css'
 

@@ -1,9 +1,11 @@
 .game-root {
-    /* height: 100%; */
+    height: 100%;
+    width: 100%;
     margin-top: 0px;
     background: #ebe7e1;
     display: flex;
     flex-direction: row;
+    overflow: scroll;
 }
 
 .game-board-root{
@@ -12,16 +14,29 @@
     flex-direction: column;
     align-items: center;
     transform: translateY(100px);
+    transform-origin: 0% 0%;
 }
 
 .game-board-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    width: 1000px;
 }
 
 .game-board-info {
     z-index: 1;
-    width: 1500px;
+    width: 80%;
+    max-width: 300px;
     height: 100%;
+}
+
+.screen-too-small {
+    background: #000;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    font-size: 20px;
+    overflow: auto;
+    text-align: center;
 }

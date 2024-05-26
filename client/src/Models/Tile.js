@@ -1,3 +1,9 @@
+/*
+TILE.JS
+Type: component
+Description: Provides Tile model used for the board
+*/
+
 class Tile {
     constructor(tile_number, row, col, type, animal_territory = null, playing_piece = null) {
       // Constructor to initialize properties of a tile object

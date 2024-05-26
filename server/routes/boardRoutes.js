@@ -1,3 +1,9 @@
+/*
+BOARDROUTES.JS
+Type: route
+Description: Provides routes for backend for board information retrieval
+*/
+
 const express = require('express');
 const router = express.Router();
 const { getRandomMapController } = require('../controllers/boardController'); // Importing the controller

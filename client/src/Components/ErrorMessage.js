@@ -1,3 +1,9 @@
+/*
+ERRORMESSAGE.JS
+Type: component
+Description: Renders an error message needed for the login page
+*/
+
 import React from 'react'
 import '../Styles/ErrorMessage.css'
 

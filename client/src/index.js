@@ -1,3 +1,9 @@
+/*
+BOARD.JS
+Type: driver component
+Description: Renders the app
+*/
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';

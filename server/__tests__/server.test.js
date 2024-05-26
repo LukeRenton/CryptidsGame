@@ -1,3 +1,9 @@
+/*
+SERVER.TEST.JS
+Type: jest test file
+Description: Testing the server and handling TDD of server
+*/
+
 const request = require('supertest');
 const path = require('path');
 const express = require('express');

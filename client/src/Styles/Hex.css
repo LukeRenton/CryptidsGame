@@ -6,6 +6,8 @@
     transition: 0.2s;
     transform: translate(0);
     -webkit-transform: translate(0);
+
+    animation: load-in 0.5s ease
 }
 
 .hex-hitbox {
@@ -87,7 +89,7 @@
 
 .hex .top-face {
     position: absolute;
-    transform: rotateX(0deg) translateZ(60px) translateY(0px);
+    transform: rotateX(0deg) translateZ(59px) translateY(2px);
 }
 
 .hex .top-face > img {
@@ -213,10 +215,10 @@
 
 .hex-search-piece {
     position: absolute;
-    width: 100px;
-    height: 70px;
+    width: 40px;
+    height: 80px;
     pointer-events: none;
-    transform: translateZ(80px) translateX(-130px) translateY(25px) rotateX(0deg) rotateY(0deg);
+    transform: translateZ(80px) translateX(-100px) translateY(25px) rotateX(0deg) rotateY(0deg);
 }
 
 .show-cryptid {
@@ -234,4 +236,19 @@
     filter: grayscale(0.5);
     opacity: 0.1;
     pointer-events: none;
+}
+
+@keyframes load-in {
+    0% {
+        transform: translateZ(0px);
+        /* opacity: 1; */
+    }
+    50% {
+        transform: translateZ(50px);
+        /* opacity: 0; */
+    }
+    100% {
+        transform: translateZ(0px);
+        /* opacity: 1; */
+    }
 }

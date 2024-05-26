@@ -1,3 +1,9 @@
+/*
+PLANTBUTTON.JS
+Type: component
+Description: Renders a customized button.
+*/
+
 import React from 'react'
 import '../Styles/PlantButton.css'
 // Code for a custom button

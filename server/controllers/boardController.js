@@ -1,3 +1,9 @@
+/*
+BOARDCONTROLLER.JS
+Type: controller
+Description: Provides controller for the board (parsing info, etc.)
+*/
+
 const fs = require('fs');
 const rules_json = require("../maps/rules.json")
 const hints_json = require("../maps/hints.json")

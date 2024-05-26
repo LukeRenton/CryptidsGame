@@ -1,3 +1,8 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .board-info-root {
     width: 100%;
     margin: 10px;
@@ -5,13 +10,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: load-in-info 1s ease;
 }
 
 .board-info-blur-back {
     width: 100vw;
     height: 100vh;
     background: rgb(0,0,0,0.5);
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     position: absolute;
     left:0;
     top: 0;
@@ -68,6 +74,8 @@
     width: 100%;
     text-align: start;
     cursor: pointer;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.247);
+    
 }
 
 .board-info-information-item:hover , .board-info-decisions-item:hover {
@@ -159,6 +167,15 @@
     }
 }
 
+@keyframes load-in-info {
+    0% {
+        transform: translateX(-500px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
 .selected-item {
     
 }
@@ -169,4 +186,42 @@
 
 .player-dropdown-item:hover {
     filter: brightness(0.9);
+}
+
+.board-info-information-item-text {
+    display: flex;
+    flex-direction: row;
+}
+
+.board-info-valid-status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: rgb(54, 54, 54);
+}
+
+.board-info-hex-info-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.board-info-hex-info-item {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0px 5px;
+}
+.board-info-hex-info-item h4 {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.board-info-hex-info-text {
+    font-size: 15px;
+    font-weight: normal;
 }

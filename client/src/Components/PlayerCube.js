@@ -1,3 +1,9 @@
+/*
+PLAYERCUBE.JS
+Type: component
+Description: Renders a cube to be used on the hexes of the game.
+*/
+
 import React from 'react';
 import '../Styles/PlayerCube.css';
 // Define and export the PlayerCube functional component
