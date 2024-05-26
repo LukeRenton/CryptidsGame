@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'test') {
 
 
 // Handle requests to main react page
-// NOTE: THIS CODE HAS TO BE AT THE END OF THE FILE
+// NOTE: THIS ALL THE CODE BELOW HAS TO BE AT THE END OF THE FILE
 
 const reactRoutes = [
   '/',
@@ -39,12 +39,13 @@ const reactRoutes = [
   '/lobby',
   '/game'
 ]
+
+// All other GET requests not handled before will return the React app -- a static file
 app.get(reactRoutes, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Start the server
-
 if (process.env.NODE_ENV !== 'test') {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

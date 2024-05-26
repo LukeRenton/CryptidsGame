@@ -10,7 +10,7 @@ require('dotenv').config();
 const { Client } = require('pg');
 const { addUser, validateUserLogin, removeUser } = require('../controllers/dbController');
 
-// Assume client connection is established
+// Create client object with paramaters from protected env variables
 const client = new Client({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
@@ -23,6 +23,7 @@ const client = new Client({
 });
 
 
+// Connect to the PostgreSQL database
 client.connect((err) => {
     if (err) {
       console.error('Failed to connect to PostgreSQL:', err.message);
@@ -41,7 +42,7 @@ router.post('/register', async (req, res) => {
         const newUser = await addUser(client, username, password);
         res.status(201).json(newUser); // Return the newly created user
     } catch (err) {
-        res.status(500).json({ error: err.message }); // Return error message if something goes wrong
+        res.status(500).json({ error: "User already exists" }); // Return error message if something goes wrong
     }
 });
 

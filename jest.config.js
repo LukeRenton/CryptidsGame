@@ -3,7 +3,7 @@ module.exports = {
   testPathIgnorePatterns: ['./server/routes/dbRoutes.js'],
   collectCoverageFrom: [
       'server/**/*.js',
-      '!server/routes/dbRoutes.js',
+      '!server/routes/dbRoutes.js', // We test all db commands, but cant create the DB since it hangs everytime
   ],
   coverageReporters: ["text", "cobertura"],
   projects: [

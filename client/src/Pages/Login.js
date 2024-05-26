@@ -19,9 +19,11 @@ export default function Login( props ) {
   // On component mount, get "user" Cookie if available
   useEffect(() => {
     const cookieUser = Cookies.get('user');
-    if (cookieUser !== '') {
-      props.updateUser(cookieUser);
-      navigate('/lobby');
+    if (cookieUser){
+      if (cookieUser !== '') {
+        props.updateUser(cookieUser);
+        navigate('/lobby');
+      }
     }
   },[])
 

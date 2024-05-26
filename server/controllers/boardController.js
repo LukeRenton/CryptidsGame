@@ -13,6 +13,7 @@ const path = require('path');
 const structures_order_normal = ["white_standing_stone", "green_standing_stone", "blue_standing_stone", "white_shack", "green_shack", "blue_shack"]
 const structures_order_advanced = ["white_standing_stone", "green_standing_stone", "blue_standing_stone", "black_standing_stone", "white_shack", "green_shack", "blue_shack", "black_shack"]
 
+//Converts a char to an integer
 const processChar = (char) => {
   if (char == '0') {
     return 0;
@@ -39,15 +40,20 @@ const processChar = (char) => {
   } else if (char == 'B') {
     return 11;
   }
+  throw new Error('Invalid character');
 }
-/**
- * 
- * @param {string} mapCode 
- * @param {string} mapMode 
- * @returns grid of tiles and pieces
- */
+
+// Given a map code (from maps/intro) and a mode, deciphers the map code into tiles and pieces
 const deciferMapCode = (mapCode, mapMode) => {
   const tiles = {};
+  if (mapCode.length !== 18) {
+    throw new Error('Invalid map code length');
+  }
+
+  if (mapMode !== "intro" && mapMode !== "normal") {
+    throw new Error('Invalid mode');
+  }
+
   for (let i = 0; i < 6; i++) {
       const tile_num = parseInt(mapCode[i], 16);
       tiles[i+1] = {
@@ -56,9 +62,12 @@ const deciferMapCode = (mapCode, mapMode) => {
         "tile_num" : tile_num > 6 ? tile_num - 6 : tile_num,
       }
   }
+
+  // Select which mode to use (structures change accordingly)
   const structures = mapMode === "intro" ? structures_order_normal : structures_order_advanced;
   const pieces = {};
   let counter = 0;
+  // Start from 6 since there is 6 in person tile pieces
   for (let i = 6; i < mapCode.length; i+=2){
 
     // Convert chars to integers
@@ -68,8 +77,11 @@ const deciferMapCode = (mapCode, mapMode) => {
     // Retrieve which tile number we are on
     const tile_row = Math.floor(row/3);
     const tile_col = Math.floor(col/6);
+
+    // Tile number corresponding to the actuall board game tile piece number
     const tile_num = tile_row*2 + tile_col + 1
 
+    // This forces the boards into rectangle blocks of 3 * 6 length so we can work according to tile pieces
     const actual_row = row % 3;
     const actual_col = col % 6;
   
@@ -86,6 +98,7 @@ const deciferMapCode = (mapCode, mapMode) => {
   return {tiles, pieces};
 }
 
+// Since the json files are 1 indexed we just standardise it here
 const formatFinalLocation = (location) => {
   const row_col = location.split(", ")
   return {
@@ -94,9 +107,7 @@ const formatFinalLocation = (location) => {
   }
 }
 
-console.log(deciferMapCode("B46183084B18451521", "intro"));
-
-// Verbositise the rules and hints
+// Given an abbreviated rule we return the verbose version (according to Andrew's schema)
 const verbositiseRules = (rules) => {
   const verbose_rules = [];
   rules.forEach(rule => {
@@ -105,13 +116,14 @@ const verbositiseRules = (rules) => {
   return verbose_rules;
 }
 
+// Given an abbreviated hint we return the verbose version (according to Andrew's schema)
 const verbositiseHint = (hint) => {
   return hints_json[hint];
 }
 
 // Get a random board based on the mode and number of players
 const getRandomBoard = (mode, player_count) => {
-  //Get all the stored files
+  // Get random map according to mode
   const directory_path = path.join(__dirname, '../maps', mode);
   const files = fs.readdirSync(directory_path);
   const random_file = files[Math.floor(Math.random() * files.length)];
@@ -120,6 +132,7 @@ const getRandomBoard = (mode, player_count) => {
   const possible_board_configs = JSON.parse(content);
   const possible_player_configs = possible_board_configs.players[player_count];
 
+  // Each number of players theres like 5-10 possible configurations per map per number of players. So we pick a random configuration under a specific map.json
   const random_player_config = possible_player_configs[Math.floor(Math.random() * possible_player_configs.length)];
   const map = {
     "mapCode" : possible_board_configs.mapCode,

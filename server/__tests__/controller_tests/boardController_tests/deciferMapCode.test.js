@@ -6,7 +6,8 @@ Description: Testing the map code deciphering and handling TDD of server
 // deciferMapCode.test.js
 const controller = require('../../../controllers/boardController');
 
-test("decipher map code with normal (\"advanced\") mode", () => {
+// TEST 1: decifer map code with intro mode and a set map code which we know the answer to
+test("decipher map code with normal (\"intro\") mode", () => {
   const mapCode = 'B46183084B18451521';
   const mapMode = "intro";
 
@@ -33,4 +34,40 @@ test("decipher map code with normal (\"advanced\") mode", () => {
   //check the set corresponds to the expected output
   const output = controller.deciferMapCode(mapCode, mapMode);
   expect(output).toEqual(expectedOutput);
+});
+
+// TEST 2: make sure invalid map codes with less structures throws an error
+test("decipher map code with invalid map code length", () => {
+  const mapCode = 'AO2213093';
+  const mapMode = "intro";
+
+  // Check if invalid map code length is thrown
+  expect(() => controller.deciferMapCode(mapCode, mapMode)).toThrow('Invalid map code length');
+});
+
+// TEST 3: make sure invalid map codes with more structures throws an error
+test("decipher map code with invalid map code length", () => {
+  const mapCode = 'AO221309312384AB213129213';
+  const mapMode = "intro";
+
+  // Check if invalid map code length is thrown
+  expect(() => controller.deciferMapCode(mapCode, mapMode)).toThrow('Invalid map code length');
+});
+
+// TEST 4: make sure invalid characters in the map code throws an error
+test("decipher map code with invalid characters", () => {
+  const mapCode = 'B$G183084%18451521';
+  const mapMode = "intro";
+
+  // Check if invalid character is thrown
+  expect(() => controller.deciferMapCode(mapCode, mapMode)).toThrow('Invalid character');
+});
+
+// TEST 5: make sure invalid mode throws an error
+test("decipher map code with invalid mode", () => {
+  const mapCode = 'B46183084B18451521';
+  const mapMode = "invalid";
+
+  // Check if invalid mode is thrown
+  expect(() => controller.deciferMapCode(mapCode, mapMode)).toThrow('Invalid mode');
 });

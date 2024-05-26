@@ -18,7 +18,7 @@ function App() {
   const [localGameInfo, setLocalGameInfo] = useState({});
   const [playerNames, setPlayerNames] = useState(["","","","",""]);
   const [movesList, setMovesList] = useState([[],[],[],[],[]]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState("");
   
 
   const updateUser = (newUser) => {

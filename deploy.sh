@@ -19,12 +19,10 @@ if [ -z "$commit_message" ]; then  # Check if the variable is empty
   exit 1  # Exit the script with a non-zero status
 fi
 
-# Get the current branch name
-
-
 git add .
 git commit -m "$commit_message"
 
+# Set branch if not already done so
 if [ -z "$upstream_branch" ]; then
   echo "No upstream branch set for $current_branch. Setting it to origin/$current_branch"
   git push --set-upstream origin "$current_branch"
