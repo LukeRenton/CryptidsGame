@@ -43,11 +43,6 @@ In Cryptids Online, each player takes on the role of a cryptozoologist, racing t
 
 ### General
 
-#### Naming Convention
-
-- We will be using a snake naming convention for variables (e.g. num_users)
-  - Motivation: [CamelCase vs. Under_score](https://www.cs.kent.edu/~jmaletic/papers/ICPC2010-CamelCaseUnderScoreClouds.pdf)
-
 #### Comments
 
 1. Comments should be clear.
